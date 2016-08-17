@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 录像 -->
+    <declare-styleable name="VideoRcdView">
+        <!-- 开始是否打开摄像头 -->
+        <attr name="is_open_camera" format="boolean" />
+        <!-- 一次拍摄最长时间 -->
+        <attr name="record_max_time" format="integer" />
+        <!-- 视频分辨率宽度 -->
+        //TODO
+      <!--  <attr name="width" format="integer" />
+        &lt;!&ndash; 视频分辨率高度 &ndash;&gt;
+        <attr name="height" format="integer" />-->
+    </declare-styleable>
+    
+     <!-- 秒表 -->
+    <declare-styleable name="SecondsView">
+        <!-- 字体颜色 -->
+        <attr name="ttextColor" format="integer" />
+    </declare-styleable>
+    
+
+</resources>

@@ -1,0 +1,191 @@
+package com.myutils.unit.file;
+
+import java.io.File;
+
+import com.myutils.base.AppFactory;
+import com.myutils.utils.ApplicationUtils;
+import com.myutils.utils.DateTimeUtils;
+import com.myutils.utils.FileUtils;
+
+/**
+ * @Created by gzpykj.com
+ * @author zms
+ * @Date 2016-6-6
+ * @Descrition 项目文件的处理模型，
+ * <p>目录</p>
+ * 默认目录为(AppDir)，可以通过指定fileDir来相对app目录创建新目录,
+ * 如果指定路径(customDir),则根据customDir来新建目录
+ * 
+ * <p>文件名称(name)</p>
+ * 如果为空，则输出当前系统打印时间,默认每次刷新文件名称(，后缀名prefix不为空，则输出prefix+name
+ * 
+ */
+public class FileModel {
+
+	/**
+	 * App文件目录
+	 */
+	public String dfBsDir = FileUtils.getSDCardPath()+ ApplicationUtils.getAppName();
+	/**
+	 * 相对App目录下的目录路径
+	 */
+	public String nextDir=null;
+	/**
+	 *文件路径
+	 */
+	public String dir = null;
+	/**
+	 * 在App目录下的目录路径
+	 */
+	public String customDir = null;
+	/**
+	 * 文件名称
+	 */
+	private String name = null;
+	/**
+	 * 前缀
+	 */
+	private String prefix = "";
+	/**
+	 * 后缀
+	 */
+	private String suffix= "";
+	
+	/**
+	 * 文件对象
+	 */
+	private File file;
+	
+	
+
+	public FileModel() {
+
+	}
+	
+	/**
+	 * 获取文件目录
+	 * @return
+	 */
+	public String getDir() {
+		if(customDir!=null){
+			dir=customDir;
+		}else{
+			if(dir==null){
+				if(nextDir!=null){
+					dir=dfBsDir+nextDir;
+				}else{
+					dir=dfBsDir;
+				}
+			}
+		}
+		return dir;
+	}
+
+
+	/**
+	 * 获取文件名称
+	 * @return
+	 */
+	public String getName() {
+		if (name == null) {
+			name = DateTimeUtils.getCurrentTime("yyyyMMddHH:mm:ss");
+		}
+		return prefix+name+suffix;
+	}
+	
+	/**
+	 * 更新文件名称
+	 * @return
+	 */
+	public void updateName() {
+		name =DateTimeUtils.getCurrentTime("yyyyMMddHH:mm:ss");
+	}
+	
+	/**
+	 * 获取文件路径
+	 * @return
+	 */
+	public String getPath() {
+		return getDir()+"/"+getName();
+	}
+	
+	
+	
+	/**
+	 * 获取文件路径
+	 * @return
+	 */
+	public File createFile() {
+		File f=new File(getDir(), getName());
+		if(f.exists()){
+			file=f;
+		}else{
+			file=FileUtils.getFile(getDir(), getName());
+		}
+		return file;
+	}
+	
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+
+	public String getPrefix() {
+		return prefix;
+	}
+
+
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
+
+	public String getCustomDir() {
+		return customDir;
+	}
+
+	public void setCustomDir(String customDir) {
+		this.customDir = customDir;
+	}
+
+	public String getDfBsDir() {
+		return dfBsDir;
+	}
+
+	public void setDfBsDir(String dfBsDir) {
+		this.dfBsDir = dfBsDir;
+	}
+
+	
+	public void setDir(String dir) {
+		this.dir = dir;
+	}
+
+	public String getNextDir() {
+		return nextDir;
+	}
+
+	public void setNextDir(String nextDir) {
+		this.nextDir = nextDir;
+	}
+
+	public String getSuffix() {
+		return suffix;
+	}
+
+	public void setSuffix(String suffix) {
+		this.suffix = suffix;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+
+
+
+}

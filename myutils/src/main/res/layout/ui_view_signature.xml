@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.myutils.ui.view.signature.HuaBanView
+        android:id="@+id/huaBan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/tool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/ln_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="40dp"
+            android:clickable="true"
+            android:background="@drawable/signature_sel"
+            android:orientation="vertical"
+             android:padding="5dp"
+            >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/signature_setting" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#686868"
+                android:text="设置" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln_clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="40dp"
+            android:clickable="true"
+            android:background="@drawable/signature_sel"
+             android:padding="5dp"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/signature_clear" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#686868"
+                android:text="清除" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             android:padding="5dp"
+             android:clickable="true"
+            android:background="@drawable/signature_sel"
+            android:layout_weight="1"
+            android:minHeight="40dp"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/signature_save" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#686868"
+                android:text="保存" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln_cancl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+             android:padding="5dp"
+            android:minHeight="40dp"
+            android:clickable="true"
+            android:background="@drawable/signature_sel"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/signature_close" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#686868"
+                android:text="退出" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

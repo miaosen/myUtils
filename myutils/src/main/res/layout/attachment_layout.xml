@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:orientation="vertical" >
+
+    <View style="@style/lineHorizontal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F7F7F7"
+        android:orientation="vertical"
+        android:padding="5dp" >
+
+        <ImageView
+            android:id="@+id/img_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/icon_file_lt" />
+
+        <TextView
+            android:id="@+id/tv_file"
+ 			style="@style/tv_text"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/img_file"
+            android:text="附件"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/btn_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/icon_video" />
+
+        <ImageButton
+            android:id="@+id/btn_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@id/btn_video"
+            android:background="@drawable/icon_takepic" />
+
+        <ImageButton
+            android:id="@+id/btn_voice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@id/btn_photo"
+            android:background="@drawable/icon_record" />
+
+        <ImageButton
+            android:id="@+id/add_local_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@id/btn_voice"
+            android:background="@drawable/icon_add" />
+    </RelativeLayout>
+
+    <View style="@style/lineHorizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical" >
+
+        <GridView
+            android:id="@+id/upload_gridview"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="#fff"
+            android:numColumns="6" >
+        </GridView>
+    </LinearLayout>
+
+    <View
+        style="@style/lineHorizontal"
+        android:layout_marginBottom="51dp" />
+
+</LinearLayout>
