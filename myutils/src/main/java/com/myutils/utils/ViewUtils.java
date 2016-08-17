@@ -161,10 +161,8 @@ public class ViewUtils {
 					View viewchild = vp.getChildAt(i);
 					if (CompareUtils.containsKey(view.getId(), viewIds)) {
 					} else {
-						if (ClassUtils.isClassTypeOf(viewchild, formViewType)) {
 							if (viewchild.getId() != -1) {
 								allchildren.put(viewchild.getId(), viewchild);
-							}
 						}
 					}
 					allchildren.putAll(getFormView(viewchild, formViewType,
@@ -347,7 +345,6 @@ public class ViewUtils {
 				if (viewchild instanceof ViewGroup) {
 					formMap.putAll(getFormMap(viewchild, formViewType));
 				} else {
-					if (ClassUtils.isClassTypeOf(viewchild, formViewType)) {
 						if (viewchild.getId() > 0) {
 							String idName = ResourceUnit.getNameById(viewchild
 									.getId());
@@ -372,7 +369,6 @@ public class ViewUtils {
 								} else if (viewchild instanceof CheckBox) {
 									// TODO 获取CheckBox
 								}
-							}
 						}
 					}
 				}
