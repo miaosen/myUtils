@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
  * @Created by gzpykj.com
  * @author zms
  * @Date 2016年4月8日
- * @Descrition 解决ScrollView嵌套ListView ListView重复刷新的问题
+ * @Descrition 解决ScrollView嵌套ListView ListView重复刷新的问题,数据量较少时推荐使用
  * 
  */
 public class LinearLayoutForListView extends LinearLayout {

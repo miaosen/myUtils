@@ -11,19 +11,17 @@ import com.myutils.utils.FileUtils;
  * @Created by gzpykj.com
  * @author zms
  * @Date 2016-6-6
- * @Descrition 项目文件的处理模型，
- * <p>目录</p>
+ * @Descrition 项目文件的输出模型，
  * 默认目录为(AppDir)，可以通过指定fileDir来相对app目录创建新目录,
  * 如果指定路径(customDir),则根据customDir来新建目录
  * 
- * <p>文件名称(name)</p>
- * 如果为空，则输出当前系统打印时间,默认每次刷新文件名称(，后缀名prefix不为空，则输出prefix+name
+ * 如果为空，则输出当前系统打印时间,默认每次刷新文件名称，后缀名prefix不为空，则输出prefix+name
  * 
  */
 public class FileModel {
 
 	/**
-	 * App文件目录
+	 * 默认项目名称为基础文件夹
 	 */
 	public String dfBsDir = FileUtils.getSDCardPath()+ ApplicationUtils.getAppName();
 	/**
@@ -31,11 +29,11 @@ public class FileModel {
 	 */
 	public String nextDir=null;
 	/**
-	 *文件路径
+	 *  App基础文件夹
 	 */
 	public String dir = null;
 	/**
-	 * 在App目录下的目录路径
+	 * 自定义基础文件夹
 	 */
 	public String customDir = null;
 	/**

@@ -1,11 +1,12 @@
 package com.myutils.core.okhttp;
 
+import com.myutils.core.logger.L;
 import com.myutils.core.okhttp.builder.GetBuilder;
 import com.myutils.core.okhttp.builder.PostBuilder;
 import com.myutils.core.okhttp.builder.RequestBuilder;
 import com.myutils.core.okhttp.callback.CallBackAdapter;
 import com.myutils.ui.dialog.LoadingDialog;
-import com.myutils.ui.toast.T;
+import com.myutils.ui.T;
 import com.myutils.utils.NetUtils;
 
 import java.util.LinkedHashMap;
@@ -29,26 +30,25 @@ public class ActionInvoker {
     private String url;
 
     //请求参数
-    private Map<String, Object> paramMap=new LinkedHashMap<String, Object>();;
+    private Map<String, Object> paramMap = new LinkedHashMap<String, Object>();
+    ;
     //请求体
-    private RequestBuilder responseBuilder=null;
+    private RequestBuilder responseBuilder = null;
     // 默认表单提交方式,决定ResponseBuilder的类型
     private String way = "post";
 
     // 单例弹窗
     private LoadingDialog loadingDialog;
-
+    // 单例弹窗提示信息
     private String dialogMsg;
 
     private CallBackAdapter callback;
-
 
 
     public ActionInvoker(String url) {
         this.url = url;
         client = OkHttpUtils.getInstance();
     }
-
 
 
     /**
@@ -58,23 +58,37 @@ public class ActionInvoker {
         if (!NetUtils.isConnected()) {
             T.show("网络未连接,请连接网络!");
         } else {
-            if(dialogMsg!=null){
+            if (dialogMsg!= null) {
                 loadingDialog = LoadingDialog.getDialog();
                 loadingDialog.show(dialogMsg);
             }
+
             if (way.equals("post")) {
-                 responseBuilder = new PostBuilder(url);
+                responseBuilder = new PostBuilder(url);
             } else {// get方式
-                 responseBuilder = new GetBuilder(url);
+                responseBuilder = new GetBuilder(url);
             }
             responseBuilder.addParam(paramMap);
-            if(callback!=null){
+            if (callback != null) {
                 Call call = client.newCall(responseBuilder.getRequest());
-                if(loadingDialog!=null){
+                if (loadingDialog != null) {
                     callback.setLoadingDialog(loadingDialog);
                 }
                 call.enqueue(callback);
+                logParam();
             }
+        }
+    }
+
+    /**
+     *
+     */
+    private void logParam() {
+        if (paramMap.size() > 0) {
+            for (String key : paramMap.keySet())
+                L.i("key===" + key + "    value===" + paramMap.get(key));
+        } else {
+            L.i("没有参数");
         }
     }
 
@@ -111,14 +125,14 @@ public class ActionInvoker {
      * 请求方式为get
      */
     public void getMode() {
-         way="get";
+        way = "get";
     }
 
     /**
      * 请求方式为post
      */
     public void postMode() {
-        way="post";
+        way = "post";
     }
 
 

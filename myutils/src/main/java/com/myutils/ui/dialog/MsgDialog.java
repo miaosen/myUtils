@@ -1,36 +1,30 @@
 package com.myutils.ui.dialog;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.view.LayoutInflater;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.myutils.R;
-import com.myutils.ui.view.annotation.ViewInject;
+import com.myutils.ui.dialog.bs.BaseFmDialog;
+import com.myutils.core.annotation.ViewInject;
 import com.myutils.utils.ViewUtils;
-import com.myutils.utils.WindowUtils;
+
 /**
  * @Created by gzpykj.com
  * @author zms
  * @Date 2016-5-8
  * @Descrition 信息提示弹窗
  */
-public class MsgDialog extends Dialog {
+public class MsgDialog extends BaseFmDialog {
 	
 	private Context context;
-	/**
-	 * 布局文件
-	 */
-	private int layout=R.layout.ui_dlg_msg;
-	/**
-	 * 布局
-	 */
-	private View dialogView=null;
 	/**
 	 * 布局的中间部分
 	 */
@@ -39,7 +33,7 @@ public class MsgDialog extends Dialog {
 	 * 中间部分对其方式
 	 * @param gravity
 	 */
-	private int contentGravity=-100;
+	private int containerGravity = Gravity.CENTER;
 	
 	@ViewInject
 	private TextView tv_title;
@@ -54,95 +48,42 @@ public class MsgDialog extends Dialog {
 	@ViewInject
 	private TextView tv_msg;
 	
-	private String strTitle;
-	private String strMsg;
+	private String title;
+	private String msg;
 	//弹窗宽度
 	private int dialogWidth=-1;
 	//弹窗高度
 	private int dialogHeight=LayoutParams.WRAP_CONTENT;
 	//弹窗内容区高度
 	private int contentHeight=-1;
-	
-	private OnSureListener onSureListener=null;
-	
-	private OnCancleListener onCancleListener=null;
-	
-	
-	public MsgDialog(Context context,String title,String msg) {
-		super(context,R.style.dialogNoHeader);
-		this.context=context;
-		strTitle=title;
-		strMsg=msg;
-	}
 
-	public MsgDialog(Context context,String title,String msg,OnSureListener onSureListener,OnCancleListener onCancelListener) {
-		super(context,R.style.dialogNoHeader);
-		this.context=context;
-		this.onSureListener=onSureListener;
-		this.onCancleListener=onCancelListener;
-		strTitle=title;
-		strMsg=msg;
-	}
-	
-	public MsgDialog(Context context,String title,View contentView) {
-		super(context,R.style.dialogNoHeader);
-		this.context=context;
-		this.contentView=contentView;
-		strTitle=title;
-	}
-	
-	public MsgDialog(Context context,String title,View contentView,OnSureListener onSureListener,OnCancleListener onCancelListener) {
-		super(context,R.style.dialogNoHeader);
-		this.context=context;
-		this.contentView=contentView;
-		this.onSureListener=onSureListener;
-		this.onCancleListener=onCancelListener;
-		strTitle=title;
-	}
-	
-	/**
-	 * 布局创建
-	 * @return
-	 */
-	public View onCreatView(){
-		 dialogView = LayoutInflater.from(context).inflate(layout, null);
+
+
+	@Override
+	public void init(View dialogView){
 		ViewUtils.injectAllFields(this, dialogView);
-		tv_title.setText(strTitle);
-		if(strMsg!=null){
-			tv_msg.setText(strMsg);
+		if(msg !=null){
+			tv_msg.setText(msg);
 		}
 		btn_left.setOnClickListener(new mClick());
 		btn_right.setOnClickListener(new mClick());
+		setContainerGravity(containerGravity);
+		tv_title.setText(title);
 		if(contentView!=null){
 			ln_content.removeAllViews();
 			ln_content.addView(contentView);
+		}else{
+			tv_msg.setText(msg);
+			ln_content.setGravity(containerGravity);
 		}
-		if(contentGravity!=-100){
-			ln_content.setGravity(contentGravity);
-		}
-		
-		if(dialogWidth==-1){
-			int screenWidth = WindowUtils.getScreenWidth();
-			dialogWidth=screenWidth* 4 / 6;
-		}
-		if(contentHeight!=-1){
-			sv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, contentHeight));
-		}
-		LayoutParams layoutParams = new LayoutParams(dialogWidth,dialogHeight );
-		addContentView(dialogView, layoutParams);
-		return dialogView;
-		
 	}
-	
+
 	@Override
-	public void show() {
-		if(dialogView==null){
-			onCreatView();
-		}
-		super.show();
+	public int setLayout() {
+		return R.layout.ui_dlg_msg;
 	}
-	
-	
+
+
 	class mClick implements android.view.View.OnClickListener{
 		@Override
 		public void onClick(View v) {
@@ -162,22 +103,104 @@ public class MsgDialog extends Dialog {
 		}
 		
 	}
-	
-	public interface OnSureListener{
-		void sure(MsgDialog dialog);
-	}
-	
-	public interface OnCancleListener{
-		void cancle(MsgDialog dialog);
+
+	public MsgDialog setTitle(String title) {
+		this.title = title;
+		return this;
 	}
 
-	public int getContentGravity() {
-		return contentGravity;
+
+
+	public MsgDialog setMsg(String msg) {
+		this.msg = msg;
+		return this;
 	}
 
-	public void setContentGravity(int gravity) {
-		this.contentGravity = gravity;
+	public MsgDialog setContainerGravity(int gravity) {
+		this.containerGravity = gravity;
+		return this;
 	}
+
+	public void setContext(Context context) {
+		this.context = context;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+	public View getDialogView() {
+		return dialogView;
+	}
+
+	public void setDialogView(View dialogView) {
+		this.dialogView = dialogView;
+	}
+
+	public View getContentView() {
+		return contentView;
+	}
+
+	public void setContentView(View contentView) {
+		this.contentView = contentView;
+	}
+
+	public TextView getTv_title() {
+		return tv_title;
+	}
+
+
+	public LinearLayout getLn_content() {
+		return ln_content;
+	}
+
+	public void setLn_content(LinearLayout ln_content) {
+		this.ln_content = ln_content;
+	}
+
+	public ScrollView getSv() {
+		return sv;
+	}
+
+	public void setSv(ScrollView sv) {
+		this.sv = sv;
+	}
+
+	public Button getBtn_left() {
+		return btn_left;
+	}
+
+	public void setBtn_left(Button btn_left) {
+		this.btn_left = btn_left;
+	}
+
+	public Button getBtn_right() {
+		return btn_right;
+	}
+
+	public void setBtn_right(Button btn_right) {
+		this.btn_right = btn_right;
+	}
+
+	public TextView getTv_msg() {
+		return tv_msg;
+	}
+
+	public void setTv_msg(TextView tv_msg) {
+		this.tv_msg = tv_msg;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+
+
+
+	public int getContainerGravity() {
+		return containerGravity;
+	}
+
+
 
 	public int getDialogWidth() {
 		return dialogWidth;
@@ -210,21 +233,4 @@ public class MsgDialog extends Dialog {
 	public void setOnSureListener(OnSureListener onSureListener) {
 		this.onSureListener = onSureListener;
 	}
-
-	public OnCancleListener getOnCancleListener() {
-		return onCancleListener;
-	}
-
-	public void setOnCancleListener(OnCancleListener onCancleListener) {
-		this.onCancleListener = onCancleListener;
-	}
-	
-	
-	
-//	@Override
-//	protected void onCreate(Bundle savedInstanceState) {
-//		super.onCreate(savedInstanceState);
-//		setContentView(R.layout.eg_custom_dialog);
-//	}
-
 }

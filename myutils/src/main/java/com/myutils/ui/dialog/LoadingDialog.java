@@ -12,24 +12,25 @@ import android.widget.ListView;
 
 import com.myutils.R;
 import com.myutils.base.AppFactory;
-import com.myutils.core.logger.L;
 import com.myutils.core.RowObject;
-import com.myutils.ui.apdater.SimpleFillListAdapter;
+import com.myutils.ui.view.listview.SimpleFillListAdapter;
+import com.myutils.ui.dialog.bs.WindowDialog;
+
 /**
  * @Created by gzpykj.com
  * @author zms
  * @Date 2015-12-31
  * @Descrition 单例加载弹窗(使用WindowManager),适合在一个界面同时加载几条数据的情况下使用,避免重复创建
  */
-public class LoadingDialog extends WindowDialog{
+public class LoadingDialog extends WindowDialog {
 	
 	private static final String TAG = "LoadingDialog";
 	
 	// View
 //	private TextView tips_loading_msg;
-	private ListView listView;
+	private static ListView listView;
 	private LinearLayout lnDialogView;
-	private List<RowObject> rows =null;
+	private static List<RowObject> rows =null;
 	private SimpleFillListAdapter mAdapter;
 	
 	// 左边为提示内容，右边为状态 loadingStatus
@@ -42,7 +43,6 @@ public class LoadingDialog extends WindowDialog{
 
 	public static LoadingDialog getDialog() {
 		if (instance == null) {
-			L.i(TAG + "=======getDialog============");
 			instance = new LoadingDialog();
 		}
 		return instance;
@@ -54,6 +54,11 @@ public class LoadingDialog extends WindowDialog{
 		if(rows==null){
 			 rows = new ArrayList<RowObject>();
 		}
+		if(mAdapter==null){
+			mAdapter = new SimpleFillListAdapter(AppFactory.getAppContext(), rows,
+					R.layout.spl_listview_item);
+		}
+
 	}
 	
 	
@@ -71,11 +76,7 @@ public class LoadingDialog extends WindowDialog{
 		// 监听
 		view.setOnClickListener(new mClick());
 		listView = (ListView) view.findViewById(R.id.listView);
-
-		mAdapter = new SimpleFillListAdapter(AppFactory.getAppContext(), rows,
-				R.layout.spl_listview_item);
 		listView.setAdapter(mAdapter);
-		//tips_loading_msg = (TextView) view.findViewById(R.id.tips_loading_msg);
 		int w = (int) (screenWidth * 4 / 6);
 		lnDialogView = (LinearLayout) view.findViewById(R.id.ln_dialog);
 		lnDialogView.setLayoutParams(new LinearLayout.LayoutParams(w, w / 2));
@@ -83,10 +84,20 @@ public class LoadingDialog extends WindowDialog{
 		lnDialogView.setOnClickListener(new mClick());
 		return view;
 	}
-	
-	
-	
-	
+	/**
+	 * view监听事件
+	 *
+	 * @author OAIM
+	 *
+	 */
+	class mClick implements View.OnClickListener {
+		@Override
+		public void onClick(View v) {
+
+
+		}
+
+	}
 
 	/**
 	 * 移除加载完的提示或者关闭弹窗
@@ -114,27 +125,24 @@ public class LoadingDialog extends WindowDialog{
 	 * @param tip 提示内容
 	 */
 	public void show(String tip) {
-		//Logger.info(TAG+"   show====");
 		if (!isShowing()) {// 显示弹窗
 			show();
 		} 
-		
 		if (mapMessage.containsKey(tip)) {
 		} else {
 			if (onRefreshDialog != null) {
 				onRefreshDialog.refreshDialog(mapMessage);
 			} else {
 				mapMessage.put(tip, loadingStatus);
-				rows=getTipData(mapMessage);
-				//mAdapter.notifyDataSetChanged();
-				//Logger.i("!!!!!!!!!!!!!!!!!!!!!!!!!!"+mAdapter.getCount());
+
+				updateTipData(mapMessage);
 			}
-			mapMessage.put(tip, loadingStatus);
+			mAdapter.notifyDataSetChanged();
 		}
 	}
 	
 
-	private List<RowObject> getTipData(Map<String, String> mapMessage) {
+	private List<RowObject> updateTipData(Map<String, String> mapMessage) {
 		rows.clear();
 		for (String key:mapMessage.keySet()) {
 			RowObject row = new RowObject();

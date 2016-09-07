@@ -14,4 +14,8 @@
     <!-- 橘红色 -->
     <color name="orange">#E5662C</color>
 
+    <!-- 半透明黑色 -->
+    <color name="black_op">#66000000</color>
+    <!-- 全透明 -->
+    <color name="transparent">#00000000</color>
 </resources>

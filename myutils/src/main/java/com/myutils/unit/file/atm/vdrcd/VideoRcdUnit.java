@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 
 import com.myutils.base.AppFactory;
 import com.myutils.core.logger.L;
@@ -22,9 +23,9 @@ import com.myutils.utils.VideoUtils;
  */
 public class VideoRcdUnit {
 
-	private Context context;
+	//private Context context;
 
-	private Activity activity;
+	//private Activity activity;
 
 	/**
 	 * 录像请求码
@@ -52,9 +53,9 @@ public class VideoRcdUnit {
 	// 视频缩略图地址
 	private String videoThumbnailName = "";
 
-	public VideoRcdUnit(Context context) {
-		this.context = context;
-		activity = (Activity) context;
+	public VideoRcdUnit() {
+//		this.context = context;
+//		activity = (Activity) context;
 	}
 
 	/**
@@ -62,17 +63,33 @@ public class VideoRcdUnit {
 	 * 
 	 * @return
 	 */
-	public void startRecord() {
+	public void startRecord(Activity activity) {
 		initDfVideoName();
 		initVideoThumbnailName();
-		Intent intent = new Intent(context, VideoRcdAct.class);
+		Intent intent = new Intent(activity, VideoRcdAct.class);
 		intent.putExtra("videoPath", getVideoPath());
 		intent.putExtra("videoName", getVideoName());
 		activity.startActivityForResult(intent, REQUEST_CODE);
 		
 	}
 
-	
+
+	/**
+	 * 跳转到视频录制界面
+	 *
+	 * @return
+	 */
+	public void startRecord(Fragment fragment) {
+		initDfVideoName();
+		initVideoThumbnailName();
+		Intent intent = new Intent(fragment.getContext(), VideoRcdAct.class);
+		intent.putExtra("videoPath", getVideoPath());
+		intent.putExtra("videoName", getVideoName());
+		fragment.startActivityForResult(intent, REQUEST_CODE);
+
+	}
+
+
 	/**
 	 * 初始化默认视频名称
 	 */

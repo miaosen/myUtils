@@ -5,8 +5,6 @@
     <color name="deep_gray">#333333</color>
     <color name="common_gray">#E3E3E3</color>
     <color name="common_bg_gray">#F0F0F0</color>
-    <!-- 半透明黑色 -->
-    <color name="black_op">#66000000</color>
     <color name="dark">#ff000000</color>
     <color name="red">#ffff0000</color>
     <color name="contents_text">#ff000000</color>
@@ -29,7 +27,7 @@
     <color name="share_view">#ffffffff</color>
     <color name="status_view">#50000000</color>
     <color name="status_text">#ffffffff</color>
-    <color name="transparent">#00000000</color>
+
     <color name="viewfinder_frame">#ff000000</color>
     <color name="viewfinder_laser">#ffff0000</color>
     <color name="viewfinder_mask">#60000000</color>

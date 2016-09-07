@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * @author zengmiaosen
@@ -38,7 +39,6 @@ public abstract class StringCallBack extends CallBackAdapter {
         }
         if (response.isSuccessful()) {
             final String result = response.body().string();
-
             HandlerQueue.onResultCallBack(new Runnable() {
                 @Override
                 public void run() {

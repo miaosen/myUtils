@@ -2,7 +2,7 @@ package com.myutils.base;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -10,7 +10,7 @@ import com.myutils.utils.ViewUtils;
 
 @SuppressLint("NewApi")
 public abstract class BaseActivity extends
-        FragmentActivity implements OnClickListener {
+        AppCompatActivity implements OnClickListener {
 
     /**
      * 页面是否加载完成
@@ -20,9 +20,9 @@ public abstract class BaseActivity extends
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initConfig();
-        ViewUtils.injectAllField(this);
-        initView();
+        setContentView(initConfig(savedInstanceState));
+        ViewUtils.injectAllFields(this);
+        initView(getWindow().getDecorView());
     }
 
 
@@ -38,12 +38,13 @@ public abstract class BaseActivity extends
     /**
      * 初始化配置信息,
      */
-    public abstract void initConfig();
+    public abstract int initConfig(Bundle savedInstanceState);
 
     /**
      * 注解读取View后执行
+     * @param decorView
      */
-    public abstract void initView();
+    public abstract void initView(View decorView);
 
     /**
      * 获取数据操作或者一些耗时操作，比如获取网络数据，

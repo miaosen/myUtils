@@ -14,10 +14,10 @@ import android.widget.ImageButton;
 import com.myutils.R;
 import com.myutils.core.logger.L;
 import com.myutils.core.RowObject;
-import com.myutils.ui.apdater.BaseFillAdapter;
-import com.myutils.ui.toast.T;
-import com.myutils.ui.view.annotation.ViewInject;
-import com.myutils.unit.file.atm.AtmUnit.OnDataChangeListener;
+import com.myutils.ui.view.listview.BaseFillAdapter;
+import com.myutils.ui.T;
+import com.myutils.core.annotation.ViewInject;
+import com.myutils.unit.file.atm.AttachmentUnit.OnDataChangeListener;
 import com.myutils.utils.ViewUtils;
 
 /**
@@ -30,7 +30,7 @@ public class AtmView {
 
 	private Context context;
 
-	private AtmUnit atmUnit;
+	private AttachmentUnit atmUnit;
 
 	private View decorView;
 	@ViewInject
@@ -39,10 +39,10 @@ public class AtmView {
 	private AtmAdp atmAdp;
 	private List<RowObject> rows = new LinkedList<RowObject>();
 
-	public AtmView(AtmUnit atmUnit, Context context) {
-		this.context = context;
+	public AtmView(AttachmentUnit atmUnit, View decorView) {
+		this.decorView = decorView;
 		this.atmUnit = atmUnit;
-		decorView = ViewUtils.getDecorView(context);
+		context=atmUnit.getContext();
 		ViewUtils.injectAllFields(this, decorView);
 		if (initView()) {
 			atmUnit.initUnit();

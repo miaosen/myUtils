@@ -13,7 +13,8 @@ import android.widget.ProgressBar;
 import com.myutils.R;
 import com.myutils.core.RowObject;
 import com.myutils.ui.view.SecondsView;
-import com.myutils.ui.view.annotation.ViewInject;
+import com.myutils.core.annotation.ViewInject;
+import com.myutils.unit.file.FileModel;
 import com.myutils.utils.ViewUtils;
 
 /**
@@ -39,7 +40,8 @@ public class VoiceRcdView extends LinearLayout {
 
 	private VoiceRecord voiceRecord;
 
-	private VoiceRcdCfg voiceRcdCfg;
+
+	public FileModel fileModel;
 	
 	/**
 	 * 录音完成回调
@@ -67,9 +69,9 @@ public class VoiceRcdView extends LinearLayout {
 	 * 初始化
 	 */
 	private void init() {
-		voiceRcdCfg = new VoiceRcdCfg();
+		initVoiceRcdCfg();
 		if (voiceRecord == null) {
-			voiceRecord = new VoiceRecord(voiceRcdCfg);
+			voiceRecord = new VoiceRecord(fileModel);
 		}
 		voiceRecordView = ViewUtils.inflatView(context,
 				R.layout.unit_vorcd_dlgcontent);
@@ -85,7 +87,19 @@ public class VoiceRcdView extends LinearLayout {
 		start.setOnClickListener(new mClick());
 	}
 
-	
+
+	/**
+	 * 录音文件输出配置
+	 */
+	private void initVoiceRcdCfg() {
+		fileModel = new FileModel();
+		fileModel.setNextDir("/voice");
+		fileModel.setPrefix("voice_");
+		fileModel.setSuffix(".amr");
+
+	}
+
+
 	class mClick implements OnClickListener {
 		@Override
 		public void onClick(View v) {
@@ -95,7 +109,6 @@ public class VoiceRcdView extends LinearLayout {
 					start.setText("停止");
 					secondsView.reset();
 					secondsView.start();
-					voiceRcdCfg.update();
 					voiceRecord.start();
 					Animation loadAnimation = AnimationUtils.loadAnimation(context,
 							R.drawable.anm_rotate);
@@ -172,12 +185,13 @@ public class VoiceRcdView extends LinearLayout {
 		this.voiceRecord = voiceRecord;
 	}
 
-	public VoiceRcdCfg getVoiceRcdCfg() {
-		return voiceRcdCfg;
+
+	public FileModel getFileModel() {
+		return fileModel;
 	}
 
-	public void setVoiceRcdCfg(VoiceRcdCfg voiceRcdCfg) {
-		this.voiceRcdCfg = voiceRcdCfg;
+	public void setFileModel(FileModel fileModel) {
+		this.fileModel = fileModel;
 	}
 
 	public interface OnRecordComplateListener {

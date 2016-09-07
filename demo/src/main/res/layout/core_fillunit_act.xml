@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取数据"/>
+
+        <TextView
+            android:id="@+id/data$wendu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取数据"/>
+
+        <TextView
+            android:id="@+id/data$ganmao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取数据"/>
+
+        <TextView
+            android:id="@+id/data$aqi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取数据"/>
+
+        <TextView
+            android:id="@+id/data$city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取数据"/>
+
+        <TextView
+            android:id="@+id/data$yesterday$fl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取数据"/>
+
+        <Button
+            android:id="@+id/data$yesterday$fx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取数据"/>
+
+        <TextView
+            android:id="@+id/data$yesterday$high"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取数据"/>
+
+        <Button
+            android:id="@+id/data$yesterday$type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取数据"/>
+
+
+    </LinearLayout>
+</ScrollView>

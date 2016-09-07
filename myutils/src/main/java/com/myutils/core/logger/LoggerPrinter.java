@@ -66,8 +66,8 @@ final class LoggerPrinter implements Printer {
     /**
      * Localize single tag and method count for each thread
      */
-    private final ThreadLocal<String> localTag = new ThreadLocal<>();
-    private final ThreadLocal<Integer> localMethodCount = new ThreadLocal<>();
+    private final ThreadLocal<String> localTag = new ThreadLocal<String>();
+    private final ThreadLocal<Integer> localMethodCount = new ThreadLocal<Integer>();
 
     /**
      * It is used to determine log settings such as method count, thread info visibility
@@ -168,6 +168,7 @@ final class LoggerPrinter implements Printer {
         }
         try {
             json = json.trim();
+            i("不是json格式\n"+json);
             if (json.startsWith("{")) {
                 JSONObject jsonObject = new JSONObject(json);
                 String message = jsonObject.toString(JSON_INDENT);
@@ -180,9 +181,11 @@ final class LoggerPrinter implements Printer {
                 d(message);
                 return;
             }
-            e("Invalid Json");
+            //e("Invalid Json");
+            i("不是json格式\n"+json);
         } catch (JSONException e) {
             e("Invalid Json");
+
         }
     }
 

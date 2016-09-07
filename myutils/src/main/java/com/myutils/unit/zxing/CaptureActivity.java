@@ -9,12 +9,14 @@ import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
+import android.view.View;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -77,16 +79,16 @@ public abstract class CaptureActivity extends BaseActivity
 	}
 	
 	@Override
-	public void initConfig() {
-		setContentView(R.layout.zxing_capture_act);
+	public int initConfig(Bundle savedInstanceState) {
 		// config.setHeaderText("扫描企业二维码");
 		Intent intent = getIntent();
 		// viewId = intent.getIntExtra("viewId", 0);
+		return R.layout.zxing_capture_act;
 	}
 
 	
 	@Override
-	public void initView() {
+	public void initView(View decorView) {
 		CameraManager.init(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 		hasSurface = false;

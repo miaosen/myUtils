@@ -1,1 +1,1 @@
-include ':demo', ':myutils'
+include ':demo', ':myutils', ':sublimepickerlibrary'

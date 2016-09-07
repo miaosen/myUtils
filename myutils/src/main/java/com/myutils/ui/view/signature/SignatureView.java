@@ -7,10 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.myutils.R;
-import com.myutils.base.AppFactory;
-import com.myutils.ui.toast.T;
-import com.myutils.ui.view.annotation.ViewInject;
-import com.myutils.utils.ImageUtils;
+import com.myutils.core.annotation.ViewInject;
 import com.myutils.utils.ViewUtils;
 /**
  * @Created by gzpykj.com
@@ -51,7 +48,7 @@ public class SignatureView extends LinearLayout{
 		//view.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
 		this.addView(view);
 		//注解查找View
-		ViewUtils.injectAllField(this);
+		ViewUtils.injectAllFields(this);
 		ln_setting.setOnClickListener(new mClick());
 		ln_clear.setOnClickListener(new mClick());
 		ln_save.setOnClickListener(new mClick());

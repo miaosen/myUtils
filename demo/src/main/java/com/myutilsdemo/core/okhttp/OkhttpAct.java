@@ -1,54 +1,57 @@
 package com.myutilsdemo.core.okhttp;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
 import com.myutils.base.AppFactory;
 import com.myutils.core.ActionResult;
 import com.myutils.core.gson.JSONSerializer;
 import com.myutils.core.okhttp.ActionInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
-import com.myutils.ui.view.annotation.ViewInject;
+import com.myutils.core.annotation.ViewInject;
 import com.myutilsdemo.R;
 import com.myutilsdemo.base.BaseAct;
+import com.myutilsdemo.base.BaseFgm;
 
 /**
- * @email 1510809124@qq.com
  * @author zengmiaosen
+ * @email 1510809124@qq.com
  * @CreateDate 2016/8/6 14:45
  * @Descrition Okhttp示例
  */
-public class OkhttpAct extends BaseAct{
+public class OkhttpAct extends BaseAct {
+
 
     @ViewInject
     LinearLayout ln;
     @ViewInject
     Button button;
+    @ViewInject
+    EditText ed;
 
     @Override
-    public void initConfig() {
-        setContentView(R.layout.core_act_okhttp);
+    public int initConfig(Bundle savedInstanceState) {
+        return R.layout.core_okhttp_act;
     }
 
     @Override
-    public void initView() {
+    public void initView(View view) {
         //ln= (LinearLayout) findViewById(R.id.ln);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getData(1);
+                getData(5);
             }
         });
     }
 
 
-
     @Override
     public void initData() {
-//        for (int i = 0; i <5 ; i++) {
-//            getData(i);
-//        }
+
     }
 
     @Override
@@ -56,22 +59,26 @@ public class OkhttpAct extends BaseAct{
 
     }
 
-    private void getData(final int i) {
-        ActionInvoker ai = AppFactory.creatActionInvorker("https://github.com/");
-        ai.postMode();
-        ai.setDialog("百度");
+    private void getData(final int size) {
+        for (int i = 0; i < size; i++) {
+            final int j = i;
+            ActionInvoker ai = AppFactory.creatActionInvorker("https://github.com/");
+            ai.setDialog("百度...");
 //        ai.addParam("mobileLogin", "true");
 //        ai.addParam("username", "thinkGem");
 //        ai.addParam("password", "123456");
-        ai.setCallback(new StringCallBack() {
-            @Override
-            public void onSuccess(ActionResult result) {
-                TextView tv=new TextView(OkhttpAct.this);
-                tv.setText("第 "+i+" 条"+JSONSerializer.toJson(result)+"");
-                ln.addView(tv);
-            }
-        });
-        ai.invoke();
+            ai.setCallback(new StringCallBack() {
+                @Override
+                public void onSuccess(ActionResult result) {
+//                    EditText tv = new EditText(getContext());
+//                    tv.setText("第 " + j + " 条" + JSONSerializer.toJson(result) + "");
+//                    ln.addView(tv);
+                    ed.setText(JSONSerializer.toJson(result));
+                }
+            });
+            ai.invoke();
+        }
+
     }
 
 

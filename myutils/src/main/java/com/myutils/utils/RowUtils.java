@@ -40,27 +40,30 @@ public class RowUtils {
 	}
 
 	/**
-	 * 获取RowObject深层数据,比如args为["aa","bb"],则返回row下的aaRowObject对象中的key为bb的值
+	 * 获取RowObject层级数据,比如args为["aa","bb"],则返回row下的aa的RowObject对象中的key为bb的值
 	 * 
 	 * @param row
 	 * @param args
 	 * @return
 	 */
-	public static Object getlayerData(RowObject row, String[] args) {
-		Object value = null;
+	public static String getlayerData(RowObject row, String[] args) {
+		String value = null;
 		if (args.length < 2) {
 			return value;
 		} else {
+			//避免引用影响数据源
 			RowObject rowNew = new RowObject();
 			rowNew.putAll(row);
 			for (int i = 0; i < args.length; i++) {
 				if (rowNew.get(args[i]) != null) {
 					if (i == args.length - 1) {
-						value = rowNew.get(args[i]);
+						value = rowNew.getString(args[i]);
 					} else {
-						L.i("i==========="+i);
-						if(rowNew.get(args[i]) instanceof RowObject){
-							rowNew = rowNew.getRow(args[i]);
+						Object obj = rowNew.get(args[i]);
+						if(obj!=null&&obj instanceof RowObject){
+							rowNew.putAll( (RowObject) obj);
+						} else {
+							i = args.length;
 						}
 					}
 				} else {

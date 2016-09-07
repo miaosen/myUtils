@@ -8,7 +8,7 @@
 //
 //import com.myutils.R;
 //import com.myutils.base.BaseActivity;
-//import com.myutils.ui.toast.T;
+//import com.myutils.ui.T;
 //
 //public class ErrorActivity extends BaseActivity{
 //

@@ -16,7 +16,7 @@ import com.myutils.core.RowObject;
 public class GsonUtils {
 
 	/**
-	 * 
+	 * gson反射为RowObject时自定义解析数据
 	 * @return
 	 */
 	public static JsonDeserializer<RowObject> rowObjectJsonDeserializer() {
@@ -49,7 +49,6 @@ public class GsonUtils {
 			JsonElement je = entry.getValue();
 			if (je.isJsonObject()) {
 				jsonObjectToRowObject(row,entry.getKey(), je.getAsJsonObject());
-				//Logger.i("key====="+entry.getKey()+je.getAsJsonObject());
 			}else if (je.isJsonArray()) {
 				JsonArrayToListRowObject(row,entry.getKey(), je.getAsJsonArray());
 			} else {
@@ -57,14 +56,12 @@ public class GsonUtils {
 				if(!je.isJsonNull()){
 					row.put(entry.getKey(), je.getAsString());
 				}
-				//Logger.info("key========="+entry.getKey()+"  str========"+je.getAsString());
 			}
 		}
 		if(key==null||key.equals("")){
 			resultMap.putAll(row);
 		}else{
 			resultMap.put(key,row);
-			//Logger.info("put================"+key+row.size());
 		}
 		return resultMap;
 	}
@@ -72,7 +69,7 @@ public class GsonUtils {
 	/**
 	 * JsonArray转list<RowObject>
 	 * @param resultMap
-	 * @param jsonObject
+	 * @param JsonArray
 	 * @param key 
 	 * @return
 	 */

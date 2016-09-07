@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.myutils.R;
-import com.myutils.ui.view.annotation.ViewInject;
+import com.myutils.core.annotation.ViewInject;
 import com.myutils.utils.ViewUtils;
 
 /**

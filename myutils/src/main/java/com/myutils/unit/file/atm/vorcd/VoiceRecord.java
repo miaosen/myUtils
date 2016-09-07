@@ -5,6 +5,7 @@ import java.io.IOException;
 import android.media.MediaRecorder;
 
 import com.myutils.ui.UIHelper;
+import com.myutils.unit.file.FileModel;
 
 /**
  * @Created by gzpykj.com
@@ -17,17 +18,17 @@ public class VoiceRecord {
 
 	private MediaRecorder mMediaRecorder;
 
-	private VoiceRcdCfg voiceRcdCfg;
 	// 是否正在录音
 	private boolean isRecording = false;
 
 	// 是否正在录音
 	private boolean isInitializ = false;
-	
-	
-	
-	public VoiceRecord(VoiceRcdCfg voiceRcdCfg) {
-		this.voiceRcdCfg = voiceRcdCfg;
+
+
+	private FileModel fileModel;
+
+	public VoiceRecord(FileModel fileModel) {
+		this.fileModel = fileModel;
 	}
 
 	/**
@@ -50,7 +51,7 @@ public class VoiceRecord {
 			/* ②设置音频文件的编码：AAC/AMR_NB/AMR_MB/Default */
 			mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 			/* ②设置输出文件的路径 */
-			mMediaRecorder.setOutputFile(voiceRcdCfg.getVociePath());
+			mMediaRecorder.setOutputFile(fileModel.getPath());
 			/* ③准备 */
 			mMediaRecorder.prepare();
 			isInitializ=true;
@@ -66,6 +67,8 @@ public class VoiceRecord {
 	 * 开始录音
 	 */
 	public void start() {
+		fileModel.updateName();
+		fileModel.createFile();
 		if (isRecording) {
 			UIHelper.toast("正在录音");
 		} else {
@@ -76,6 +79,7 @@ public class VoiceRecord {
 			}
 			
 		}
+
 	}
 
 	/**
@@ -102,7 +106,7 @@ public class VoiceRecord {
 	}
 
 	public String getVociePath() {
-		return voiceRcdCfg.getVociePath();
+		return fileModel.getPath();
 	}
 
 	public boolean isRecording() {

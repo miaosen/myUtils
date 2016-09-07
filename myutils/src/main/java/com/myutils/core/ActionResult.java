@@ -1,8 +1,11 @@
 package com.myutils.core;
 
+import android.util.Log;
+
 import java.util.List;
 
 import com.myutils.core.gson.JSONSerializer;
+import com.myutils.core.logger.L;
 import com.myutils.utils.JsonUtils;
 
 import okhttp3.Response;
@@ -37,12 +40,9 @@ public class ActionResult {
 	private String message;
 
 
-	public ActionResult(Response response) {
-		this.response = response;
-	}
-
 	public ActionResult(String text) {
 		this.text = text;
+
 	}
 
 	public String getText() {

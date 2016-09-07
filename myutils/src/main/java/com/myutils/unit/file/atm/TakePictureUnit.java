@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 
 import com.myutils.base.AppFactory;
 import com.myutils.core.logger.L;
@@ -24,10 +25,9 @@ import com.myutils.utils.DPUtils;
  * @Date 2016-3-14
  * @Descrition 调用系统照相机拍照，然后压缩图片，返回压缩图片地址和缩略图地址
  */
-//TODO 引入fileModel，bitmap回收
 public class TakePictureUnit {
 
-	private Activity activity;
+
 
 	private Intent openCameraIntent;
 
@@ -61,8 +61,7 @@ public class TakePictureUnit {
 	private FileModel fmTempPic;
 
 
-	public TakePictureUnit(Context context) {
-		this.activity = (Activity) context;
+	public TakePictureUnit() {
 		initFileCfg();
 		init();
 	}
@@ -102,13 +101,26 @@ public class TakePictureUnit {
 	/**
 	 * 开始照相
 	 */
-	public void takePicture() {
+	public void takePicture(Fragment fragment) {
+		updateName();
+
+		fragment.startActivityForResult(openCameraIntent, REQUEST_CODE);
+	}
+
+	/**
+	 * 开始照相
+	 */
+	public void takePicture(Activity activity) {
+		updateName();
+		activity.startActivityForResult(openCameraIntent, REQUEST_CODE);
+	}
+
+	private void updateName() {
 		fmPic.updateName();
 		fmThumbPic.updateName();
 		fmPic.createFile();
 		fmThumbPic.createFile();
 		fmTempPic.createFile();
-		activity.startActivityForResult(openCameraIntent, REQUEST_CODE);
 	}
 
 	/**
