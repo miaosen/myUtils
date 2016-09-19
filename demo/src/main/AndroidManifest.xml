@@ -26,7 +26,7 @@
     <!-- 允许拨打电话 -->
     <uses-permission android:name="android.permission.CALL_PHONE"/>
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <!-- 通讯录相关权限 -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.READ_PROFILE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
@@ -58,7 +58,7 @@
 
         <activity android:name=".ui.dlg.DialogAct" />
 
-        <activity android:name=".ui.filladp.BaseApdaterAct" />
+        <activity android:name=".ui.view.listview.ListViewAct" />
 
         <activity android:name=".ui.view.rcview.RcViewAct" />
 

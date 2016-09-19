@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.myutils.R;
+import com.myutils.core.logger.L;
 
 /**
  * @Created by gzpykj.com
@@ -25,7 +26,6 @@ public class BaseHeader {
 	private Button headerRight;
 	private TextView title;
 
-	private boolean isHeaderEnable = false;
 
 	public BaseHeader(Context context) {
 		this.context = context;
@@ -39,26 +39,13 @@ public class BaseHeader {
 		initHeader();
 	}
 
-	public BaseHeader(Activity activity) {
-		this.context = activity;
-		header = activity.findViewById(R.id.rl_head);
-		initHeader();
-	}
-
-	public BaseHeader(Activity activity, View view) {
-		this.context = activity;
-		header = activity.findViewById(R.id.rl_head);
-		initHeader();
-	}
-
 	/**
 	 * 初始化
 	 */
 	private void initHeader() {
 		if (header == null) {
-			
+			L.e("没找到header布局文件！");
 		} else {
-			isHeaderEnable = true;
 			headerLeft = (Button) header.findViewById(R.id.left_btn);
 			headerRight = (Button) header.findViewById(R.id.right_btn);
 			title = (TextView) header.findViewById(R.id.title);
@@ -70,7 +57,7 @@ public class BaseHeader {
 	 * 
 	 * @param name
 	 */
-	public BaseHeader setLeft(String name) {
+	public BaseHeader leftText(String name) {
 		headerLeft.setText(name);
 		return this;
 	}
@@ -83,17 +70,17 @@ public class BaseHeader {
 		return this;
 	}
 
-	public BaseHeader setLeftFinish() {
+	public BaseHeader leftFinish() {
 		headerLeft.setOnClickListener(new mClick());
 		return this;
 	}
 
-	public BaseHeader setRight(String name) {
+	public BaseHeader rightText(String name) {
 		headerRight.setText(name);
 		return this;
 	}
 
-	public BaseHeader setRightFinish() {
+	public BaseHeader rightFinish() {
 		headerRight.setOnClickListener(new mClick());
 		return this;
 	}
@@ -142,12 +129,5 @@ public class BaseHeader {
 		this.title = title;
 	}
 
-	public boolean isHeaderEnable() {
-		return isHeaderEnable;
-	}
-
-	public void setHeaderEnable(boolean isHeaderEnable) {
-		this.isHeaderEnable = isHeaderEnable;
-	}
 
 }

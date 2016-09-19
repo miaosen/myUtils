@@ -1,22 +1,14 @@
-package com.myutilsdemo.ui.view;
-
-
-
+package com.myutilsdemo.ui.view.listview;
 
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AbsListView;
 import com.myutils.utils.ViewUtils;
+
 import java.util.List;
-
-
-
 
 /**
  * @email 1510809124@qq.com
@@ -25,14 +17,12 @@ import java.util.List;
  * @CreateDate 2016/9/2 11:22
  * @Descrition AbsListView子类的上下拉刷新，比如listView gridview
  */
-public class RefreshRecyclerView extends SwipeRefreshLayout{
+public class RefreshAbsListView extends SwipeRefreshLayout implements AbsListView.OnScrollListener {
 
     /**
      * listview实例
      */
-    private RecyclerView recyclerView;
-
-    private RecyclerView.LayoutManager layoutManager;
+    private AbsListView mAbsListView;
     /**
      *  滑动到最下面时的上拉操作
      */
@@ -60,11 +50,11 @@ public class RefreshRecyclerView extends SwipeRefreshLayout{
     private boolean isLoading = false;
 
 
-    public RefreshRecyclerView(Context context) {
+    public RefreshAbsListView(Context context) {
         super(context);
     }
 
-    public RefreshRecyclerView(Context context, AttributeSet attrs) {
+    public RefreshAbsListView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -73,7 +63,7 @@ public class RefreshRecyclerView extends SwipeRefreshLayout{
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         // 初始化ListView对象
-        if (recyclerView == null) {
+        if (mAbsListView == null) {
             getAbsListView();
         }
     }
@@ -87,25 +77,10 @@ public class RefreshRecyclerView extends SwipeRefreshLayout{
             List<View> allChildViews = ViewUtils.getAllChildViews(this);
             for (int i = 0; i < allChildViews.size(); i++) {
                 View childView = getChildAt(i);
-                if (childView instanceof RecyclerView) {
-                    recyclerView = (RecyclerView) childView;
-                    layoutManager=recyclerView.getLayoutManager();
+                if (childView instanceof AbsListView) {
+                    mAbsListView = (AbsListView) childView;
                     // 设置滚动监听器给ListView, 使得滚动的情况下也可以自动加载
-                    recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                        @Override
-                        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                            super.onScrollStateChanged(recyclerView, newState);
-                        }
-
-                        @Override
-                        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                            // 滚动时到了最底部也可以加载更多
-                            if (canLoad()) {
-                                loadData();
-                            }
-                            super.onScrolled(recyclerView, dx, dy);
-                        }
-                    });
+                    mAbsListView.setOnScrollListener(this);
                     i=allChildViews.size();
                 }
             }
@@ -113,11 +88,10 @@ public class RefreshRecyclerView extends SwipeRefreshLayout{
     }
 
 
-    /**
-     * 触摸事件
-     * @param event
-     * @return
-     */
+    /*
+    * (non-Javadoc)
+    * @see android.view.ViewGroup#dispatchTouchEvent(android.view.MotionEvent)
+    */
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         final int action = event.getAction();
@@ -158,38 +132,10 @@ public class RefreshRecyclerView extends SwipeRefreshLayout{
      * 判断是否到了最底部
      */
     private boolean isBottom() {
-        if (layoutManager != null && layoutManager.getItemCount() != 0) {
-            if(layoutManager instanceof LinearLayoutManager){
-                LinearLayoutManager layout= (LinearLayoutManager) layoutManager;
-                return layout.findLastVisibleItemPosition() ==(layout.getItemCount() - 1);
-            }else if(layoutManager instanceof GridLayoutManager){
-                GridLayoutManager layout= (GridLayoutManager) layoutManager;
-                return layout.findLastVisibleItemPosition() ==(layout.getItemCount() - 1);
-            }else if(layoutManager instanceof StaggeredGridLayoutManager){
-                //TODO
-                StaggeredGridLayoutManager layout= (StaggeredGridLayoutManager) layoutManager;
-                int lastPosition[]=null;
-                lastPosition=  layout.findLastVisibleItemPositions(lastPosition);
-                return getMaxInt(lastPosition) ==(layout.getItemCount() - 1);
-            }
+        if (mAbsListView != null && mAbsListView.getAdapter() != null) {
+            return mAbsListView.getLastVisiblePosition() == (mAbsListView.getAdapter().getCount() - 1);
         }
         return false;
-    }
-
-    /**
-     * 获取数组的最大值
-     * @param args
-     * @return
-     */
-    public static int getMaxInt(int [] args){
-        int max=0;
-        for (int i = 0; i < args.length; i++) {
-            int arg = args[i];
-            if(arg>max){
-                max=arg;
-            }
-        }
-        return max;
     }
 
     /**
@@ -219,9 +165,9 @@ public class RefreshRecyclerView extends SwipeRefreshLayout{
     public void setLoading(boolean loading) {
         isLoading = loading;
         if (isLoading) {
-             // recyclerView.addFooterView(mAbsListViewFooter);
+//              mAbsListView.addFooterView(mAbsListViewFooter);
         } else {
-            //   recyclerView.removeFooterView(mAbsListViewFooter);
+            //   mAbsListView.removeFooterView(mAbsListViewFooter);
             mYDown = 0;
             mLastY = 0;
         }
@@ -234,7 +180,19 @@ public class RefreshRecyclerView extends SwipeRefreshLayout{
         mOnLoadListener = loadListener;
     }
 
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
 
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
+                         int totalItemCount) {
+        // 滚动时到了最底部也可以加载更多
+        if (canLoad()) {
+            loadData();
+        }
+    }
 
     /**
      * 加载更多的监听器

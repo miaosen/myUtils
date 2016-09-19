@@ -21,7 +21,7 @@ public class TestDialog extends BaseFmDialog {
 
     @Override
     public int setLayout() {
-        return R.layout.content_main;
+        return R.layout.activity_main;
     }
 
     @Override

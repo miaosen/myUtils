@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.myutils.R;
+import com.myutils.core.annotation.InjectReader;
 import com.myutils.core.annotation.ViewInject;
 import com.myutils.utils.ViewUtils;
 /**
@@ -48,7 +49,7 @@ public class SignatureView extends LinearLayout{
 		//view.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
 		this.addView(view);
 		//注解查找View
-		ViewUtils.injectAllFields(this);
+		InjectReader.injectAllFields(this);
 		ln_setting.setOnClickListener(new mClick());
 		ln_clear.setOnClickListener(new mClick());
 		ln_save.setOnClickListener(new mClick());

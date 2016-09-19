@@ -1,28 +1,36 @@
-package com.myutilsdemo.ui.view;
+package com.myutils.ui.view.rcview;
+
 
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AbsListView;
+
 import com.myutils.utils.ViewUtils;
 
 import java.util.List;
+
 
 /**
  * @email 1510809124@qq.com
  * @author zengmiaosen
  * @git http://git.oschina.net/miaosen/MyUtils
  * @CreateDate 2016/9/2 11:22
- * @Descrition AbsListView子类的上下拉刷新，比如listView gridview
+ * @Descrition 为RecyclerView加上加载更多功能，比如listView gridview
  */
-public class RefreshAbsListView extends SwipeRefreshLayout implements AbsListView.OnScrollListener {
+public class RefreshRcView extends SwipeRefreshLayout{
 
     /**
      * listview实例
      */
-    private AbsListView mAbsListView;
+    private RecyclerView recyclerView;
+
+    private RecyclerView.LayoutManager layoutManager;
     /**
      *  滑动到最下面时的上拉操作
      */
@@ -50,11 +58,11 @@ public class RefreshAbsListView extends SwipeRefreshLayout implements AbsListVie
     private boolean isLoading = false;
 
 
-    public RefreshAbsListView(Context context) {
+    public RefreshRcView(Context context) {
         super(context);
     }
 
-    public RefreshAbsListView(Context context, AttributeSet attrs) {
+    public RefreshRcView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -62,26 +70,40 @@ public class RefreshAbsListView extends SwipeRefreshLayout implements AbsListVie
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-
         // 初始化ListView对象
-        if (mAbsListView == null) {
-            getAbsListView();
+        if (recyclerView == null) {
+            getRecyclerView();
         }
     }
 
     /**
      * 获取ListView对象
      */
-    private void getAbsListView() {
+    private void getRecyclerView() {
         int childs = getChildCount();
         if (childs > 0) {
             List<View> allChildViews = ViewUtils.getAllChildViews(this);
             for (int i = 0; i < allChildViews.size(); i++) {
                 View childView = getChildAt(i);
-                if (childView instanceof AbsListView) {
-                    mAbsListView = (AbsListView) childView;
+                if (childView instanceof RecyclerView) {
+                    recyclerView = (RecyclerView) childView;
+                    layoutManager=recyclerView.getLayoutManager();
                     // 设置滚动监听器给ListView, 使得滚动的情况下也可以自动加载
-                    mAbsListView.setOnScrollListener(this);
+                    recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                        @Override
+                        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                            super.onScrollStateChanged(recyclerView, newState);
+                        }
+
+                        @Override
+                        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                            // 滚动时到了最底部也可以加载更多
+                            if (canLoad()) {
+                                loadData();
+                            }
+                            super.onScrolled(recyclerView, dx, dy);
+                        }
+                    });
                     i=allChildViews.size();
                 }
             }
@@ -89,20 +111,19 @@ public class RefreshAbsListView extends SwipeRefreshLayout implements AbsListVie
     }
 
 
-    /*
-    * (non-Javadoc)
-    * @see android.view.ViewGroup#dispatchTouchEvent(android.view.MotionEvent)
-    */
+    /**
+     * 触摸事件
+     * @param event
+     * @return
+     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         final int action = event.getAction();
-
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 // 按下
                 mYDown = (int) event.getRawY();
                 break;
-
             case MotionEvent.ACTION_MOVE:
                 // 移动
                 mLastY = (int) event.getRawY();
@@ -133,10 +154,38 @@ public class RefreshAbsListView extends SwipeRefreshLayout implements AbsListVie
      * 判断是否到了最底部
      */
     private boolean isBottom() {
-        if (mAbsListView != null && mAbsListView.getAdapter() != null) {
-            return mAbsListView.getLastVisiblePosition() == (mAbsListView.getAdapter().getCount() - 1);
+        if (layoutManager != null && layoutManager.getItemCount() != 0) {
+            if(layoutManager instanceof LinearLayoutManager){
+                LinearLayoutManager layout= (LinearLayoutManager) layoutManager;
+                return layout.findLastVisibleItemPosition() ==(layout.getItemCount() - 1);
+            }else if(layoutManager instanceof GridLayoutManager){
+                GridLayoutManager layout= (GridLayoutManager) layoutManager;
+                return layout.findLastVisibleItemPosition() ==(layout.getItemCount() - 1);
+            }else if(layoutManager instanceof StaggeredGridLayoutManager){
+                //TODO
+                StaggeredGridLayoutManager layout= (StaggeredGridLayoutManager) layoutManager;
+                int lastPosition[]=null;
+                lastPosition=  layout.findLastVisibleItemPositions(lastPosition);
+                return getMaxInt(lastPosition) ==(layout.getItemCount() - 1);
+            }
         }
         return false;
+    }
+
+    /**
+     * 获取数组的最大值
+     * @param args
+     * @return
+     */
+    public static int getMaxInt(int [] args){
+        int max=0;
+        for (int i = 0; i < args.length; i++) {
+            int arg = args[i];
+            if(arg>max){
+                max=arg;
+            }
+        }
+        return max;
     }
 
     /**
@@ -166,9 +215,9 @@ public class RefreshAbsListView extends SwipeRefreshLayout implements AbsListVie
     public void setLoading(boolean loading) {
         isLoading = loading;
         if (isLoading) {
-//              mAbsListView.addFooterView(mAbsListViewFooter);
+             // recyclerView.addFooterView(mAbsListViewFooter);
         } else {
-            //   mAbsListView.removeFooterView(mAbsListViewFooter);
+            //   recyclerView.removeFooterView(mAbsListViewFooter);
             mYDown = 0;
             mLastY = 0;
         }
@@ -181,19 +230,7 @@ public class RefreshAbsListView extends SwipeRefreshLayout implements AbsListVie
         mOnLoadListener = loadListener;
     }
 
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-    }
-
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount,
-                         int totalItemCount) {
-        // 滚动时到了最底部也可以加载更多
-        if (canLoad()) {
-            loadData();
-        }
-    }
 
     /**
      * 加载更多的监听器

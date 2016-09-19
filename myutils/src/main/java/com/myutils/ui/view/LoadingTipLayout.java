@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.myutils.R;
+import com.myutils.core.annotation.InjectReader;
 import com.myutils.core.annotation.ViewInject;
 import com.myutils.utils.ViewUtils;
 
@@ -51,7 +52,7 @@ public class LoadingTipLayout extends FrameLayout{
 		viewTip = (FrameLayout) ViewUtils.inflatView(context, R.layout.ui_view_loadingtip);
 		this.addView(viewTip, 0);
 		//解决xml预览保存
-		ViewUtils.injectAllFields(this, viewTip);
+		InjectReader.injectAllFields(this, viewTip);
 		}
 	}
 	

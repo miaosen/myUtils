@@ -59,6 +59,7 @@ public class ActionInvoker {
             T.show("网络未连接,请连接网络!");
         } else {
             if (dialogMsg!= null) {
+                L.i("dialogMsg=============="+dialogMsg);
                 loadingDialog = LoadingDialog.getDialog();
                 loadingDialog.show(dialogMsg);
             }

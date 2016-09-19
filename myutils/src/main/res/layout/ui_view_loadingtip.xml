@@ -1,55 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#eeeeee"
-    android:padding="5dp"
-    android:orientation="vertical" >
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="#eeeeee"
+             android:orientation="vertical"
+             android:padding="5dp">
 
     <LinearLayout
         android:id="@+id/ln_loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" >
 
-            <ProgressBar
-                android:id="@+id/animProgress"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:indeterminateDrawable="@drawable/eg_rotate_loading_style_01" />
-        </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/animProgress"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:indeterminateDrawable="@drawable/eg_rotate_loading_style_01"/>
 
         <TextView
             android:id="@+id/tv_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
             android:gravity="center"
             android:text="获取中..."
             android:textColor="@color/text_color"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
     </LinearLayout>
 
     <LinearLayout
-         android:id="@+id/ln_error"
+        android:id="@+id/ln_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:orientation="vertical"
         android:padding="10dp"
-        android:visibility="gone"
-        android:orientation="vertical" >
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/img_error_layout"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/icon_fail" />
+            android:background="@drawable/icon_fail"/>
 
         <TextView
             android:id="@+id/tv_fail"
@@ -59,27 +54,27 @@
             android:gravity="center"
             android:text="加载失败，点击重试..."
             android:textColor="@color/text_color"
-             />
+            />
     </LinearLayout>
-    
+
     <LinearLayout
         android:id="@+id/ln_not_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="gone"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" >
+            android:layout_gravity="center_horizontal">
 
             <ProgressBar
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:visibility="gone"
-                android:indeterminateDrawable="@drawable/eg_rotate_loading_style_01" />
+                android:indeterminateDrawable="@drawable/eg_rotate_loading_style_01"
+                android:visibility="gone"/>
         </RelativeLayout>
 
         <TextView
@@ -91,7 +86,7 @@
             android:padding="5dp"
             android:text="暂无数据!"
             android:textColor="@color/text_color"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
     </LinearLayout>
 
 </FrameLayout>

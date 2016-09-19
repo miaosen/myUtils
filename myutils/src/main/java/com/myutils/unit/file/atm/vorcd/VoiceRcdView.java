@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.myutils.R;
 import com.myutils.core.RowObject;
+import com.myutils.core.annotation.InjectReader;
 import com.myutils.ui.view.SecondsView;
 import com.myutils.core.annotation.ViewInject;
 import com.myutils.unit.file.FileModel;
@@ -83,7 +84,7 @@ public class VoiceRcdView extends LinearLayout {
 		this.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 				LayoutParams.MATCH_PARENT));
 
-		ViewUtils.injectAllFields(this, voiceRecordView);
+		InjectReader.injectAllFields(this, voiceRecordView);
 		start.setOnClickListener(new mClick());
 	}
 

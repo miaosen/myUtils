@@ -12,6 +12,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.myutils.R;
+import com.myutils.core.annotation.InjectReader;
 import com.myutils.ui.dialog.bs.BaseFmDialog;
 import com.myutils.core.annotation.ViewInject;
 import com.myutils.utils.ViewUtils;
@@ -61,7 +62,7 @@ public class MsgDialog extends BaseFmDialog {
 
 	@Override
 	public void init(View dialogView){
-		ViewUtils.injectAllFields(this, dialogView);
+		InjectReader.injectAllFields(this, dialogView);
 		if(msg !=null){
 			tv_msg.setText(msg);
 		}

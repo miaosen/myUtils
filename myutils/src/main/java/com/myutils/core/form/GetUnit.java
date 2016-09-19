@@ -2,17 +2,14 @@ package com.myutils.core.form;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.appeaser.sublimepickerlibrary.DateButton;
 import com.myutils.ui.view.CustomRadioGroup;
 import com.myutils.utils.ViewUtils;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +24,7 @@ public class GetUnit {
 
     private Map<String, View> viewWithIdName;
 
-
-    /**
-     * 不需要获取的View类型
-     */
-    private List<Class> disableType = null;
+    private ViewFilter viewFilter;
 
 
     public GetUnit(Context context) {
@@ -47,12 +40,13 @@ public class GetUnit {
         init();
     }
 
+    public GetUnit( Map<String, View> viewWithIdName) {
+        this.viewWithIdName =viewWithIdName;
+        init();
+    }
+
     private void init() {
-        if (this.disableType == null) {
-            this.disableType = new LinkedList<Class>();
-        }
-        //TextView一般不需要获取
-        setDisableType(TextView.class);
+        viewFilter=new ViewFilter();
     }
 
 
@@ -60,7 +54,7 @@ public class GetUnit {
         Map<String, Object> contentMap = new LinkedHashMap<String, Object>();
         for (String idName: viewWithIdName.keySet()) {
             View view = viewWithIdName.get(idName);
-            if (disableType == null || !disableType.contains(view.getClass())) {
+            if (viewFilter.isContain(idName,view)) {
                 if (view instanceof TextView) {//获取TextView或者TextView的子类文字
                     TextView tv = (TextView) view;
                     if (tv.getText()!=null&&!tv.getText().equals("")) {
@@ -75,24 +69,35 @@ public class GetUnit {
                 }else if (view instanceof CustomRadioGroup){
                     CustomRadioGroup rg=(CustomRadioGroup) view;
                     contentMap.put(idName + "",  rg.getValue());
-
                 }
             }
-
         }
         return contentMap;
     }
 
-
-
     public void setDisableType(List<Class> disableType) {
-        this.disableType.addAll(disableType);
+       viewFilter.setDisableType(disableType);
     }
 
+
+    /**
+     * 设置不需要获取的view
+     * @param disableType
+     */
     public void setDisableType(Class... disableType) {
-        for (int i = 0; i < disableType.length; i++) {
-            this.disableType.add(disableType[i]);
-        }
+        viewFilter.setDisableType(disableType);
     }
+
+
+    /**
+     * 设置不需要获取的view
+     * @param idName
+     */
+    public void enableIdName(String idName){
+        viewFilter.enableIdName(idName);
+    }
+
+
+
 
 }

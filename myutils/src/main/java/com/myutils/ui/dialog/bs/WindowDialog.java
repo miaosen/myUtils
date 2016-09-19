@@ -80,7 +80,6 @@ public abstract class WindowDialog implements DialogInterface{
 	 * 显示
 	 */
 	public void show() {
-		L.i("view====="+view);
 		if(view==null){
 			view=onCreateView();
 		}

@@ -12,6 +12,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 
 import com.myutils.R;
+import com.myutils.core.annotation.InjectReader;
 import com.myutils.core.logger.L;
 import com.myutils.core.RowObject;
 import com.myutils.ui.view.listview.BaseFillAdapter;
@@ -43,7 +44,7 @@ public class AtmView {
 		this.decorView = decorView;
 		this.atmUnit = atmUnit;
 		context=atmUnit.getContext();
-		ViewUtils.injectAllFields(this, decorView);
+		InjectReader.injectAllFields(this, decorView);
 		if (initView()) {
 			atmUnit.initUnit();
 		} else {

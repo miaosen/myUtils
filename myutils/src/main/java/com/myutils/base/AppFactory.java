@@ -28,10 +28,10 @@ public class AppFactory {
 	 * 应用配置信息
 	 * @return
 	 */
-//	public static AppConfig getAppConfig(){
-//		AppConfig appConfig=AppConfig.getInstance();
-//		return appConfig;
-//	}
+	public static AppConfig getAppConfig(){
+		AppConfig appConfig=AppConfig.getInstance();
+		return appConfig;
+	}
 	
 	/**
 	 * 获取全局上下文

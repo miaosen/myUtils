@@ -36,7 +36,7 @@ public class AtmAct extends BaseAct {
 	@Override
 	public int initConfig(Bundle savedInstanceState) {
 		context=this;
-		return R.layout.core_atm_act;
+		return R.layout.unit_atm_act;
 	}
 
 	@Override

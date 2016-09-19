@@ -17,8 +17,8 @@ import com.myutilsdemo.unit.file.AtmAct;
 import com.myutilsdemo.unit.file.VocieRecordAct;
 
 /**
- * @email 1510809124@qq.com
  * @author zengmiaosen
+ * @email 1510809124@qq.com
  * @git http://git.oschina.net/miaosen/MyUtils
  * @CreateDate 2016/9/1 16:17
  * @Descrition 核心示例主页
@@ -26,7 +26,7 @@ import com.myutilsdemo.unit.file.VocieRecordAct;
 public class UnitMainFgm extends BaseFgm {
 
     @ViewInject
-    Button attachment,recordVoice,take_pic,video_rcd;
+    Button attachment, recordVoice, take_pic, video_rcd;
 
     TakePictureUnit takePictureUnit;
 
@@ -46,15 +46,14 @@ public class UnitMainFgm extends BaseFgm {
 
     @Override
     public void click(View v) {
-        if(v==attachment){
+        if (v == attachment) {
             IntentUtils.jump(getContext(), AtmAct.class);
-        }else if(v==recordVoice){
+        } else if (v == recordVoice) {
             IntentUtils.jump(getContext(), VocieRecordAct.class);
-        }else if(v==take_pic){
-             takePictureUnit=new TakePictureUnit();
+        } else if (v == take_pic) {
+            takePictureUnit = new TakePictureUnit();
             takePictureUnit.takePicture(this);
-
-        }else if(v==video_rcd){
+        } else if (v == video_rcd) {
             IntentUtils.jump(getContext(), VocieRecordAct.class);
 
         }
@@ -64,8 +63,8 @@ public class UnitMainFgm extends BaseFgm {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-         RowObject rowObject = takePictureUnit.onActivityResult(requestCode, resultCode, data);
-        L.i("rowObject===="+ JSONSerializer.toJson(rowObject));
+        RowObject rowObject = takePictureUnit.onActivityResult(requestCode, resultCode, data);
+        L.i("rowObject====" + JSONSerializer.toJson(rowObject));
     }
 
     @Override

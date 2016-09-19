@@ -37,27 +37,32 @@ public class FillUnit {
 
     private OnFillMessageListener onFillMessageListener;
 
-    /**
-     * 不需要填充的View类型
-     */
-    private List<Class> disableType = null;
+    private ViewFilter viewFilter;
 
 
     public FillUnit(Map<String, View> viewWithIdName) {
         this.viewWithIdName = viewWithIdName;
+        init();
     }
-
 
     public FillUnit(Context context) {
         this.context = context;
         this.decorView = ViewUtils.getDecorView(context);
         viewWithIdName = ViewUtils.getViewWithIdName(decorView);
+        init();
     }
 
 
     public FillUnit(View view) {
         viewWithIdName = ViewUtils.getViewWithIdName(view);
+        init();
     }
+
+
+    private void init() {
+        viewFilter=new ViewFilter();
+    }
+
 
 
     public void fill(RowObject row) {
@@ -127,7 +132,7 @@ public class FillUnit {
         }
         if (!success) {
             Class cls = view.getClass();
-            if (disableType == null || !disableType.contains(cls)) {
+            if (viewFilter.isContain(key,view)) {
                 success = customFillMessage(view, key, value);
                 if (success) {//自定义View填充
                 } else if (view instanceof TextView) {// 填充TextView或者TextView的子类
@@ -165,19 +170,11 @@ public class FillUnit {
 
 
     public void setDisableType(List<Class> disableType) {
-        if (this.disableType == null) {
-            this.disableType = new LinkedList<Class>();
-        }
-        this.disableType.addAll(disableType);
+        viewFilter .setDisableType(disableType);
     }
 
     public void setDisableType(Class... disableType) {
-        if (this.disableType == null) {
-            this.disableType = new LinkedList<Class>();
-        }
-        for (int i = 0; i < disableType.length; i++) {
-            this.disableType.add(disableType[i]);
-        }
+        viewFilter.setDisableType(disableType);
     }
 
 
@@ -222,7 +219,4 @@ public class FillUnit {
     }
 
 
-    public List<Class> getDisableType() {
-        return disableType;
-    }
 }

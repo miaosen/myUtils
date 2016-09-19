@@ -15,7 +15,7 @@ import okhttp3.ResponseBody;
  * @author zengmiaosen
  * @email 1510809124@qq.com
  * @CreateDate 2016/8/7 20:01
- * @Descrition
+ * @Descrition 文本回调
  */
 public abstract class StringCallBack extends CallBackAdapter {
 

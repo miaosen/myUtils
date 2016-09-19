@@ -7,8 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.myutils.core.logger.L;
-import com.myutils.utils.ViewUtils;
+import com.myutils.core.annotation.InjectReader;
 
 /**
  * Created by OAIM on 2016/8/25.
@@ -24,7 +23,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(initConfig(savedInstanceState),container,false);
-        ViewUtils.injectAllFields(this,view);
+        InjectReader.injectAllFields(this,view);
         initView(view);
         isFirstLoad=true;
         return view;

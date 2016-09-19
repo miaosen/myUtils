@@ -22,7 +22,7 @@ public class HandlerQueue {
 
     private static class Queue{
         /**
-         * 回到UI线程操作
+         * UI线程操作
          * 不是主线程的话,需要使用Looper.prepare(); Handler handler = new Handler();Looper.loop()结构;
          * 或者Handler handler = new Handler(Looper.getMainLooper());
          */

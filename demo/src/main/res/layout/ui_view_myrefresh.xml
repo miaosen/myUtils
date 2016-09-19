@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+
+
+
+
+
+    <com.myutilsdemo.ui.view.refresh.MyRefresh
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#ff00ff"
+            android:gravity="center"
+            android:layout_marginTop="-100dp"
+            android:text="header"
+            android:textColor="@color/white"
+            android:textSize="33sp"
+            />
+
+        <TextView
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/white"
+            android:background="#ff00ff"
+            android:text="footer"
+            android:layout_marginBottom="-50dp"
+            android:textSize="25sp"
+            />
+
+
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_below="@id/header"
+            android:layout_height="wrap_content" />
+
+
+
+
+    </com.myutilsdemo.ui.view.refresh.MyRefresh>
+
+
+</LinearLayout>

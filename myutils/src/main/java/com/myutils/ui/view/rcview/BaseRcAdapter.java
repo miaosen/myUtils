@@ -25,8 +25,11 @@ public abstract class BaseRcAdapter extends RecyclerView.Adapter<BaseRcAdapter.V
     private List<RowObject> rows;
     private int layout;
 
+
     // item监听
     private OnItemClickListener onItemClickListener;
+
+    int num=0;
 
     public BaseRcAdapter(List<RowObject> rows, int layout) {
         this.rows = rows;
@@ -39,6 +42,8 @@ public abstract class BaseRcAdapter extends RecyclerView.Adapter<BaseRcAdapter.V
         View view = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
         // 创建一个ViewHolder
         ViewHolder holder = new ViewHolder(view);
+        L.i("onCreateViewHolder====================="+num);
+        num=num+1;
         return holder;
     }
 
@@ -59,7 +64,10 @@ public abstract class BaseRcAdapter extends RecyclerView.Adapter<BaseRcAdapter.V
 
         public ViewHolder(View itemView) {
             super(itemView);
-            fillUnit = new FillUnit(itemView);
+            if(fillUnit==null){
+                fillUnit = new FillUnit(itemView);
+
+            }
         }
 
 
@@ -73,6 +81,7 @@ public abstract class BaseRcAdapter extends RecyclerView.Adapter<BaseRcAdapter.V
             }
         }
     }
+
 
 
     /**
@@ -104,6 +113,10 @@ public abstract class BaseRcAdapter extends RecyclerView.Adapter<BaseRcAdapter.V
             }
         }
     }
+
+
+
+
 
     @Override
     public int getItemCount() {
