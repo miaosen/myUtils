@@ -1,5 +1,7 @@
 package com.myutils.core.logger;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -181,10 +183,8 @@ final class LoggerPrinter implements Printer {
                 return;
             }
             //e("Invalid Json");
-            i("不是json格式\n"+json);
         } catch (JSONException e) {
-            e("Invalid Json");
-
+            e("不是json格式\n");
         }
     }
 
@@ -311,6 +311,7 @@ final class LoggerPrinter implements Printer {
                     .append(trace[stackIndex].getLineNumber())
                     .append(")");
             level += "   ";
+            Log.i("logtag","builder===="+builder.toString());
             logChunk(logType, tag, builder.toString());
         }
     }

@@ -58,6 +58,12 @@ public class MsgDialog extends BaseFmDialog {
 	//弹窗内容区高度
 	private int contentHeight=-1;
 
+	public MsgDialog(String title){
+		this.title= title;
+	}
+
+	public MsgDialog(){
+	}
 
 
 	@Override

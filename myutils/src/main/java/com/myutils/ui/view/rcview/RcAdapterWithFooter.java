@@ -1,5 +1,7 @@
 package com.myutils.ui.view.rcview;
 
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -110,6 +112,15 @@ public class RcAdapterWithFooter extends BaseRcAdapter{
         }
         isShowFooter=true;
     }
+
+    public void hideFooter(int seconds) {
+        new Handler().postDelayed(new Runnable(){
+            public void run() {
+                hideFooter();
+            }
+        }, seconds*1000);
+    }
+
 
     public void hideFooter() {
         if(getItemCount()>getRows().size()){

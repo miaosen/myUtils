@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 背景样式 -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--灰色框 -->
+    <style name="bg_frame_grey">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/sel_frame_grey_blue</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">3dp</item>
+    </style>
+    
+    
+</resources>

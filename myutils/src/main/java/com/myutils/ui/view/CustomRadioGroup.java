@@ -53,7 +53,7 @@ public class CustomRadioGroup extends LinearLayout{
 
 	private void init() {
 		List<View> allChildViews = ViewUtils.getAllChildViews(this);
-		L.i("CustomRadioGroup==="+allChildViews.size());
+		//L.i("CustomRadioGroup==="+allChildViews.size());
 		for (int i = 0; i < allChildViews.size(); i++) {
 			View view = allChildViews.get(i);
 			if(view instanceof RadioButton){

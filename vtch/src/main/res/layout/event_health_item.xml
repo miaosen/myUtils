@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:padding="8dp">
+
+    <LinearLayout
+        android:id="@+id/ln_illness"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/sel_event_item_bg_blue"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/event_choose_illness"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginRight="15dp"
+                android:gravity="center"
+                >
+
+                <TextView
+                    style="@style/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_marginTop="12dp"
+                    android:text="肩周炎"
+                    android:textColor="@color/black"
+                    android:gravity="center_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                style="@style/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="陈医生"
+                android:textColor="@color/black"
+                android:gravity="center_horizontal"
+                android:textSize="14sp"
+                android:padding="1dp"
+                android:textStyle="bold"
+                />
+
+                <TextView
+                    style="@style/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2016-09-22 14:00"
+                    android:padding="1dp"
+                    android:gravity="center_horizontal"
+                    android:textSize="12sp"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:background="@drawable/sel_btn_white"
+                    android:text="预约"
+                    android:layout_margin="10dp"
+                    android:textSize="14sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

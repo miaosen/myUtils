@@ -70,11 +70,8 @@ public class InjectReader {
 
 
 
-
     /**
-     * 解析所有注解
-     *
-     *            需要赋值的view
+     * 解析注解基础方法
      */
     public static void injectAllFields(Object object, View injectView,
                                        Class<?> clazz) {

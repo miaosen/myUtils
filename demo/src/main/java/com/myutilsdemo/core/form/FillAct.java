@@ -8,14 +8,10 @@ import android.widget.TextView;
 import com.myutils.base.AppFactory;
 import com.myutils.core.ActionResult;
 import com.myutils.core.form.FillUnit;
-import com.myutils.core.logger.L;
-import com.myutils.core.okhttp.ActionInvoker;
+import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
 import com.myutilsdemo.R;
 import com.myutilsdemo.base.BaseAct;
-import com.myutilsdemo.base.BaseFgm;
-
-import org.w3c.dom.Text;
 
 /**
  * @email 1510809124@qq.com
@@ -40,7 +36,7 @@ public class FillAct extends BaseAct {
 
     @Override
     public void initData() {
-        ActionInvoker ai = AppFactory.creatActionInvorker("http://wthrcdn.etouch.cn/weather_mini?citykey=101010100");
+        UrlInvoker ai = AppFactory.creatUrlInvorker("http://wthrcdn.etouch.cn/weather_mini?citykey=101010100");
         ai.postMode();
         ai.setDialog("百度");
         ai.setCallback(new StringCallBack() {

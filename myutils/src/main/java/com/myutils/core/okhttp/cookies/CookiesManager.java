@@ -24,10 +24,10 @@ public class CookiesManager implements CookieJar {
 
     @Override
     public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-        L.i("saveFromResponse =============" + url + "  ");
+        //L.i("saveFromResponse =============" + url + "  ");
         if (cookies != null && cookies.size() > 0) {
             for (Cookie item : cookies) {
-                L.i("saveFromResponse =============" + item + "  " + url);
+               // L.i("saveFromResponse =============" + item + "  " + url);
                 cookieStore.add(url, item);
             }
         }

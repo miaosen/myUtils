@@ -19,7 +19,7 @@
 //import com.myutils.data.ActionResult;
 //import com.myutils.data.OnResultListener;
 //import com.myutils.data.RowObject;
-//import com.myutils.data.okhttp.ActionInvoker;
+//import com.myutils.data.okhttp.UrlInvoker;
 //import com.myutils.ui.apdater.BaseFillListViewAdapter;
 //import com.myutils.ui.apdater.BaseFillListViewAdapter.OnItemClickListener;
 //import com.myutils.ui.apdater.BaseFillListViewAdapter.ViewHolder;
@@ -188,8 +188,8 @@
 //			//loadData(rows);
 //		}
 //		if (dataProvide.equals("internet")) {// 网络
-//			ActionInvoker ai = AppFactory
-//					.creatActionInvorker(actionClass);
+//			UrlInvoker ai = AppFactory
+//					.creatUrlInvorker(actionClass);
 //			ai.setOnResultListener(new OnDataResult(type));
 //			ai.addParam(pageIndexParam, pageIndex);
 //			ai.addParam(pageSizeParam, pageSize);
@@ -232,7 +232,7 @@
 //		}
 //		@Override
 //		public void onResult(ActionResult result) {
-//			L.i("PagingListViewDataList====" + result.getText());
+//			L.i("PagingListViewDataList====" + result.getResponseText());
 //			List<RowObject> rows = new LinkedList<RowObject>();
 //			if (onDataListner == null) {
 //				// 默认json格式解析 :{"success":false,"data":[],"size":0}
@@ -247,7 +247,7 @@
 //				 */
 //			} else {
 //				// 不符合上面的格式请调此方法自行解析
-//				rows = onDataListner.onData(result.getText());
+//				rows = onDataListner.onData(result.getResponseText());
 //			}
 //			if(rows==null){
 //				rows=new LinkedList<RowObject>();

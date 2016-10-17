@@ -11,6 +11,6 @@
     <bitmap
         android:antialias="true"
         android:filter="true"
-        android:src="@drawable/eg_loding_icon_01" />
+        android:src="@drawable/icon_loding" />
 
 </rotate>

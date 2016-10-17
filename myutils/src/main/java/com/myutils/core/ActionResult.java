@@ -1,79 +1,60 @@
 package com.myutils.core;
 
-import android.util.Log;
-
-import java.util.List;
-
 import com.myutils.core.gson.JSONSerializer;
-import com.myutils.core.logger.L;
 import com.myutils.utils.JsonUtils;
 
-import okhttp3.Response;
+import java.util.List;
 
 public class ActionResult {
 
 
-	private Response response;
 	/**
 	 * 返回的字符串内容
 	 */
-	private String text;
-	/**
-	 * 主要内容
-	 */
-	private String data;
+	private String responseText;
 	/**
 	 * 主要内容转化的RowObject
 	 */
 	private RowObject row;
-	/**
-	 * 主要内容转化的List<RowObject>
-	 */
-	private List<RowObject> rows;
-	/**
-	 * 获取数据成功标志
-	 */
-	private boolean success = false;
-	/**
-	 * 附加信息、错误信息
-	 */
-	private String message;
-
 
 	public ActionResult(String text) {
-		this.text = text;
-
+		this.responseText = text;
 	}
 
-	public String getText() {
-		return text;
+	public String getResponseText() {
+		return responseText;
 	}
 
 	public RowObject getRow() {
-		if (JsonUtils.isValidateJson(getText())) {
-			row = JSONSerializer.getRow(text);
+		if(row!=null){
+			return row;
+		}else{
+			if (JsonUtils.isValidateJson(getResponseText())) {
+				row = JSONSerializer.getRow(responseText);
+			}
+			return row;
 		}
-		return row;
 	}
 
 	public List<RowObject> getRows() {
-		return JSONSerializer.getRows(text);
+		return JSONSerializer.getRows(responseText);
 	}
 
 	public boolean isSuccess() {
-		if (JsonUtils.isValidateJson(getText())) {
-			if (JsonUtils.isSuccess(getText())) {
-				success = true;
+
+		if (JsonUtils.isValidateJson(getResponseText())) {
+			if (JsonUtils.isSuccess(getResponseText())) {
+				return true;
 			}
 		}
-		return success;
+		return false;
 	}
 
 	public String getMessage() {
-		if(row!=null){
-			message=row.getString("message");
+		if(getRow()!=null){
+			return getRow().getString("message");
 		}
-		return message;
+		return null;
 	}
 
 

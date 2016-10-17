@@ -2,7 +2,6 @@ package com.myutilsdemo.ui.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 
@@ -10,7 +9,7 @@ import com.myutils.base.AppFactory;
 import com.myutils.core.ActionResult;
 import com.myutils.core.RowObject;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.core.okhttp.ActionInvoker;
+import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
 import com.myutils.ui.view.listview.BaseFillAdapter;
 import com.myutilsdemo.R;
@@ -49,7 +48,7 @@ public class MyRrefreshAct extends BaseAct {
 
     @Override
     public void initData() {
-        ActionInvoker ai = AppFactory.creatActionInvorker("http://api.avatardata.cn/GuoNeiNews/Query?key=124076155abb4e97993a181c949e9de8");
+        UrlInvoker ai = AppFactory.creatUrlInvorker("http://api.avatardata.cn/GuoNeiNews/Query?key=124076155abb4e97993a181c949e9de8");
         ai.addParam("page", 50);
         //ai.setDialog("loading...");
         ai.addParam("rows",10);

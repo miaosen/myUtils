@@ -106,7 +106,7 @@ public class FillUnit {
         String value = null;
         if (key.indexOf("$") == -1) {////填充单层数据
             value = row.getString(key);
-
+            //L.i("key================"+key+" value======="+value);
         } else {//填充多层数据
             String[] split = key.split("\\$");
             value = RowUtils.getlayerData(row, split);

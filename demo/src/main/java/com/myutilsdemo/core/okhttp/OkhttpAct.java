@@ -9,12 +9,11 @@ import android.widget.LinearLayout;
 import com.myutils.base.AppFactory;
 import com.myutils.core.ActionResult;
 import com.myutils.core.gson.JSONSerializer;
-import com.myutils.core.okhttp.ActionInvoker;
+import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
 import com.myutils.core.annotation.ViewInject;
 import com.myutilsdemo.R;
 import com.myutilsdemo.base.BaseAct;
-import com.myutilsdemo.base.BaseFgm;
 
 /**
  * @author zengmiaosen
@@ -43,7 +42,7 @@ public class OkhttpAct extends BaseAct {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getData(5);
+                getData(1);
             }
         });
     }
@@ -61,8 +60,7 @@ public class OkhttpAct extends BaseAct {
 
     private void getData(final int size) {
         for (int i = 0; i < size; i++) {
-            final int j = i;
-            ActionInvoker ai = AppFactory.creatActionInvorker("https://github.com/");
+            UrlInvoker ai = AppFactory.creatUrlInvorker("http://www.zuanke8.com/thread-3409811-1-1.html");
             ai.setDialog("百度...");
 //        ai.addParam("mobileLogin", "true");
 //        ai.addParam("username", "thinkGem");

@@ -33,14 +33,18 @@ public class IntentUtils {
 	/**
 	 * 获取RowObject对象
 	 * @param in
-	 * @param row
 	 * @param key
 	 * @return
 	 */
 	public static RowObject getRow(Intent in,String key){
 		SerializableRowObject serializableRowObject = (SerializableRowObject) in
 				.getSerializableExtra(key);
-		return serializableRowObject.getRowObject();
+		if(serializableRowObject!=null){
+			return serializableRowObject.getRowObject();
+		}else{
+			return null;
+		}
+
 	}
 	
 

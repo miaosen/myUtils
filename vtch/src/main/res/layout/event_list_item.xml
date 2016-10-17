@@ -1,46 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:gravity="center"
               android:orientation="vertical"
-              android:padding="5dp">
+              android:padding="8dp">
 
-    <TextView
-        android:id="@+id/title"
-        style="@style/ed_text"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:textSize="18sp"
-        />
+    <LinearLayout
+        android:id="@+id/ln_illness"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/sel_event_item_bg_blue"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
 
-    <TextView
-        android:id="@+id/description"
-        style="@style/ed_text"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:textSize="12sp"
-        />
 
-    <TextView
-        android:id="@+id/picUrl"
-        style="@style/ed_text"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:textSize="12sp"
-        />
+        <RelativeLayout
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            >
 
-    <TextView
-        android:id="@+id/url"
-        style="@style/ed_text"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:textSize="12sp"
-        />
 
-    <TextView
-        android:id="@+id/ctime"
-        style="@style/ed_text"
-        />
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/simpleDraweeView"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                fresco:failureImage="@drawable/icon_no_pic"
+                fresco:placeholderImage="@drawable/icon_loding"
+                fresco:roundAsCircle="true"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/ACTIVITYNAME"
+                    style="@style/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_horizontal"
+                    android:padding="1dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:id="@+id/EXPERTNAME"
+                        style="@style/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:padding="1dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        style="@style/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:padding="1dp"
+                        android:text="("
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:id="@+id/DISEASENAME"
+                        style="@style/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:padding="1dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        style="@style/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:padding="1dp"
+                        android:text=")"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/ACTIVITYDATE"
+                    style="@style/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:padding="1dp"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:id="@+id/TIMENAME"
+                    style="@style/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:padding="1dp"
+                    android:textSize="12sp"
+                    />
+
+                <Button
+                    android:id="@+id/btn_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:padding="2dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/sel_btn_white"
+                    android:text="预约"
+                    android:textSize="14sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

@@ -240,7 +240,7 @@ public class DateView extends Dialog implements OnGestureListener {
 				month = num;
 				checkDay(year,month);
 				edMonth.setText((num > 9 ? num : "0" + num) + "");
-//				int day=Integer.parseInt(edDay.getText().toString());
+//				int day=Integer.parseInt(edDay.getResponseText().toString());
 				dayApdapter = new DayApdapter(context, year, month,screenWidth);
 				gridview.setAdapter(dayApdapter);
 			}

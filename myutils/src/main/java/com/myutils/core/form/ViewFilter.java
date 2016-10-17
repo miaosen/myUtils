@@ -3,6 +3,8 @@ package com.myutils.core.form;
 import android.view.View;
 import android.widget.TextView;
 
+import com.myutils.core.logger.L;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,13 +23,13 @@ public class ViewFilter {
      */
     private List<Class> disableType = null;
 
-    private List<String> listEnableIdName= null;
+    private List<String> disableIdName = null;
 
     public ViewFilter(){
         disableType = new LinkedList<Class>();
         //TextView一般不需要获取
         setDisableType(TextView.class);
-        listEnableIdName=new LinkedList<>();
+        disableIdName =new LinkedList<>();
     }
 
 
@@ -38,9 +40,7 @@ public class ViewFilter {
      * @return
      */
     public boolean isContain(String idName, View view){
-        if(listEnableIdName.contains(idName)){
-            return false;
-        }else if(disableType.contains(view.getClass())){
+        if(disableType.contains(view.getClass())||disableIdName.contains(idName)){
             return false;
         }else {
             return true;
@@ -72,7 +72,7 @@ public class ViewFilter {
      * @param idName
      */
     public void enableIdName(String idName){
-        listEnableIdName.add(idName);
+        disableIdName.add(idName);
     }
 
 

@@ -3,12 +3,9 @@ package com.myutilsdemo.ui.view.rcview;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -16,14 +13,13 @@ import android.webkit.WebView;
 import com.myutils.base.AppFactory;
 import com.myutils.core.ActionResult;
 import com.myutils.core.RowObject;
-import com.myutils.core.okhttp.ActionInvoker;
+import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
 import com.myutils.core.annotation.ViewInject;
 import com.myutils.ui.UIHelper;
 import com.myutils.ui.dialog.MsgDialog;
 import com.myutils.ui.view.rcview.BaseRcAdapter;
 import com.myutils.ui.view.rcview.GridViewLine;
-import com.myutils.ui.view.rcview.ItemTouchCallback;
 import com.myutils.ui.view.rcview.RcAdapterWithFooter;
 import com.myutils.ui.view.rcview.RefreshRcView;
 import com.myutilsdemo.R;
@@ -129,7 +125,7 @@ public class RcViewAct extends BaseAct {
     }
 
     private void getNew(String url) {
-        ActionInvoker ai = AppFactory.creatActionInvorker(url);
+        UrlInvoker ai = AppFactory.creatUrlInvorker(url);
         //ai.setDialog("loading...");
         ai.setCallback(new StringCallBack() {
             @Override
@@ -138,11 +134,11 @@ public class RcViewAct extends BaseAct {
                 WebSettings wSet = webView.getSettings();
                 wSet.setJavaScriptEnabled(true);
                 msgDialog.setContentView(webView);
-                webView.loadData(result.getText(),"text/html","utf-8");
+                webView.loadData(result.getResponseText(),"text/html","utf-8");
                 webView.setBackgroundColor(Color.parseColor("#00ffff"));
                 msgDialog.show(getSupportFragmentManager(),"news");
-                //msgDialog.setMsg(result.getText());
-               // UIHelper.toast("你选择了 " + result.getText());
+                //msgDialog.setMsg(result.getResponseText());
+               // UIHelper.toast("你选择了 " + result.getResponseText());
             }
         });
         ai.invoke();
@@ -155,7 +151,7 @@ public class RcViewAct extends BaseAct {
         }else{
             rcAdapter.showFooter();
         }
-        ActionInvoker ai = AppFactory.creatActionInvorker("http://api.avatardata.cn/GuoNeiNews/Query?key=124076155abb4e97993a181c949e9de8");
+        UrlInvoker ai = AppFactory.creatUrlInvorker("http://api.avatardata.cn/GuoNeiNews/Query?key=124076155abb4e97993a181c949e9de8");
         if(page==2){
             page=1001110;
         }

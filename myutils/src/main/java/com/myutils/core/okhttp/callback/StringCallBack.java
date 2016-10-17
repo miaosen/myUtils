@@ -2,6 +2,7 @@ package com.myutils.core.okhttp.callback;
 
 
 import com.myutils.core.ActionResult;
+import com.myutils.core.logger.L;
 import com.myutils.core.okhttp.HandlerQueue;
 import com.myutils.ui.dialog.LoadingDialog;
 
@@ -21,16 +22,6 @@ public abstract class StringCallBack extends CallBackAdapter {
 
 
     private LoadingDialog loadingDialog;
-
-
-    public StringCallBack() {
-
-    }
-
-    @Override
-    public void onFailure(Call call, IOException e) {
-
-    }
 
     @Override
     public void onResponse(Call call, final Response response) throws IOException {

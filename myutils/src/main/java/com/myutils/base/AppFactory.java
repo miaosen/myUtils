@@ -1,6 +1,6 @@
 package com.myutils.base;
 
-import com.myutils.core.okhttp.ActionInvoker;
+import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.utils.ApplicationUtils;
 import com.myutils.utils.FileUtils;
 
@@ -19,8 +19,8 @@ public class AppFactory {
 	 * @param actionClass
 	 * @return
 	 */
-	public static ActionInvoker creatActionInvorker(String actionClass){
-		ActionInvoker ai=new ActionInvoker(actionClass);
+	public static UrlInvoker creatUrlInvorker(String actionClass){
+		UrlInvoker ai=new UrlInvoker(actionClass);
 		return ai;
 	}
 	

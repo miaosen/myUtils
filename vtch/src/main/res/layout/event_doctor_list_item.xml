@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:padding="8dp">
+
+    <LinearLayout
+        android:id="@+id/ln_illness"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/sel_event_item_bg_blue"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_margin="15dp">
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/simpleDraweeView"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="10dp"
+                fresco:failureImage="@drawable/icon_no_pic"
+                fresco:placeholderImage="@drawable/icon_loding"
+                fresco:roundAsCircle="true"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                >
+
+
+                <TextView
+                    style="@style/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:padding="1dp"
+                    android:id="@+id/EXPERTNAME"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

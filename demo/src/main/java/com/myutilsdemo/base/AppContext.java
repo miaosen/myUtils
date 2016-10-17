@@ -11,7 +11,7 @@ public class AppContext extends BaseAppContext {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        L.init("logtag");
+        L.setIsLog(true);
+        L.setLogtag("logtag");
     }
 }

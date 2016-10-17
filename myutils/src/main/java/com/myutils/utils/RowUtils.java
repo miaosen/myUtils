@@ -3,8 +3,11 @@ package com.myutils.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.myutils.core.gson.JSONSerializer;
 import com.myutils.core.logger.L;
 import com.myutils.core.RowObject;
+
+import okhttp3.RequestBody;
 
 /**
  * Created by OAIM on 2016/1/6.
@@ -74,4 +77,14 @@ public class RowUtils {
 		}
 	}
 
+
+	/**
+	 * 实体类转RowObject
+	 * @param obj
+	 * @return
+     */
+	public static RowObject entityToRow(Object obj) {
+		String json = JSONSerializer.toJson(obj);
+		return JSONSerializer.getRow(json);
+	}
 }

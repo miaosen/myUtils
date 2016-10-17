@@ -1,9 +1,14 @@
 package com.myutils.core.okhttp;
 
+import android.util.Log;
+
 import okhttp3.OkHttpClient;
 
 import com.myutils.base.AppFactory;
+import com.myutils.core.logger.L;
 import com.myutils.core.okhttp.cookies.CookiesManager;
+
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -16,11 +21,40 @@ public class ClientFactory {
 	
 	private static CookiesManager cookiesManager = new CookiesManager(AppFactory.getAppContext());
 
-	//private static String keepCookies = AppFactory.getAppConfig().getKEEP_COOKIE();
-	
+	private static String keepCookies = AppFactory.getAppConfig().getKEEP_COOKIE();
+
+	private volatile static OkHttpClient mInstance = null;
+
+
+	// 单例加线程锁
+	public static OkHttpClient getInstance() {
+		if (mInstance == null) {
+			synchronized (ClientFactory.class) {
+				if (mInstance == null) {
+					mInstance = ClientFactory.getOkHttp();
+				}
+			}
+		}
+		return mInstance;
+	}
+
+
+
+
+
 	/**
-	 * OKhttp 设置
-	 * 
+	 * 清除cookies
+	 *
+	 * @return
+	 */
+	public static void clearCookies() {
+		ClientFactory.getCookiesManager().getCookieStore().removeAll();
+	}
+
+
+	/**
+	 * OkHttpClient 配置
+	 *
 	 * @return
 	 */
 	public static OkHttpClient getOkHttp() {
@@ -28,14 +62,17 @@ public class ClientFactory {
 		//Builder okHttpBuilder = client.newBuilder();
 		OkHttpClient.Builder buidler =  client.newBuilder();
 		buidler.addInterceptor(new OkhttpLog());
-//		if (keepCookies != null && keepCookies.equals("true")) {
-//			buidler =  buidler.cookieJar(cookiesManager);
-//		}
-		client=buidler.build();
+		if (keepCookies != null && keepCookies.equals("true")) {
+			buidler =  buidler.cookieJar(cookiesManager);
+			//Log.i("logtag","keepCookies================");
+		}
 		// 连接超时60秒
-//		client=client.newBuilder().connectTimeout(40, TimeUnit.SECONDS).build();
-//		client=client.newBuilder().readTimeout(50, TimeUnit.SECONDS).build();
-//		client=client.newBuilder().writeTimeout(60, TimeUnit.SECONDS).build();
+		buidler.connectTimeout(30, TimeUnit.SECONDS).build();
+		buidler.readTimeout(30, TimeUnit.SECONDS).build();
+		buidler.writeTimeout(30, TimeUnit.SECONDS).build();
+		client=buidler.build();
+
+
 		return client;
 	}
 

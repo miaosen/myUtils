@@ -21,7 +21,7 @@ import okhttp3.OkHttpClient;
  * @Date 2016-5-24
  * @Descrition 异步获取网络数据
  */
-public class ActionInvoker {
+public class UrlInvoker {
 
 
     private OkHttpClient client;
@@ -42,12 +42,16 @@ public class ActionInvoker {
     // 单例弹窗提示信息
     private String dialogMsg;
 
+    //回调
     private CallBackAdapter callback;
 
+    //打印参数时定位项目调用此次请求的代码位置
+    private int logLocationIndex=2;
 
-    public ActionInvoker(String url) {
+
+    public UrlInvoker(String url) {
         this.url = url;
-        client = OkHttpUtils.getInstance();
+        client = ClientFactory.getInstance();
     }
 
 
@@ -59,7 +63,6 @@ public class ActionInvoker {
             T.show("网络未连接,请连接网络!");
         } else {
             if (dialogMsg!= null) {
-                L.i("dialogMsg=============="+dialogMsg);
                 loadingDialog = LoadingDialog.getDialog();
                 loadingDialog.show(dialogMsg);
             }
@@ -82,14 +85,14 @@ public class ActionInvoker {
     }
 
     /**
-     *
+     * 打印参数
      */
     private void logParam() {
         if (paramMap.size() > 0) {
             for (String key : paramMap.keySet())
-                L.i("key===" + key + "    value===" + paramMap.get(key));
+                L.i("key===" + key + "    value===" + paramMap.get(key),logLocationIndex);
         } else {
-            L.i("没有参数");
+            L.i("没有参数",logLocationIndex);
         }
     }
 
@@ -204,5 +207,14 @@ public class ActionInvoker {
 
     public void setCallback(CallBackAdapter callback) {
         this.callback = callback;
+    }
+
+
+    public int getLogLocationIndex() {
+        return logLocationIndex;
+    }
+
+    public void setLogLocationIndex(int logLocationIndex) {
+        this.logLocationIndex = logLocationIndex;
     }
 }

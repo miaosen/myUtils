@@ -88,7 +88,7 @@
                     android:background="@drawable/sel_share_blue_lt_left"
                     android:gravity="center"
                     android:text="确定"
-                    android:textColor="@color/blue_deep"
+                    android:textColor="@color/blue"
                     android:textSize="16sp"/>
 
                 <View
@@ -103,7 +103,7 @@
                     android:background="@drawable/sel_share_blue_lt_right"
                     android:gravity="center"
                     android:text="取消"
-                    android:textColor="@color/blue_deep"
+                    android:textColor="@color/blue"
                     android:textSize="16sp"/>
             </LinearLayout>
 

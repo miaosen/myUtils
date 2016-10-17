@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@mipmap/bs_bg"
+              android:orientation="vertical"
+    >
+
+    <include layout="@layout/bs_header"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+
+        <LinearLayout
+            android:id="@+id/ln_illness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sel_event_item_bg_blue"
+            android:clickable="true"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:gravity="right|center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            >
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/event_choose_illness"/>
+
+            <TextView
+                style="@style/tv_title"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="按病种预约"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln_doctor"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sel_event_item_bg_green"
+            android:clickable="true"
+            android:gravity="right|center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/event_choose_doctor"/>
+            <TextView
+                style="@style/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="按医生预约"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

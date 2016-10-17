@@ -1,12 +1,17 @@
 package com.myutils.core.form;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.myutils.ui.view.CustomRadioGroup;
 import com.myutils.utils.ViewUtils;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -47,6 +52,11 @@ public class GetUnit {
 
     private void init() {
         viewFilter=new ViewFilter();
+        viewFilter.setDisableType(TextView.class);
+        viewFilter.setDisableType(Button.class);
+        viewFilter.setDisableType(AppCompatTextView.class);
+        viewFilter.setDisableType(AppCompatButton.class);
+
     }
 
 
