@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@drawable/bs_bg"
-              android:orientation="vertical">
-
-    <include layout="@layout/bs_header" />
-
-    <View style="@style/line_hz_grey_lt" />
+              android:layout_height="match_parent">
 
 
     <com.myutils.ui.view.rcview.RefreshRcView
         android:id="@+id/mRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         >
 
         <android.support.v7.widget.RecyclerView
@@ -27,4 +24,5 @@
 
 
     </com.myutils.ui.view.rcview.RefreshRcView>
+
 </LinearLayout>

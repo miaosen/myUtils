@@ -3,6 +3,7 @@ package com.myutils.base;
 import android.annotation.SuppressLint;
 import android.app.Application;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.myutils.core.logger.L;
 
 import java.util.HashMap;
@@ -40,7 +41,7 @@ public class BaseAppContext extends Application {
 		instance = this;
 		L.i("====Application初始化成功！=====");
 		// UncaughtExceptionHandler.getInstance().initConfig(this);
-
+		Fresco.initialize(this);
 
 	}
 	

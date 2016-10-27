@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:text="添加"
+                />
+
+            <com.myutils.ui.view.FlowLayout
+                android:id="@+id/flowlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#bbbbbb"
+                app:columnMargin="5dp"
+                app:lineMargin="5dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="添加"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="添加"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="添加"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="添加"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="添加"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="添加"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="添加"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="添加"
+                        />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="添加1"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_img"
+                        android:layout_width="66dp"
+                        android:layout_height="66dp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/img_file"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/icon_file"/>
+
+                        <View
+                            android:id="@+id/img_file_right"
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/img_file"
+                            />
+
+                        <ImageView
+                            android:id="@+id/img_close"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_toLeftOf="@id/img_file_right"
+                            android:src="@drawable/icon_close"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </com.myutils.ui.view.FlowLayout>
+
+            <com.myutilsdemo.test.FlowLayoutZHY
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#bbbbbb"
+                android:visibility="gone">
+
+
+            </com.myutilsdemo.test.FlowLayoutZHY>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical">
 
     <View style="@style/lineHorizontal"/>
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="#F7F7F7"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:padding="8dp">
 
         <ImageView
             android:id="@+id/img_file"
@@ -76,13 +77,15 @@
         android:background="#FFFFFF"
         android:orientation="vertical">
 
-        <GridView
-            android:id="@+id/upload_gridview"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+        <com.myutils.ui.view.FlowLayout
+            android:id="@+id/flowLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="#fff"
+            app:columnMargin="5dp"
+            app:lineMargin="5dp"
             android:numColumns="6">
-        </GridView>
+        </com.myutils.ui.view.FlowLayout>
     </LinearLayout>
 
     <View

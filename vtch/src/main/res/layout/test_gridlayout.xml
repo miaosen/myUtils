@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:columnCount="4"
+            android:layout_height="match_parent">
+
+    <TextView
+        style="@style/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="按病种预约"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+    <TextView
+        style="@style/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="按病种预约"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        style="@style/tv_title"
+        android:gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:text="按病种预约"
+        android:textSize="20sp"
+        android:layout_weight="1"
+        android:textColor="@color/black"
+        />
+    <TextView
+        style="@style/tv_title"
+        android:gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:text="按病种预约"
+        android:textSize="20sp"
+        android:layout_weight="1"
+        android:textColor="@color/black"
+        />
+</GridLayout>

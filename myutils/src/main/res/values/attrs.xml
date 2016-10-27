@@ -19,6 +19,21 @@
         <!-- 字体颜色 -->
         <attr name="ttextColor" format="integer" />
     </declare-styleable>
-    
+
+
+    <!-- 自定义GridView -->
+    <declare-styleable name="LinearLayoutForGridView">
+        <!-- 字体颜色 -->
+        <attr name="column" format="integer" />
+    </declare-styleable>
+
+    <!-- 流布局 -->
+    <declare-styleable name="FlowLayout">
+        <!-- 行距离 -->
+        <attr name="lineMargin" format="dimension" />
+        <!-- 列距离 -->
+        <attr name="columnMargin" format="dimension" />
+
+    </declare-styleable>
 
 </resources>

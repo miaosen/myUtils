@@ -3,6 +3,7 @@ package com.myutilsdemo.unit.file;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
 
@@ -10,10 +11,13 @@ import com.myutils.core.RowObject;
 import com.myutils.core.gson.JSONSerializer;
 import com.myutils.core.logger.L;
 import com.myutils.core.annotation.ViewInject;
+import com.myutils.unit.file.atm.AtmView;
 import com.myutils.unit.file.atm.AttachmentUnit;
 import com.myutilsdemo.R;
 import com.myutilsdemo.base.BaseAct;
+import com.myutilsdemo.base.BaseFgm;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -30,8 +34,9 @@ public class AtmAct extends BaseAct {
 	
 	@ViewInject
 	private Button button1;
+	@ViewInject
+	AtmView atmView;
 
-	
 
 	@Override
 	public int initConfig(Bundle savedInstanceState) {
@@ -41,8 +46,10 @@ public class AtmAct extends BaseAct {
 
 	@Override
 	public void initView(View decorView) {
-		atmUnit = new AttachmentUnit(context,decorView);
 		button1.setOnClickListener(this);
+		atmUnit=atmView.getAtmUnit();
+		//如果View的布局是在Fragment,必须把Fragment对象传过去
+		//atmUnit.setFragment(this);
 	}
 
 	@Override
@@ -54,6 +61,11 @@ public class AtmAct extends BaseAct {
 	public void click(View v) {
 		if(v==button1){
 			submit();
+			List<RowObject> filePaths = atmView.getFilePaths();
+			//List<RowObject> rows=new LinkedList<>();
+			//rows.addAll(filePaths);
+			filePaths.addAll(filePaths);
+			atmView.notifyDataSetChanged();
 		}
 	}
 	
@@ -64,8 +76,8 @@ public class AtmAct extends BaseAct {
 	}
 	
 	private void submit() {
-		List<RowObject> list = atmUnit.getAtmView().getRows();
-		L.i("list===" + list.size() + "   " + JSONSerializer.toJson(list));
+		List<RowObject> list = atmView.getFilePaths();
+		L.json("list===" + list.size() + "   " , JSONSerializer.toJson(list));
 	}
 	
 }

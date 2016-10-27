@@ -49,24 +49,24 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.myutils.unit.file.atm.vdrcd.VideoRcdAct" />
+        <activity android:name="com.myutils.unit.file.atm.vdrcd.VideoRcdAct"/>
 
 
-        <activity android:name=".core.form.FillAct" />
+        <activity android:name=".core.form.FillAct"/>
 
-        <activity android:name=".core.okhttp.OkhttpAct" />
+        <activity android:name=".core.okhttp.OkhttpAct"/>
 
-        <activity android:name=".ui.dlg.DialogAct" />
+        <activity android:name=".ui.dlg.DialogAct"/>
 
-        <activity android:name=".ui.view.listview.ListViewAct" />
+        <activity android:name=".ui.view.listview.ListViewAct"/>
 
-        <activity android:name=".ui.view.rcview.RcViewAct" />
+        <activity android:name=".ui.view.rcview.RcViewAct"/>
+
+        <!-- 附件-->
+        <activity android:name=".unit.file.AtmAct"/>
 
 
-        <activity android:name=".unit.file.AtmAct" />
-
-
-        <activity android:name=".unit.file.VocieRecordAct" />
+        <activity android:name=".unit.file.VocieRecordAct"/>
 
     </application>
 

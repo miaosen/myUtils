@@ -1,5 +1,6 @@
 package com.myutilsdemo.base;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.myutils.base.BaseAppContext;
 import com.myutils.core.logger.L;
 
@@ -13,5 +14,6 @@ public class AppContext extends BaseAppContext {
         super.onCreate();
         L.setIsLog(true);
         L.setLogtag("logtag");
+        Fresco.initialize(this);
     }
 }

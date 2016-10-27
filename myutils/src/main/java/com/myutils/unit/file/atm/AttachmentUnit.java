@@ -30,43 +30,36 @@ public class AttachmentUnit {
 	
 	private VocieRcdDlg vocieRcdDlg;
 	
-	private AtmView atmView;
-	
 	private OnDataChangeListener onDataChangeListener;
 
-	private View decorView;
 
 	/**
 	 * 附件在activity中用这个构造器
 	 * @param context
 	 */
-	public AttachmentUnit(Context context, View decorView) {
+	public AttachmentUnit(Context context) {
 		this.context = context;
-		this.decorView=decorView;
-		atmView=new AtmView(this,decorView);
-
+		initUnit();
 	}
 
 
-	/**
-	 * 附件在fragment中用这个构造器
-	 * @param fragment
-     */
-	public AttachmentUnit(Fragment fragment, View decorView) {
-		this.fragment=fragment;
-		this.context = fragment.getContext();
-		this.decorView=decorView;
-		//初始化View成功后调用initUnit()方法
-		atmView=new AtmView(this,decorView);
-	}
-	
+	///**
+	// * 附件在fragment中用这个构造器
+	// * @param fragment
+     //*/
+	//public AttachmentUnit(Fragment fragment) {
+	//	this.fragment=fragment;
+	//	this.context = fragment.getContext();
+	//	initUnit();
+	//}
+	//
 
 	
 	public void initUnit() {
 		takePictureUnit = new TakePictureUnit();
 		// takePictureUnit.setFileName("aaa");
 		// takePictureUnit.setFilePath("/"+TakePictureUnit.getAppDir()+"/aaa");
-		videoRecordUnit = new VideoRcdUnit();
+		videoRecordUnit = new VideoRcdUnit(context);
 		// videoRecordUnit.setVideoPath(Environment
 		// .getExternalStorageDirectory().getAbsolutePath()
 		// + "/"
@@ -131,7 +124,7 @@ public class AttachmentUnit {
 		if(fragment!=null){
 			videoRecordUnit.startRecord(fragment);
 		}else{
-			videoRecordUnit.startRecord((Activity) context);
+			videoRecordUnit.startRecord();
 		}
 	}
 	
@@ -185,15 +178,6 @@ public class AttachmentUnit {
 	}
 
 
-	public AtmView getAtmView() {
-		return atmView;
-	}
-
-
-	public void setAtmView(AtmView atmView) {
-		this.atmView = atmView;
-	}
-
 
 	public OnDataChangeListener getOnDataChangeListener() {
 		return onDataChangeListener;
@@ -205,7 +189,11 @@ public class AttachmentUnit {
 	}
 
 
+	public Fragment getFragment() {
+		return fragment;
+	}
 
-	
-
+	public void setFragment(Fragment fragment) {
+		this.fragment = fragment;
+	}
 }

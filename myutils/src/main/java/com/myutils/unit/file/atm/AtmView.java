@@ -6,125 +6,114 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.myutils.R;
 import com.myutils.core.annotation.InjectReader;
 import com.myutils.core.logger.L;
 import com.myutils.core.RowObject;
+import com.myutils.ui.view.FlowLayout;
 import com.myutils.ui.view.listview.BaseFillAdapter;
 import com.myutils.ui.T;
 import com.myutils.core.annotation.ViewInject;
 import com.myutils.unit.file.atm.AttachmentUnit.OnDataChangeListener;
-import com.myutils.utils.ViewUtils;
+
+import static com.myutils.core.logger.Logger.init;
 
 /**
- * @Created by gzpykj.com
  * @author zms
+ * @Created by gzpykj.com
  * @Date 2016-6-21
  * @Descrition 附件模块布局
  */
-public class AtmView {
+public class AtmView extends LinearLayout {
 
-	private Context context;
+    private Context context;
 
-	private AttachmentUnit atmUnit;
+    private AttachmentUnit atmUnit;
 
-	private View decorView;
-	@ViewInject
-	private ImageButton btn_photo, btn_voice, btn_video;
-	private GridView upload_gridview;
-	private AtmAdp atmAdp;
-	private List<RowObject> rows = new LinkedList<RowObject>();
+    @ViewInject
+    private ImageButton btn_photo, btn_voice, btn_video;
+    private FlowLayout flowLayout;
+    private AtmAdp atmAdp;
+    private List<RowObject> rows = new LinkedList<RowObject>();
 
-	public AtmView(AttachmentUnit atmUnit, View decorView) {
-		this.decorView = decorView;
-		this.atmUnit = atmUnit;
-		context=atmUnit.getContext();
-		InjectReader.injectAllFields(this, decorView);
-		if (initView()) {
-			atmUnit.initUnit();
-		} else {
-			T.show("加载附件布局出错!");
-		}
-		onDataChange();
+    public AtmView(Context context) {
+        super(context);
+        initView();
+    }
 
-	}
+    public AtmView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        initView();
+    }
 
-	/**
-	 * 数据改变，刷新适配器
-	 */
-	private void onDataChange() {
-		atmUnit.setOnDataChangeListener(new OnDataChangeListener() {
-			@Override
-			public void onChange(RowObject result) {
-				rows.add(result);
-				atmAdp.notifyDataSetChanged();
-				ViewUtils.setListViewHeightBasedOnChildren(upload_gridview);
-			}
-		});
-	}
+    public AtmView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initView();
+    }
 
-	class mClick implements OnClickListener {
-		@Override
-		public void onClick(View v) {
-			if (v == btn_photo) {
-				atmUnit.takePic();
-			} else if (v == btn_voice) {
-				atmUnit.voiceRecord();
-			} else if (v == btn_video) {
-				atmUnit.videoRecord();
-			}
-		}
+    class mClick implements OnClickListener {
+        @Override
+        public void onClick(View v) {
+            if (v == btn_photo) {
+                atmUnit.takePic();
+            } else if (v == btn_voice) {
+                atmUnit.voiceRecord();
+            } else if (v == btn_video) {
+                atmUnit.videoRecord();
+            }
+        }
 
-	}
+    }
 
-	private boolean initView() {
-		boolean success = true;
-		try {
-			btn_photo.setOnClickListener(new mClick());
-			btn_video.setOnClickListener(new mClick());
-			btn_voice.setOnClickListener(new mClick());
-			upload_gridview = (GridView) decorView
-					.findViewById(R.id.upload_gridview);
-			atmAdp = new AtmAdp(context, rows,
-					R.layout.upload_data_gridview_item);
-			upload_gridview.setAdapter(atmAdp);
-			atmAdp.setOnItemClickListener(new BaseFillAdapter.OnItemClickListener() {
-				@Override
-				public void onItemClick(View convertView, RowObject row,
-						int position) {
-					// TODO Auto-generated method stub
-					L.i("row=====" + row.toString());
-					String type = row.getString("type")+"";
-					if(type.equals("voice")){
-						 Intent it = new Intent(Intent.ACTION_VIEW);
-			                it.setDataAndType(Uri.parse("file://" + row.getString("voicePath")), "audio/amr");
-			                context.startActivity(it);        
-					}
-				}
-			});
-		} catch (NullPointerException e) {
-			//L.e(e);
-			e.printStackTrace();
-			success = false;
-		}
-		return success;
-	}
+    private void initView() {
+        context = getContext();
+        View attachment_layout = LayoutInflater.from(context).inflate(R.layout.attachment_layout, null);
+        addView(attachment_layout);
+        InjectReader.injectAllFields(this);
+        btn_photo.setOnClickListener(new mClick());
+        btn_video.setOnClickListener(new mClick());
+        btn_voice.setOnClickListener(new mClick());
+        flowLayout = (FlowLayout)
+                findViewById(R.id.flowLayout);
+        atmAdp = new AtmAdp(context, rows, R.layout.file_atmview_item);
+        flowLayout.setAdapter(atmAdp);
+        atmUnit = new AttachmentUnit(context);
+        atmUnit.setOnDataChangeListener(new OnDataChangeListener() {
+            @Override
+            public void onChange(RowObject result) {
+                rows.add(result);
+                atmAdp.notifyDataSetChanged();
+            }
+        });
 
-	
+    }
 
-	public void setRows(List<RowObject> rows) {
-		this.rows = rows;
-	}
+    public void notifyDataSetChanged(){
+        atmAdp.notifyDataSetChanged();
+    }
 
-	public List<RowObject> getRows() {
-		return rows;
-	}
-	
-	
 
+    public void setRows(List<RowObject> rows) {
+        this.rows = rows;
+    }
+
+    public List<RowObject> getFilePaths() {
+        return rows;
+    }
+
+    public AttachmentUnit getAtmUnit() {
+        return atmUnit;
+    }
+
+    public void setAtmUnit(AttachmentUnit atmUnit) {
+        this.atmUnit = atmUnit;
+    }
 }

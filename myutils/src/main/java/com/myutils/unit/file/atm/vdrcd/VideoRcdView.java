@@ -108,9 +108,10 @@ public class VideoRcdView extends LinearLayout implements OnErrorListener {
 		a.recycle();
 	}
 	
-	public void setFile(String videoPath,String videoName){
-		videoFile=FileUtils.getFile(videoPath, videoName);
+	public void setFile(File videoFile){
+		this.videoFile=videoFile;
 	}
+
 
 	/**
 	 * 

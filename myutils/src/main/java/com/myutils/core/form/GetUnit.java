@@ -11,8 +11,6 @@ import android.widget.TextView;
 import com.myutils.ui.view.CustomRadioGroup;
 import com.myutils.utils.ViewUtils;
 
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -36,30 +34,37 @@ public class GetUnit {
         this.context = context;
         this.decorView = ViewUtils.getDecorView(context);
         viewWithIdName = ViewUtils.getViewWithIdName(decorView);
-        init();
+        initFilter();
     }
 
 
     public GetUnit(View view) {
         viewWithIdName = ViewUtils.getViewWithIdName(view);
-        init();
+        initFilter();
     }
 
     public GetUnit( Map<String, View> viewWithIdName) {
         this.viewWithIdName =viewWithIdName;
-        init();
+        initFilter();
     }
 
-    private void init() {
+    /**
+     * 初始化填充过滤器
+     */
+    private void initFilter() {
         viewFilter=new ViewFilter();
-        viewFilter.setDisableType(TextView.class);
-        viewFilter.setDisableType(Button.class);
-        viewFilter.setDisableType(AppCompatTextView.class);
-        viewFilter.setDisableType(AppCompatButton.class);
+        viewFilter.setDisableView(TextView.class);
+        viewFilter.setDisableView(Button.class);
+        viewFilter.setDisableView(AppCompatTextView.class);
+        viewFilter.setDisableView(AppCompatButton.class);
 
     }
 
 
+    /**
+     * 获取要提交的内容
+     * @return
+     */
     public Map<String, Object> getContentValue() {
         Map<String, Object> contentMap = new LinkedHashMap<String, Object>();
         for (String idName: viewWithIdName.keySet()) {
@@ -86,7 +91,7 @@ public class GetUnit {
     }
 
     public void setDisableType(List<Class> disableType) {
-       viewFilter.setDisableType(disableType);
+       viewFilter.setDisableView(disableType);
     }
 
 
@@ -95,7 +100,7 @@ public class GetUnit {
      * @param disableType
      */
     public void setDisableType(Class... disableType) {
-        viewFilter.setDisableType(disableType);
+        viewFilter.setDisableView(disableType);
     }
 
 

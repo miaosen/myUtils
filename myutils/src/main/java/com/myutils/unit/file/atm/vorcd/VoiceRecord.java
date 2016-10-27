@@ -86,15 +86,21 @@ public class VoiceRecord {
 	 * 停止录音
 	 */
 	public void stop() {
-		if (mMediaRecorder != null&&isRecording) {
+		try{
+			if (mMediaRecorder != null&&isRecording) {
 			/* ⑤停止录音 */
-			mMediaRecorder.stop();
+				mMediaRecorder.stop();
 			/* ⑥释放MediaRecorder */
-			mMediaRecorder.release();
-			isRecording = false;
-		} else {
-			UIHelper.toast("请先开始录音");
+				mMediaRecorder.release();
+				isRecording = false;
+			} else {
+				UIHelper.toast("请先开始录音");
+			}
+		}catch( Exception e){
+			e.printStackTrace();
+			UIHelper.toast("停止录音出错！");
 		}
+
 	}
 
 	public MediaRecorder getmMediaRecorder() {

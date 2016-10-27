@@ -238,7 +238,7 @@
 //				// 默认json格式解析 :{"success":false,"data":[],"size":0}
 //				if (result.isSuccess()) {
 //					RowObject row = result.getRow();
-//					rows = row.getRows("data");
+//					rows = row.getFilePaths("data");
 //				} else {
 //					tip_header.error();
 //					lv.addFooterView(tip_header);
@@ -462,7 +462,7 @@
 //		this.itemLayout = itemLayout;
 //	}
 //
-//	public List<RowObject> getRows() {
+//	public List<RowObject> getFilePaths() {
 //		return rows;
 //	}
 //

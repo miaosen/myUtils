@@ -20,6 +20,7 @@ import com.myutils.R;
 import com.myutils.core.logger.L;
 import com.myutils.unit.OnActivityResultState;
 import com.myutils.unit.file.atm.vdrcd.VideoRcdView.OnRecordFinishListener;
+import com.myutils.utils.FileUtils;
 
 public class VideoRcdAct extends Activity {
 	private VideoRcdView mRecorderView;
@@ -29,7 +30,7 @@ public class VideoRcdAct extends Activity {
 	/** 视频请求码 **/
 	public static final int REQUEST_CODE = OnActivityResultState.VIDEO_RECORD;
 	
-	private String videoPath,videoName;
+	private String videoPath;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +44,14 @@ public class VideoRcdAct extends Activity {
 	}
 	private void getIntentData() {
 		videoPath = getIntent().getStringExtra("videoPath");
-		videoName= getIntent().getStringExtra("videoName");
-		L.i("videoPath==="+videoPath+ " videoName===="+videoName);
+		//videoName= getIntent().getStringExtra("videoName");
+		L.i("videoPath==="+videoPath);
 	}
 	
 
 	private void initRecorderView() {
 		mRecorderView = (VideoRcdView) findViewById(R.id.movieRecorderView);
-		mRecorderView.setFile(videoPath, videoName);
+		mRecorderView.setFile(FileUtils.getFile(videoPath));
 	}
 
 	

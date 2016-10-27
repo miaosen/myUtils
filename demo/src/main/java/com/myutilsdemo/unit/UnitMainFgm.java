@@ -10,6 +10,7 @@ import com.myutils.core.annotation.ViewInject;
 import com.myutils.core.gson.JSONSerializer;
 import com.myutils.core.logger.L;
 import com.myutils.unit.file.atm.TakePictureUnit;
+import com.myutils.unit.file.atm.vdrcd.VideoRcdUnit;
 import com.myutils.utils.IntentUtils;
 import com.myutilsdemo.R;
 import com.myutilsdemo.base.BaseFgm;
@@ -30,6 +31,9 @@ public class UnitMainFgm extends BaseFgm {
 
     TakePictureUnit takePictureUnit;
 
+
+    VideoRcdUnit videoRcdUnit;
+
     @Override
     public int initConfig(Bundle savedInstanceState) {
         return R.layout.unit_main_fgm;
@@ -49,13 +53,14 @@ public class UnitMainFgm extends BaseFgm {
         if (v == attachment) {
             IntentUtils.jump(getContext(), AtmAct.class);
         } else if (v == recordVoice) {
+
             IntentUtils.jump(getContext(), VocieRecordAct.class);
         } else if (v == take_pic) {
             takePictureUnit = new TakePictureUnit();
             takePictureUnit.takePicture(this);
         } else if (v == video_rcd) {
-            IntentUtils.jump(getContext(), VocieRecordAct.class);
-
+            videoRcdUnit=new VideoRcdUnit(getContext());
+            videoRcdUnit.startRecord(this);
         }
     }
 
@@ -63,8 +68,14 @@ public class UnitMainFgm extends BaseFgm {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        RowObject rowObject = takePictureUnit.onActivityResult(requestCode, resultCode, data);
-        L.i("rowObject====" + JSONSerializer.toJson(rowObject));
+        if(requestCode==TakePictureUnit.REQUEST_CODE){
+            RowObject rowObject = takePictureUnit.onActivityResult(requestCode, resultCode, data);
+            L.i("takePictureUnit====" + JSONSerializer.toJson(rowObject));
+        }else if(requestCode==VideoRcdUnit.REQUEST_CODE){
+            RowObject rowObject = videoRcdUnit.onActivityResult(requestCode, resultCode, data);
+            L.i("videoRcdUnit====" + JSONSerializer.toJson(rowObject));
+        }
+
     }
 
     @Override

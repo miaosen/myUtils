@@ -84,7 +84,7 @@ public class EventIllnessAct extends PagingRcListAct {
     //protected void onResultCallBack(ActionResult result, String type) {
     //    RowObject row = result.getRow();
     //    if (result.isSuccess()) {
-    //        List<RowObject> resultRows = row.getRows("data");
+    //        List<RowObject> resultRows = row.getFilePaths("data");
     //        if (resultRows != null) {
     //            rcAdapter.hideFooter();
     //            rows.addAll(resultRows);

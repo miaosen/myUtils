@@ -1,7 +1,6 @@
 package com.myutils.core.form;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
@@ -14,10 +13,8 @@ import com.myutils.utils.JsonUtils;
 import com.myutils.utils.RowUtils;
 import com.myutils.utils.ViewUtils;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author zengmiaosen
@@ -170,11 +167,11 @@ public class FillUnit {
 
 
     public void setDisableType(List<Class> disableType) {
-        viewFilter .setDisableType(disableType);
+        viewFilter .setDisableView(disableType);
     }
 
     public void setDisableType(Class... disableType) {
-        viewFilter.setDisableType(disableType);
+        viewFilter.setDisableView(disableType);
     }
 
 

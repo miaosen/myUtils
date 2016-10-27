@@ -43,7 +43,7 @@ public class TakePictureUnit {
 	/**
 	 * 拍照请求码
 	 */
-	private static final int REQUEST_CODE = OnActivityResultState.TAKE_PICTURE;
+	public static final int REQUEST_CODE = OnActivityResultState.TAKE_PICTURE;
 
 	private Uri imageUri;
 	
@@ -103,7 +103,6 @@ public class TakePictureUnit {
 	 */
 	public void takePicture(Fragment fragment) {
 		updateName();
-
 		fragment.startActivityForResult(openCameraIntent, REQUEST_CODE);
 	}
 

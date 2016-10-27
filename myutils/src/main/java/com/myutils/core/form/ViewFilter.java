@@ -3,8 +3,6 @@ package com.myutils.core.form;
 import android.view.View;
 import android.widget.TextView;
 
-import com.myutils.core.logger.L;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class ViewFilter {
     public ViewFilter(){
         disableType = new LinkedList<Class>();
         //TextView一般不需要获取
-        setDisableType(TextView.class);
+        setDisableView(TextView.class);
         disableIdName =new LinkedList<>();
     }
 
@@ -53,14 +51,14 @@ public class ViewFilter {
      * 设置不需要获取的view
      * @param disableType
      */
-    public void setDisableType(Class... disableType) {
+    public void setDisableView(Class... disableType) {
         for (int i = 0; i < disableType.length; i++) {
             this.disableType.add(disableType[i]);
         }
     }
 
 
-    public void setDisableType(List<Class> disableType) {
+    public void setDisableView(List<Class> disableType) {
         if (this.disableType == null) {
             this.disableType = new LinkedList<Class>();
         }
