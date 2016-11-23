@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -27,19 +28,21 @@ import com.myutils.utils.IntentUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.gzpykj.vtch.R.id.rb;
+
 /**
- * @email 1510809124@qq.com
  * @author zengmiaosen
+ * @email 1510809124@qq.com
  * @git http://git.oschina.net/miaosen/MyUtils
  * @CreateDate 2016/9/23 12:06
  * @Descrition 确认预约
- */ 
+ */
 public class EventOrderAct extends BaseAct {
 
     @ViewInject
     ListView lv;
     BaseFillAdapter mAdpter;
-    List<RowObject> rows=new ArrayList<RowObject>();
+    List<RowObject> rows = new ArrayList<RowObject>();
 
     @ViewInject
     Button btn_sure;
@@ -48,7 +51,7 @@ public class EventOrderAct extends BaseAct {
 
     private String expertId;
 
-    private String  activityDate;
+    private String activityDate;
 
     private String activityTimeId;
 
@@ -57,10 +60,10 @@ public class EventOrderAct extends BaseAct {
     @Override
     public int initConfig(Bundle savedInstanceState) {
         Intent intent = getIntent();
-        activityId =intent.getStringExtra("activityId");
-        expertId=intent.getStringExtra("expertId");
-        activityDate=intent.getStringExtra("activityDate");
-        rowInfo= IntentUtils.getRow(intent,"rowInfo");
+        activityId = intent.getStringExtra("activityId");
+        expertId = intent.getStringExtra("expertId");
+        activityDate = intent.getStringExtra("activityDate");
+        rowInfo = IntentUtils.getRow(intent, "rowInfo");
         return R.layout.event_order_act;
     }
 
@@ -69,45 +72,44 @@ public class EventOrderAct extends BaseAct {
         initHeader();
         baseHeader.leftFinish();
         baseHeader.setTitle("确认预约");
-        mAdpter=new BaseFillAdapter(EventOrderAct.this,rows,R.layout.event_order_time_item) {
+        mAdpter = new BaseFillAdapter(EventOrderAct.this, rows, R.layout.event_order_time_item) {
             @Override
-            public void setItem(View convertView, RowObject row, int position, ViewHolder holder) {
-
+            public void setItem(View convertView, final RowObject row, int position, ViewHolder holder) {
+                final RadioButton rb = (RadioButton) holder.views.get("rb");
+                rb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        activityTimeId = row.getString("MAINID");
+                    }
+                });
             }
         };
         lv.setAdapter(mAdpter);
         btn_sure.setOnClickListener(this);
         mAdpter.setOnItemClickListener(new BaseFillAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View convertView, RowObject row, int position) {
-                RadioButton rb = (RadioButton) convertView.findViewById(R.id.rb);
-                if(rb.isChecked()){
-                    rb.setChecked(false);
-                    activityTimeId ="";
-                }else{
-                    rb.setChecked(true);
-                    activityTimeId =row.getString("MAINID");
-            }
+            public void onItemClick(View convertView, final RowObject row, int position) {
+
 
             }
         });
-        FillUnit fillUnit=new FillUnit(this);
+        FillUnit fillUnit = new FillUnit(this);
         fillUnit.fill(rowInfo);
     }
 
     @Override
     public void initData() {
-        UrlInvoker ai= Global.creatActionInvorker("vhTimeDefinitionAction","getListById/"+ activityId);
+        UrlInvoker ai = Global.creatActionInvorker("vhTimeDefinitionAction", "getListById/" + activityId);
         ai.setCallback(new StringCallBack() {
             @Override
             public void onSuccess(ActionResult result) {
-                if(result.isSuccess()){
+                if (result.isSuccess()) {
                     List<RowObject> data = result.getRow().getRows("data");
-                   if(data!=null){
-                       rows.addAll(data);
-                       mAdpter.notifyDataSetChanged();
-                   }
-                }else{
+                    if (data != null) {
+                        rows.addAll(data);
+                        mAdpter.notifyDataSetChanged();
+                    }
+                } else {
                     String message = result.getMessage();
                     UIHelper.toast(message);
                 }
@@ -118,22 +120,22 @@ public class EventOrderAct extends BaseAct {
 
     @Override
     public void click(View v) {
-        if(v==btn_sure){
+        if (v == btn_sure) {
             submit();
         }
     }
 
     private void submit() {
-        if(activityTimeId!=null){
-            UrlInvoker ai= Global.creatActionInvorker("vhActivityPlanAction","appointOlder/");
+        if (activityTimeId != null) {
+            UrlInvoker ai = Global.creatActionInvorker("vhActivityPlanAction", "appointOlder/");
             ai.setCallback(new StringCallBack() {
                 @Override
                 public void onSuccess(ActionResult result) {
-                    if(result.isSuccess()){
+                    if (result.isSuccess()) {
                         String message = result.getMessage();
                         UIHelper.toast(message);
                         finish();
-                    }else{
+                    } else {
                         String message = result.getMessage();
                         UIHelper.toast(message);
                     }
@@ -146,9 +148,9 @@ public class EventOrderAct extends BaseAct {
             ai.addParam("activityDate ", activityDate);
             RowObject olderInfo = GlobalVariable.getRow("olderInfo");
             // L.i(olderInfo.toString()+"   "+olderInfo.getString("MAINID"));
-            ai.addParam("olderId",olderInfo.getString("MAINID"));
+            ai.addParam("olderId", olderInfo.getString("MAINID"));
             ai.invoke();
-        }else{
+        } else {
             UIHelper.toast("没有时间段id！");
         }
 

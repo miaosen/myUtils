@@ -2,6 +2,7 @@ package com.myutils.ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -10,7 +11,7 @@ import android.widget.TextView;
 import com.myutils.R;
 import com.myutils.core.annotation.InjectReader;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.utils.ViewUtils;
+
 
 /**
  * @Created by gzpykj.com
@@ -19,10 +20,10 @@ import com.myutils.utils.ViewUtils;
  * @Descrition 加载中提示布局
  */
 
-public class LoadingTipLayout extends FrameLayout{
-	
+public class LoadingTipLayout extends FrameLayout {
+
 	private Context context;
-	
+
 	private FrameLayout viewTip;
 	@ViewInject
 	private LinearLayout ln_loading;
@@ -33,29 +34,39 @@ public class LoadingTipLayout extends FrameLayout{
 	@ViewInject
 	private TextView tv_not_data;
 	
-	
+	OnRelaodListener onRelaodListener;
+
 	public LoadingTipLayout(Context context) {
 		super(context);
-		this.context=context;
-		init();
-	}
-
-	public LoadingTipLayout(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		this.context=context;
+		this.context = context;
 		init();
 		
 	}
 
+	public LoadingTipLayout(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		this.context = context;
+		init();
+
+	}
+
 	private void init() {
-		if(!isInEditMode()){
-		viewTip = (FrameLayout) ViewUtils.inflatView(context, R.layout.ui_view_loadingtip);
-		this.addView(viewTip, 0);
-		//解决xml预览保存
-		InjectReader.injectAllFields(this, viewTip);
+		if (!isInEditMode()) {
+			viewTip = (FrameLayout) LayoutInflater.from(context).inflate(
+					R.layout.ui_view_loadingtip, null);
+			this.addView(viewTip, 0);
+			InjectReader.injectAllFields(this, viewTip);
+			ln_error.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if(onRelaodListener!=null){
+						onRelaodListener.reload(v);
+					}
+				}
+			});
 		}
 	}
-	
+
 	/**
 	 * 加载中
 	 */
@@ -63,36 +74,37 @@ public class LoadingTipLayout extends FrameLayout{
 		tip();
 		ln_loading.setVisibility(View.VISIBLE);
 	}
-	
+
 	/**
-	 * 加载中
+	 *  没有数据 
 	 */
 	public void notData() {
 		tip();
 		ln_not_data.setVisibility(View.VISIBLE);
 	}
-	
+
 	/**
-	 * 加载中
+	 * 没有数据 
+	 * @param text 提示的内容
 	 */
 	public void notData(String text) {
 		tip();
 		tv_not_data.setText(text);
 		ln_not_data.setVisibility(View.VISIBLE);
 	}
-	
+
 	/**
-	 * 加载中
+	 * 出错
 	 */
 	public void error() {
-		 tip();
+		tip();
 		ln_error.setVisibility(View.VISIBLE);
 	}
 
 	/**
 	 * 隐藏所有布局，显示提示布局
 	 */
-	private void tip(){
+	private void tip() {
 		hideAllView();
 		viewTip.setVisibility(View.VISIBLE);
 	}
@@ -103,44 +115,49 @@ public class LoadingTipLayout extends FrameLayout{
 	public void hideAllView() {
 		int childCount = this.getChildCount();
 		for (int i = 0; i < childCount; i++) {
-			View view=this.getChildAt(i);
+			View view = this.getChildAt(i);
 			view.setVisibility(View.GONE);
 		}
 		int tipChildCount = viewTip.getChildCount();
 		for (int i = 0; i < tipChildCount; i++) {
-			View view=viewTip.getChildAt(i);
+			View view = viewTip.getChildAt(i);
 			view.setVisibility(View.GONE);
 		}
 	}
-	
+
 	/**
 	 * 显示所有的子类布局
 	 */
 	public void showAllView() {
 		int childCount = this.getChildCount();
 		for (int i = 0; i < childCount; i++) {
-			View view=this.getChildAt(i);
+			View view = this.getChildAt(i);
 			view.setVisibility(View.VISIBLE);
 		}
 		int tipChildCount = viewTip.getChildCount();
 		for (int i = 0; i < tipChildCount; i++) {
-			View view=viewTip.getChildAt(i);
+			View view = viewTip.getChildAt(i);
 			view.setVisibility(View.VISIBLE);
 		}
 	}
-	
+
 	/**
 	 * 结束
 	 */
-	public void finish(){
+	public void finish() {
 		int childCount = this.getChildCount();
 		for (int i = 0; i < childCount; i++) {
-			View view=this.getChildAt(i);
+			View view = this.getChildAt(i);
 			view.setVisibility(View.VISIBLE);
 		}
 		viewTip.setVisibility(View.GONE);
 	}
-
+	
+	
+	
+	public interface OnRelaodListener{
+		void reload(View v);
+	}
 
 	public void setContext(Context context) {
 		this.context = context;
@@ -178,6 +195,22 @@ public class LoadingTipLayout extends FrameLayout{
 		this.ln_not_data = ln_not_data;
 	}
 
+	public TextView getTv_not_data() {
+		return tv_not_data;
+	}
+
+	public void setTv_not_data(TextView tv_not_data) {
+		this.tv_not_data = tv_not_data;
+	}
+
+	public OnRelaodListener getOnRelaodListener() {
+		return onRelaodListener;
+	}
+
+	public void setOnRelaodListener(OnRelaodListener onRelaodListener) {
+		this.onRelaodListener = onRelaodListener;
+	}
 	
 	
+
 }

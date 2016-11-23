@@ -2,6 +2,7 @@ package com.gzpykj.vtch.event;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,6 +15,7 @@ import com.gzpykj.vtch.base.Global;
 import com.gzpykj.vtch.base.PagingRcListAct;
 import com.myutils.base.AppFactory;
 import com.myutils.core.RowObject;
+import com.myutils.core.form.ResourceHold;
 import com.myutils.core.logger.L;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.ui.view.rcview.BaseRcAdapter;
@@ -51,6 +53,7 @@ public class EventListAct extends PagingRcListAct {
     public UrlInvoker setDataResourse() {
         UrlInvoker ai= Global.creatActionInvorker("vhActivityPlanAction","findList");
         ai.addParam("TYPENO","02");
+        ai.addParam("STATUS","2,3");
         if(!TextUtils.isEmpty(DISEASEID)){
             ai.addParam("DISEASEID",DISEASEID);
         }
@@ -99,7 +102,9 @@ public class EventListAct extends PagingRcListAct {
                 }
             });
         }else{
-            btn_order.setText("不可预约");
+            btn_order.setText("预约完成!");
+            btn_order.setTextColor(getResources().getColor(R.color.white));
+            btn_order.setBackground(new BitmapDrawable());
         }
     }
 

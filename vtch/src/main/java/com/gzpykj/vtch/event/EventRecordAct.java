@@ -2,6 +2,7 @@ package com.gzpykj.vtch.event;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -86,6 +87,8 @@ public class EventRecordAct extends PagingRcListAct {
         }else{
             btn_order.setText("已取消");
             btn_order.setEnabled(false);
+            btn_order.setTextColor(getResources().getColor(R.color.white));
+            btn_order.setBackground(new BitmapDrawable());
         }
 
     }

@@ -27,7 +27,8 @@ public class CustomRadioGroup extends LinearLayout{
 	private Context context;
 	
 	private List<RadioButton > listRb=new ArrayList<RadioButton>();
-	
+
+
 
 	public CustomRadioGroup(Context context) {
 		super(context);
@@ -59,6 +60,9 @@ public class CustomRadioGroup extends LinearLayout{
 			if(view instanceof RadioButton){
 				RadioButton rb=(RadioButton) view;
 				rb.setOnCheckedChangeListener(new mCheckedChange());
+				//rb.setClickable(false);
+				rb.setFocusable(false);
+				//rb.set(false);
 				listRb.add(rb);
 			}
 		}

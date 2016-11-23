@@ -63,6 +63,5 @@ public class FillAct extends BaseAct {
 
     @Override
     public void click(View v) {
-
     }
 }
