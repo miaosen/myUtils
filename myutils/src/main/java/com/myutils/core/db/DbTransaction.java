@@ -8,7 +8,7 @@ import java.util.Map;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 /**
  * @Created by gzpykj.com
  * @author zms

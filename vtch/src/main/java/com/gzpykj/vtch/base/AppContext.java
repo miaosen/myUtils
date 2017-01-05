@@ -2,7 +2,7 @@ package com.gzpykj.vtch.base;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.myutils.base.BaseAppContext;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 
 /**
  * Created by OAIM on 2016/7/28.

@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.myutils.R;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 
 /**
  * @Created by gzpykj.com

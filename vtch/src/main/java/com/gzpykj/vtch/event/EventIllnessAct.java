@@ -9,15 +9,11 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.gzpykj.vtch.R;
 import com.gzpykj.vtch.base.Global;
 import com.gzpykj.vtch.base.PagingRcListAct;
-import com.myutils.base.AppFactory;
-import com.myutils.core.ActionResult;
 import com.myutils.core.RowObject;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.ui.view.rcview.BaseRcAdapter;
-import com.myutils.utils.IntentUtils;
 
-import java.util.List;
 import java.util.Map;
 
 /**

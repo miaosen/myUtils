@@ -2,8 +2,6 @@ package com.myutils.core.okhttp.cookies;
 
 import java.util.List;
 
-import com.myutils.core.logger.L;
-
 import android.content.Context;
 
 import okhttp3.Cookie;

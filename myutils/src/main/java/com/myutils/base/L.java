@@ -1,8 +1,6 @@
-package com.myutils.core.logger;
+package com.myutils.base;
 
 import android.util.Log;
-
-import com.myutils.core.gson.JSONSerializer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,19 +15,23 @@ import org.json.JSONObject;
  */
 public class L {
 
+    private static boolean isLogger =true;
 
-    //是否打印
-    private static boolean isLog = false;
-    //打印标签
+    // 打印标签
     private static String logtag = "logtag";
-    /**
-     * logcat在实现上对于message的内存分配大概是4k左右,
-     * 所以超过的内容都直接被丢弃,设置文本长度超过3400分多条打印
-     */
-    private final static int LOG_MAXLENGTH = 3400;
 
-    //记录上次的logLocation
+    /**
+     * 点击跳转到类的关键字  eclipse是 at android studio是☞.(任意文字加.)
+     */
+    private static String jumpKeyWord = "  ☞. ";
+    /**
+     * logcat在实现上对于message的内存分配大概,2k左右, 所以超过的内容都直接被丢弃,设置文本长度超过LOG_MAXLENGTH分多条打印
+     */
+    private final static int LOG_MAXLENGTH = 2048;
+
+    // 记录上次的logLocation
     private static String lastLogMethod = "";
+
 
 
     /**
@@ -38,18 +40,16 @@ public class L {
      * @param text
      */
     public static void i(String text) {
-        if (isLog) {
-            Log.i("logtag", logContent(text) + logLocation(0));
+        if (isLogger) {
+            Log.i(logtag, logContent(text) + logLocation(0));
         }
     }
-
 
     public static void i(String text, int index) {
-        if (isLog) {
-            Log.i("logtag", logContent(text) + logLocation(index));
+        if (isLogger) {
+            Log.i(logtag, logContent(text) + logLocation(index));
         }
     }
-
 
 
     /**
@@ -58,7 +58,7 @@ public class L {
      * @param text
      */
     public static void e(String text) {
-        if (isLog) {
+        if (isLogger) {
             Log.e(logtag, logContent(text) + logLocation(0));
         }
     }
@@ -70,11 +70,10 @@ public class L {
      * @param e
      */
     public static void e(String msg, Exception e) {
-        if (isLog) {
+        if (isLogger) {
             Log.e(logtag, msg + logLocation(0), e);
         }
     }
-
 
     /**
      * 打印json格式文本
@@ -82,7 +81,7 @@ public class L {
      * @param json
      */
     public static void json(String json) {
-        if (isLog) {
+        if (isLogger) {
             json("", json);
         }
     }
@@ -90,16 +89,16 @@ public class L {
     /**
      * 打印json格式文本
      *
-     * @param prefix 前缀文本
+     * @param prefix
+     *            前缀文本
      * @param json
      */
     public static void json(String prefix, String json) {
-        if (isLog) {
+        if (isLogger) {
             String text = prefix + fomatJson(json);
             Log.i(logtag, logContent(text) + logLocation(0));
         }
     }
-
 
     /**
      * 打印内容
@@ -108,7 +107,7 @@ public class L {
      * @return
      */
     private static String logContent(String text) {
-        if (text.length() < 50) {//内容长度不超过50，前面加空格加到50
+        if (text.length() < 50) {// 内容长度不超过50，前面加空格加到50
             int minLeng = 50 - text.length();
             // Log.i(logtag, "leng========" + leng + "   " + text.length());
             if (minLeng > 0) {
@@ -118,12 +117,13 @@ public class L {
                 }
                 text = text + stringBuilder.toString();
             }
-        } else if (text.length() > LOG_MAXLENGTH) {//内容超过logcat单条打印上限，分批打印
-            //Log.i(logtag,"text长度========="+text.length());
+        } else if (text.length() > LOG_MAXLENGTH) {// 内容超过logcat单条打印上限，分批打印
+            //Log.i(logtag, "text长度=========" + text.length());
             int logTime = text.length() / LOG_MAXLENGTH;
             for (int i = 0; i < logTime; i++) {
-                String leng = text.substring(i * LOG_MAXLENGTH, (i + 1) * LOG_MAXLENGTH);
-                //提示
+                String leng = text.substring(i * LOG_MAXLENGTH, (i + 1)
+                        * LOG_MAXLENGTH);
+                // 提示
                 if (i == 0) {
                     Log.i(logtag, "打印分" + logTime + "条显示 :" + leng);
                 } else {
@@ -131,7 +131,8 @@ public class L {
                 }
 
             }
-            text = text.substring(logTime * LOG_MAXLENGTH, text.length());
+            text = "接上条↑"
+                    + text.substring(logTime * LOG_MAXLENGTH, text.length());
         }
         return text;
     }
@@ -144,8 +145,10 @@ public class L {
     private static StringBuilder logLocation(int index) {
         StackTraceElement logStackTrace = getLogStackTrace(index);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("   ☞.(").append(logStackTrace.getFileName()).append(":").append(logStackTrace.getLineNumber() + ")");
-        //Log.i(logtag, "leng========" + stringBuilder + "   " + lastLogMethod);
+        stringBuilder.append(jumpKeyWord).append(" (").append(logStackTrace.getFileName())
+                .append(":").append(logStackTrace.getLineNumber() + ")");
+        // Log.i(logtag, "leng========" + stringBuilder + "   " +
+        // lastLogMethod);
         if (stringBuilder.toString().equals(lastLogMethod)) {
             stringBuilder = new StringBuilder("");
         } else {
@@ -154,7 +157,6 @@ public class L {
 
         return stringBuilder;
     }
-
 
     /**
      * json格式化
@@ -179,35 +181,33 @@ public class L {
         return "Json格式有误: " + jsonStr;
     }
 
-
     /**
-     * 获取调用打印方法的栈
-     * index 调用打印i/e/json的index为0
+     * 获取调用打印方法的栈 index 调用打印i/e/json的index为0
+     *
      * @return
      */
     private static StackTraceElement getLogStackTrace(int index) {
         StackTraceElement logTackTraces = null;
-        StackTraceElement[] stackTraces = Thread.currentThread().getStackTrace();
-        //Log.i(logtag, JSONSerializer.toJson(stackTraces));
+        StackTraceElement[] stackTraces = Thread.currentThread()
+                .getStackTrace();
+        // Log.i(logtag, JSONSerializer.toJson(stackTraces));
         for (int i = 0; i < stackTraces.length; i++) {
             StackTraceElement stackTrace = stackTraces[i];
             if (stackTrace.getClassName().equals(L.class.getName())) {
-                //getLogStackTrace--logLocation--i/e/json--方法栈,所以调用打印方法栈的位置是当前方法栈后的第3个
-                logTackTraces = stackTraces[i + 3+index];
+                // getLogStackTrace--logLocation--i/e/json--方法栈,所以调用打印方法栈的位置是当前方法栈后的第3个
+                logTackTraces = stackTraces[i + 3 + index];
                 i = stackTraces.length;
             }
         }
         return logTackTraces;
     }
 
-
     public static void setLogtag(String logtag) {
         L.logtag = logtag;
     }
 
-
-    public static void setIsLog(boolean isLog) {
-        L.isLog = isLog;
+    public static void setIsLog(boolean isLogger) {
+        L.isLogger = isLogger;
     }
 
 

@@ -5,9 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import android.annotation.SuppressLint;
-import android.os.StrictMode;
 
-import com.myutils.core.logger.L;
 import com.myutils.utils.ApplicationUtils;
 import com.myutils.utils.FileUtils;
 

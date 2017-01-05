@@ -1,11 +1,8 @@
 package com.myutils.core.okhttp;
 
-import android.util.Log;
-
 import okhttp3.OkHttpClient;
 
 import com.myutils.base.AppFactory;
-import com.myutils.core.logger.L;
 import com.myutils.core.okhttp.cookies.CookiesManager;
 
 import java.util.concurrent.TimeUnit;
@@ -61,7 +58,6 @@ public class ClientFactory {
 		OkHttpClient client = new OkHttpClient();
 		//Builder okHttpBuilder = client.newBuilder();
 		OkHttpClient.Builder buidler =  client.newBuilder();
-		buidler.addInterceptor(new OkhttpLog());
 		if (keepCookies != null && keepCookies.equals("true")) {
 			buidler =  buidler.cookieJar(cookiesManager);
 			//Log.i("logtag","keepCookies================");
@@ -70,9 +66,8 @@ public class ClientFactory {
 		buidler.connectTimeout(30, TimeUnit.SECONDS).build();
 		buidler.readTimeout(30, TimeUnit.SECONDS).build();
 		buidler.writeTimeout(30, TimeUnit.SECONDS).build();
+		buidler.addInterceptor(new OkhttpLog());
 		client=buidler.build();
-
-
 		return client;
 	}
 

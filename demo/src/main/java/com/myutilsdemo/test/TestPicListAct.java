@@ -3,14 +3,13 @@ package com.myutilsdemo.test;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.view.View;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.myutils.core.ActionResult;
 import com.myutils.core.RowObject;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
 import com.myutils.ui.UIHelper;

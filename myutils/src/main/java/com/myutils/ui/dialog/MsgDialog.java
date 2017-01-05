@@ -3,11 +3,9 @@ package com.myutils.ui.dialog;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -15,7 +13,6 @@ import com.myutils.R;
 import com.myutils.core.annotation.InjectReader;
 import com.myutils.ui.dialog.bs.BaseFmDialog;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.utils.ViewUtils;
 
 /**
  * @Created by gzpykj.com

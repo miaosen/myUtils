@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 
 import android.app.Activity;
 import android.content.ContentResolver;

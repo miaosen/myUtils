@@ -6,17 +6,16 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.gzpykj.vtch.R;
 import com.gzpykj.vtch.base.Global;
 import com.gzpykj.vtch.base.PagingRcListAct;
-import com.myutils.base.AppFactory;
 import com.myutils.core.ActionResult;
 import com.myutils.core.GlobalVariable;
 import com.myutils.core.RowObject;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
 import com.myutils.ui.UIHelper;
@@ -25,7 +24,10 @@ import com.myutils.ui.dialog.bs.BaseFmDialog;
 import com.myutils.ui.view.rcview.BaseRcAdapter;
 import com.myutils.utils.IntentUtils;
 
+import java.io.IOException;
 import java.util.Map;
+
+import okhttp3.Call;
 
 /**
  * @author zengmiaosen
@@ -69,8 +71,10 @@ public class EventRecordAct extends PagingRcListAct {
                 startActivity(in);
             }
         });
-        Button btn_order = (Button) viewWithIdName.get("btn_order");
-        btn_order.setOnClickListener(new View.OnClickListener() {
+        TextView btn_order = (TextView) viewWithIdName.get("btn_order");
+        TextView btn_cancle_order = (TextView) viewWithIdName.get("btn_cancle_order");
+        btn_cancle_order.setVisibility(View.GONE);
+        btn_cancle_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                showCancleOrderDialog(row.getString("MAINID"));
@@ -82,14 +86,16 @@ public class EventRecordAct extends PagingRcListAct {
         draweeView.setImageURI(uri);
         String status = row.getString("STATUS");
         if(status!=null&&status.equals("1")){
-            btn_order.setText("取消预约");
-            btn_order.setEnabled(true);
-        }else{
+            btn_order.setText("成功预约");
+            btn_cancle_order.setVisibility(View.VISIBLE);
+        }else if(status!=null&&status.equals("2")){
             btn_order.setText("已取消");
-            btn_order.setEnabled(false);
-            btn_order.setTextColor(getResources().getColor(R.color.white));
-            btn_order.setBackground(new BitmapDrawable());
+        }if(status!=null&&status.equals("3")){
+            btn_order.setText("已关闭");
         }
+        btn_order.setEnabled(false);
+        btn_order.setTextColor(getResources().getColor(R.color.white));
+        btn_order.setBackground(new BitmapDrawable());
 
     }
 
@@ -99,8 +105,7 @@ public class EventRecordAct extends PagingRcListAct {
         msgDialog.setOnSureListener(new BaseFmDialog.OnSureListener() {
             @Override
             public void sure(BaseFmDialog baseFmDialog) {
-                cancleOrder(mainId);
-
+                cancleOrder(mainId,baseFmDialog);
             }
         });
         msgDialog.show(getSupportFragmentManager(),"canle");
@@ -109,19 +114,26 @@ public class EventRecordAct extends PagingRcListAct {
     /**
      * 取消预约
      */
-    private void cancleOrder(String mainId) {
+    private void cancleOrder(String mainId, final BaseFmDialog baseFmDialog) {
         UrlInvoker ai= Global.creatActionInvorker("vhActivityAppointAction","cancelAppoint");
         ai.addParam("idStr",mainId);
         ai.setCallback(new StringCallBack() {
             @Override
             public void onSuccess(ActionResult result) {
-                if(result.isSuccess()){
-                    UIHelper.toast("取消成功！");
-                    finish();
+               if(result.isSuccess()){
+                   UIHelper.toast("取消成功！");
+                   baseFmDialog.dismiss();
+                   refresh();
                 }else{
-                    String message = result.getMessage();
-                    UIHelper.toast(message);
+                   String message = result.getMessage();
+                   UIHelper.toast(message);
                 }
+            }
+
+            @Override
+            protected void onFail(Call call, IOException e) {
+                super.onFail(call, e);
+
             }
         });
         ai.invoke();

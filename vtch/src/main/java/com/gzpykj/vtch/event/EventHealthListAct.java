@@ -14,6 +14,7 @@ public class EventHealthListAct extends EventListAct {
     public UrlInvoker setDataResourse() {
         UrlInvoker ai= Global.creatActionInvorker("vhActivityPlanAction","findList");
         ai.addParam("TYPENO","01");
+        ai.addParam("STATUS","2");
         return ai;
     }
 

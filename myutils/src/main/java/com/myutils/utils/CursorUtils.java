@@ -12,7 +12,7 @@ import org.json.JSONObject;
 import android.database.Cursor;
 
 import com.myutils.core.RowObject;
-import com.myutils.core.gson.JSONSerializer;
+import com.myutils.core.json.JSONSerializer;
 
 public class CursorUtils {
 	

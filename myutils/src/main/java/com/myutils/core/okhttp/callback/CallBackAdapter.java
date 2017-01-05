@@ -1,7 +1,6 @@
 package com.myutils.core.okhttp.callback;
 
-import com.myutils.core.ActionResult;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.core.okhttp.HandlerQueue;
 import com.myutils.ui.dialog.LoadingDialog;
 

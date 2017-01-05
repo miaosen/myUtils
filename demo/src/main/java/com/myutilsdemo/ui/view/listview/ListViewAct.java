@@ -83,12 +83,15 @@ public class ListViewAct extends BaseAct {
             public void onSuccess(ActionResult result) {
                 RowObject row = result.getRow();
                 List<RowObject> resultRows = row.getRows("result");
-                rows.addAll(resultRows);
-                mAdpter.notifyDataSetChanged();
-                // 加载完后调用该方法
-                pullToRefresh.setLoading(false);
-                pullToRefresh.setRefreshing(false);
-                lv.removeFooterView(footerView);
+                if(rows!=null){
+                    rows.addAll(resultRows);
+                    mAdpter.notifyDataSetChanged();
+                    // 加载完后调用该方法
+                    pullToRefresh.setLoading(false);
+                    pullToRefresh.setRefreshing(false);
+                    lv.removeFooterView(footerView);
+                }
+
             }
         });
         ai.invoke();

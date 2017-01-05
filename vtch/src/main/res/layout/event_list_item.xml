@@ -7,156 +7,198 @@
               android:orientation="vertical"
               android:padding="8dp">
 
-    <LinearLayout
-        android:id="@+id/ln_illness"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:background="@drawable/sel_event_item_bg_blue"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        >
+        android:layout_marginRight="40dp">
 
-
-        <RelativeLayout
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            >
-
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/simpleDraweeView"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                fresco:failureImage="@drawable/icon_no_pic"
-                fresco:placeholderImage="@drawable/icon_loding"
-                fresco:roundAsCircle="true"
-                />
-
-        </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/ln_illness"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:orientation="vertical"
+            android:background="@drawable/sel_event_item_bg_blue"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             >
+
+
+            <RelativeLayout
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                >
+
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/simpleDraweeView"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    fresco:failureImage="@drawable/icon_no_pic"
+                    fresco:placeholderImage="@drawable/icon_loding"
+                    fresco:roundAsCircle="true"
+                    />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:gravity="center"
+                android:gravity="right"
                 android:orientation="vertical"
                 >
 
-                <TextView
-                    android:id="@+id/ACTIVITYNAME"
-                    style="@style/tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:gravity="center_horizontal"
-                    android:padding="1dp"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    />
-
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginRight="15dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     >
 
                     <TextView
-                        android:id="@+id/EXPERTNAME"
+                        android:id="@+id/ACTIVITYNAME"
                         style="@style/tv_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
                         android:gravity="center_horizontal"
                         android:padding="1dp"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"
                         />
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:id="@+id/EXPERTNAME"
+                            style="@style/tv_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:padding="1dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            style="@style/tv_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:padding="1dp"
+                            android:text="("
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            android:id="@+id/DISEASENAME"
+                            style="@style/tv_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:padding="1dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            style="@style/tv_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:padding="1dp"
+                            android:text=")"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            />
+                    </LinearLayout>
+
+
                     <TextView
+                        android:id="@+id/ACTIVITYDATE"
                         style="@style/tv_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
                         android:padding="1dp"
-                        android:text="("
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
+                        android:textSize="12sp"
                         />
 
                     <TextView
-                        android:id="@+id/DISEASENAME"
+                        android:id="@+id/TIMENAME"
                         style="@style/tv_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
                         android:padding="1dp"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
+                        android:textSize="12sp"
                         />
 
-                    <TextView
-                        style="@style/tv_title"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:padding="1dp"
-                        android:text=")"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        />
+                        android:paddingBottom="10dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/btn_order"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/sel_btn_white"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:text="预 约"
+                            android:textSize="12sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/btn_cancle_order"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/sel_btn_white"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:visibility="gone"
+                            android:layout_marginLeft="5dp"
+                            android:text="取消预约"
+                            android:textSize="12sp"
+                            />
+
+                    </LinearLayout>
+
                 </LinearLayout>
-
-
-                <TextView
-                    android:id="@+id/ACTIVITYDATE"
-                    style="@style/tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:padding="1dp"
-                    android:textSize="12sp"
-                    />
-
-                <TextView
-                    android:id="@+id/TIMENAME"
-                    style="@style/tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:padding="1dp"
-                    android:textSize="12sp"
-                    />
-
-                <Button
-                    android:id="@+id/btn_order"
-                    android:layout_width="wrap_content"
-                    android:layout_height="28dp"
-                    android:padding="2dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/sel_btn_white"
-                    android:text="预约"
-                    android:textSize="14sp"
-                    />
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
+        <ImageView
+            android:id="@+id/img_colse"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+           android:layout_alignParentBottom="true"
+            android:src="@mipmap/icon_hascolse"
+            />
+
+    </RelativeLayout>
 
 </LinearLayout>

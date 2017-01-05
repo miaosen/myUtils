@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.myutils.core.annotation.InjectReader;
-import com.myutils.utils.ViewUtils;
 
 @SuppressLint("NewApi")
 public abstract class BaseActivity extends
@@ -22,8 +21,7 @@ public abstract class BaseActivity extends
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(initConfig(savedInstanceState));
-        InjectReader.injectAllFields(this);
-        initView(getWindow().getDecorView());
+
     }
 
 
@@ -32,6 +30,8 @@ public abstract class BaseActivity extends
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus && !loadComplete) {
             loadComplete = true;
+            InjectReader.injectAllFields(this);
+            initView(getWindow().getDecorView());
             initData();
         }
     }

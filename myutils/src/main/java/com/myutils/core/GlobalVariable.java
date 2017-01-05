@@ -3,8 +3,8 @@ package com.myutils.core;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.myutils.core.logger.L;
-import com.myutils.core.gson.JSONSerializer;
+import com.myutils.base.L;
+import com.myutils.core.json.JSONSerializer;
 import com.myutils.utils.JsonUtils;
 import com.myutils.utils.SharePreferenceUtil;
 
@@ -22,14 +22,12 @@ import com.myutils.utils.SharePreferenceUtil;
 public class GlobalVariable {
 	
 	private static final String TAG = "GlobalVariable";
-	
 	/**
 	 * 缓存的xml文件名
 	 */
 	private static final String VARIABLE_PREFS = "variablePrefsFile";
 	
 	private static SharePreferenceUtil sharePreferenceUtil;
-	
 	/**
 	 * 存放字符串变量
 	 */

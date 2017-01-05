@@ -7,8 +7,8 @@ import android.widget.Button;
 
 import com.myutils.core.RowObject;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.core.gson.JSONSerializer;
-import com.myutils.core.logger.L;
+import com.myutils.core.json.JSONSerializer;
+import com.myutils.base.L;
 import com.myutils.unit.file.atm.TakePictureUnit;
 import com.myutils.unit.file.atm.vdrcd.VideoRcdUnit;
 import com.myutils.utils.IntentUtils;

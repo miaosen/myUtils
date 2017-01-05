@@ -33,7 +33,6 @@
         <attr name="lineMargin" format="dimension" />
         <!-- 列距离 -->
         <attr name="columnMargin" format="dimension" />
-
     </declare-styleable>
 
 </resources>

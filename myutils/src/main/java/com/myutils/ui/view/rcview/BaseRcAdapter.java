@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.myutils.core.RowObject;
-import com.myutils.core.form.FillUnit;
-import com.myutils.core.logger.L;
+import com.myutils.core.form.Form;
+import com.myutils.base.L;
 
 import java.util.List;
 
@@ -60,12 +60,12 @@ public abstract class BaseRcAdapter extends RecyclerView.Adapter<BaseRcAdapter.V
      * ItemView初始化
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public FillUnit fillUnit;
+        public Form fillUnit;
 
         public ViewHolder(View itemView) {
             super(itemView);
             if(fillUnit==null){
-                fillUnit = new FillUnit(itemView);
+                fillUnit = new Form(itemView);
 
             }
         }

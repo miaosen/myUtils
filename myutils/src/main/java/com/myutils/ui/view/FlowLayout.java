@@ -8,14 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.myutils.core.form.ResourceHold;
-import com.myutils.core.logger.L;
-import com.myutils.unit.file.atm.AtmAdp;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 /**
  * @author zengmiaosen
  * @email 1510809124@qq.com

@@ -8,7 +8,7 @@ import com.gzpykj.vtch.R;
 import com.gzpykj.vtch.base.BaseAct;
 import com.myutils.core.RowObject;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.core.form.FillUnit;
+import com.myutils.core.form.Form;
 import com.myutils.utils.IntentUtils;
 
 /**
@@ -37,7 +37,7 @@ public class EventDetailAct extends BaseAct {
         initHeader();
         baseHeader.setTitle("活动详情");
         baseHeader.leftFinish();
-        FillUnit fillUnit=new FillUnit(this);
+        Form fillUnit=new Form(this);
         fillUnit.fill(rowInfo);
     }
 

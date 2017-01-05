@@ -4,12 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 
-import com.myutils.base.AppFactory;
-import com.myutils.core.logger.L;
 import com.myutils.core.RowObject;
 import com.myutils.unit.OnActivityResultState;
 import com.myutils.unit.file.FileModel;

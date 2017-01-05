@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
-import com.myutils.utils.ViewUtils;
+import com.myutils.core.form.ViewUtils;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.myutils.core.gson;
+package com.myutils.core.json;
 
 import java.lang.reflect.Type;
 import java.util.LinkedList;

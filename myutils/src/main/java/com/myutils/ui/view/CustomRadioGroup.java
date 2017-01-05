@@ -12,8 +12,8 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
-import com.myutils.core.logger.L;
-import com.myutils.utils.ViewUtils;
+import com.myutils.base.L;
+import com.myutils.core.form.ViewUtils;
 
 
 /**

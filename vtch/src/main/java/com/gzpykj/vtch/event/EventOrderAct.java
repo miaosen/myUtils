@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 import com.gzpykj.vtch.R;
 import com.gzpykj.vtch.base.BaseAct;
@@ -16,19 +14,15 @@ import com.myutils.core.ActionResult;
 import com.myutils.core.GlobalVariable;
 import com.myutils.core.RowObject;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.core.form.FillUnit;
-import com.myutils.core.logger.L;
+import com.myutils.core.form.Form;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
 import com.myutils.ui.UIHelper;
-import com.myutils.ui.view.CustomRadioGroup;
 import com.myutils.ui.view.listview.BaseFillAdapter;
 import com.myutils.utils.IntentUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.gzpykj.vtch.R.id.rb;
 
 /**
  * @author zengmiaosen
@@ -93,7 +87,7 @@ public class EventOrderAct extends BaseAct {
 
             }
         });
-        FillUnit fillUnit = new FillUnit(this);
+        Form fillUnit = new Form(this);
         fillUnit.fill(rowInfo);
     }
 
@@ -127,7 +121,7 @@ public class EventOrderAct extends BaseAct {
 
     private void submit() {
         if (activityTimeId != null) {
-            UrlInvoker ai = Global.creatActionInvorker("vhActivityPlanAction", "appointOlder/");
+            UrlInvoker ai = Global.creatActionInvorker("vhActivityAppointAction", "appointActivity");
             ai.setCallback(new StringCallBack() {
                 @Override
                 public void onSuccess(ActionResult result) {
@@ -144,8 +138,8 @@ public class EventOrderAct extends BaseAct {
             });
             ai.addParam("activityTimeId", activityTimeId);
             ai.addParam("mainId", activityId);
-            ai.addParam("expertId ", expertId);
-            ai.addParam("activityDate ", activityDate);
+            ai.addParam("expertId", expertId);
+            ai.addParam("activityDate", activityDate);
             RowObject olderInfo = GlobalVariable.getRow("olderInfo");
             // L.i(olderInfo.toString()+"   "+olderInfo.getString("MAINID"));
             ai.addParam("olderId", olderInfo.getString("MAINID"));

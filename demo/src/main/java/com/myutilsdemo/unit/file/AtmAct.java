@@ -3,21 +3,18 @@ package com.myutilsdemo.unit.file;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
 
 import com.myutils.core.RowObject;
-import com.myutils.core.gson.JSONSerializer;
-import com.myutils.core.logger.L;
+import com.myutils.core.json.JSONSerializer;
+import com.myutils.base.L;
 import com.myutils.core.annotation.ViewInject;
 import com.myutils.unit.file.atm.AtmView;
 import com.myutils.unit.file.atm.AttachmentUnit;
 import com.myutilsdemo.R;
 import com.myutilsdemo.base.BaseAct;
-import com.myutilsdemo.base.BaseFgm;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**

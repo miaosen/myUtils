@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.myutils.core.logger.L;
 
 import java.util.HashMap;
 import java.util.Map;

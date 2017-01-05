@@ -2,7 +2,6 @@ package com.gzpykj.vtch.base;
 
 import com.myutils.base.AppConfig;
 import com.myutils.base.AppFactory;
-import com.myutils.core.logger.L;
 import com.myutils.core.okhttp.UrlInvoker;
 
 /**

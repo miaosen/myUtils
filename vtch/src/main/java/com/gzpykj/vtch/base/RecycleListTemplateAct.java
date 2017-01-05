@@ -13,7 +13,7 @@ import com.myutils.base.AppFactory;
 import com.myutils.core.ActionResult;
 import com.myutils.core.RowObject;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
 import com.myutils.ui.UIHelper;

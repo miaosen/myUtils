@@ -28,7 +28,7 @@
 //import com.myutils.core.annotation.ViewInject;
 //import com.myutils.ui.view.paginglistview.SwipeRefreshLayout.OnLoadListener;
 //import com.myutils.ui.view.paginglistview.SwipeRefreshLayout.OnRefreshListener;
-//import com.myutils.utils.ViewUtils;
+//import com.myutils.core.form.ViewUtils;
 //
 ///**
 // * @Created by gzpykj.com

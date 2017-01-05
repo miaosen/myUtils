@@ -1,26 +1,8 @@
 package com.gzpykj.vtch.base;
 
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.myutils.core.ActionResult;
-import com.myutils.core.RowObject;
-import com.myutils.core.annotation.ViewInject;
-import com.myutils.core.logger.L;
-import com.myutils.core.okhttp.UrlInvoker;
-import com.myutils.core.okhttp.callback.StringCallBack;
-import com.myutils.ui.UIHelper;
-import com.myutils.ui.view.LoadingTipLayout;
 import com.myutils.ui.view.header.BaseHeader;
-import com.myutils.ui.view.rcview.BaseRcAdapter;
-import com.myutils.ui.view.rcview.RcAdapterWithFooter;
-import com.myutils.ui.view.rcview.RefreshRcView;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author zengmiaosen

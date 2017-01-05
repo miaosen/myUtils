@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Message;
 
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.utils.CursorUtils;
 
 /**

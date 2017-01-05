@@ -1,76 +1,107 @@
 package com.myutils.core.form;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @email 1510809124@qq.com
  * @author zengmiaosen
+ * @email 1510809124@qq.com
  * @git http://git.oschina.net/miaosen/MyUtils
  * @CreateDate 2016/9/7 11:28
- * @Descrition View过滤器
+ * @Descrition View过滤器,主要负责在数据填充和收集时把一些不需要的view去掉
  */
 public class ViewFilter {
 
 
     /**
-     * 不需要填充的View类型
-     */
-    private List<Class> disableType = null;
+     * 整体控制
+     **/
+    //只需要过滤当前View的类名，加入到这个数组
+    private List<Class> disableViews =new LinkedList<Class>();
+    Class<?> disableClass[] = new Class[]{
+            TextView.class
+    };
 
-    private List<String> disableIdName = null;
+    //需要过滤View及其子类的类名，加入到这个数组
+    private List<Class> disableSubViews =new LinkedList<Class>();
+    Class<?> disableSubclass[] = new Class[]{
+            Button.class
+    };
 
-    public ViewFilter(){
-        disableType = new LinkedList<Class>();
-        //TextView一般不需要获取
-        setDisableView(TextView.class);
-        disableIdName =new LinkedList<>();
+    /**
+     * 细节控制（优先级高，不受前面2个影响）
+     **/
+    //父类加入disableSubViews，又想其中某个子类添加例外，子类加入到这个数组
+    private List<Class> enableViews = new LinkedList<Class>();
+
+
+    public ViewFilter() {
+        for (Class<?> clz:
+                disableClass ) {
+            disableViews.add(clz);
+        }
+        for (Class<?> clz:
+                disableSubclass ) {
+            disableSubViews.add(clz);
+        }
     }
 
 
     /**
-     * 是否包含过滤的类型
-     * @param idName
+     * 过滤方法
      * @param view
-     * @return
+     * @return 符合过滤条件返回true
      */
-    public boolean isContain(String idName, View view){
-        if(disableType.contains(view.getClass())||disableIdName.contains(idName)){
+    public boolean filter(View view) {
+        if (enableViews.contains(view.getClass())) {
             return false;
-        }else {
+        }
+        if (disableViews.contains(view.getClass()) ) {
             return true;
         }
+        boolean succes=false;
+        for (int i = 0; i <disableSubViews.size() ; i++) {
+            Class cls=disableSubViews.get(i);
+            if(cls.isInstance(view.getClass())){
+                succes= true;
+                i=disableSubViews.size();
+            }
+        }
+        return succes;
     }
-
 
 
     /**
      * 设置不需要获取的view
-     * @param disableType
+     * @param clz
      */
-    public void setDisableView(Class... disableType) {
-        for (int i = 0; i < disableType.length; i++) {
-            this.disableType.add(disableType[i]);
-        }
+    public void setDisableView(Class clz) {
+        this.disableViews.add(clz);
+    }
+
+    public void setDisableView(List<Class> cls) {
+        this.disableViews.addAll(cls);
+    }
+
+    public void setEnableView(Class clz) {
+        this.enableViews.add(clz);
+    }
+
+    public void setEnableView(List<Class> disableType) {
+        this.enableViews.addAll(disableType);
     }
 
 
-    public void setDisableView(List<Class> disableType) {
-        if (this.disableType == null) {
-            this.disableType = new LinkedList<Class>();
-        }
-        this.disableType.addAll(disableType);
+    public void setDisableSubView(Class clz) {
+        this.disableSubViews.add(clz);
     }
 
-    /**
-     * 设置不需要获取的view
-     * @param idName
-     */
-    public void enableIdName(String idName){
-        disableIdName.add(idName);
+    public void setDisableSubView(List<Class> cls) {
+        this.disableSubViews.addAll(cls);
     }
 
 

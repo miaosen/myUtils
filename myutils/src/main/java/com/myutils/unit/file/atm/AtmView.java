@@ -4,27 +4,19 @@ import java.util.LinkedList;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.myutils.R;
 import com.myutils.core.annotation.InjectReader;
-import com.myutils.core.logger.L;
 import com.myutils.core.RowObject;
 import com.myutils.ui.view.FlowLayout;
-import com.myutils.ui.view.listview.BaseFillAdapter;
-import com.myutils.ui.T;
 import com.myutils.core.annotation.ViewInject;
 import com.myutils.unit.file.atm.AttachmentUnit.OnDataChangeListener;
 
-import static com.myutils.core.logger.Logger.init;
 
 /**
  * @author zms

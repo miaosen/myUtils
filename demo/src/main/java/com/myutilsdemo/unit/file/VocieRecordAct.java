@@ -6,7 +6,7 @@ import android.widget.Button;
 
 import com.myutils.core.RowObject;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.unit.file.FileModel;
 import com.myutils.unit.file.atm.vorcd.VocieRcdDlg;
 import com.myutils.unit.file.atm.vorcd.VoiceRcdView;

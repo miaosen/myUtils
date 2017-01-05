@@ -6,23 +6,19 @@ import java.util.Map;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Environment;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.myutils.R;
 import com.myutils.base.AppFactory;
 import com.myutils.base.BaseActivity;
 import com.myutils.core.RowObject;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.ui.view.listview.BaseFillAdapter;
 import com.myutils.ui.dialog.MsgDialog;
 import com.myutils.ui.dialog.bs.BaseFmDialog;
-import com.myutils.utils.ApplicationUtils;
-import com.myutils.utils.BitmapUtils;
 
 public class AtmAdp extends BaseFillAdapter {
 

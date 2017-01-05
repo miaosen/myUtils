@@ -6,12 +6,10 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.myutils.R;
 import com.myutils.base.BaseActivity;
 import com.myutils.core.ActionResult;
 import com.myutils.core.RowObject;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.core.logger.L;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
 import com.myutils.ui.UIHelper;
@@ -136,6 +134,10 @@ public abstract class PagingRcListAct extends BaseActivity {
         ai.invoke();
     }
 
+    public void refresh(){
+        rows.clear();
+        getData("refresh");
+    }
 
     /**
      * 结果回调

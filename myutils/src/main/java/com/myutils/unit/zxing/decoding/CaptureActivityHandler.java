@@ -28,7 +28,7 @@ import android.os.Message;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.myutils.R;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.unit.zxing.CaptureActivity;
 import com.myutils.unit.zxing.camera.CameraManager;
 import com.myutils.unit.zxing.view.ViewfinderResultPointCallback;

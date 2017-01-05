@@ -22,7 +22,7 @@ import android.widget.ListView;
 import com.myutils.R;
 import com.myutils.base.AppFactory;
 import com.myutils.base.BaseAppContext.OnTrimMemoryListenr;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.core.RowObject;
 import com.myutils.ui.view.listview.BaseFillAdapter;
 

@@ -54,6 +54,7 @@
             android:padding="8dp"
             android:text="123456"
             android:layout_marginTop="6dp"
+
             android:drawableLeft="@mipmap/icon_password"
             android:hint="密码"/>
 

@@ -3,11 +3,8 @@ package com.myutils.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.myutils.core.gson.JSONSerializer;
-import com.myutils.core.logger.L;
+import com.myutils.core.json.JSONSerializer;
 import com.myutils.core.RowObject;
-
-import okhttp3.RequestBody;
 
 /**
  * Created by OAIM on 2016/1/6.
@@ -43,7 +40,7 @@ public class RowUtils {
 	}
 
 	/**
-	 * 获取RowObject层级数据,比如args为["aa","bb"],则返回row下的aa的RowObject对象中的key为bb的值
+	 * 获取RowObject层级数据,比如aa对象下有key为bb的字段,则返回row下的aa的RowObject对象中的key为bb的值
 	 * 
 	 * @param row
 	 * @param args

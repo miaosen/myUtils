@@ -5,8 +5,7 @@ import org.json.JSONObject;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
-import com.myutils.core.logger.L;
-import com.myutils.core.gson.JSONSerializer;
+import com.myutils.core.json.JSONSerializer;
 
 /**
  * @Created by gzpykj.com

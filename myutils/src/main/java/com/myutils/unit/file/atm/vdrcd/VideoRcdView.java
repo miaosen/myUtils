@@ -30,8 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.myutils.R;
-import com.myutils.core.logger.L;
-import com.myutils.utils.FileUtils;
+import com.myutils.base.L;
 
 /**
  * 视频播放控件

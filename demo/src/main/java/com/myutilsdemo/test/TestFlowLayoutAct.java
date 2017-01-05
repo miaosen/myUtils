@@ -5,13 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.myutils.base.BaseActivity;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.core.gson.JSONSerializer;
-import com.myutils.core.logger.L;
-import com.myutils.ui.UIHelper;
 import com.myutils.ui.view.FlowLayout;
 import com.myutilsdemo.R;
 

@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 
 /** 
  * 字符串转换为java.util.Date<br> 

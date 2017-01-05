@@ -10,7 +10,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.core.RowObject;
 
 public class XmlPullUtils {

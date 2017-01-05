@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.myutils.R;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.unit.OnActivityResultState;
 import com.myutils.unit.file.atm.vdrcd.VideoRcdView.OnRecordFinishListener;
 import com.myutils.utils.FileUtils;

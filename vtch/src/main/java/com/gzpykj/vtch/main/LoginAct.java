@@ -12,12 +12,11 @@ import com.gzpykj.vtch.base.Global;
 import com.gzpykj.vtch.event.EventChooseAct;
 import com.gzpykj.vtch.event.EventHealthListAct;
 import com.gzpykj.vtch.event.EventRecordAct;
-import com.gzpykj.vtch.event.EventSignAct;
 import com.myutils.core.ActionResult;
 import com.myutils.core.GlobalVariable;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.core.form.GetUnit;
-import com.myutils.core.logger.L;
+import com.myutils.core.form.DataCollector;
+import com.myutils.base.L;
 import com.myutils.core.okhttp.ClientFactory;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
@@ -62,7 +61,7 @@ public class LoginAct extends BaseAct {
     }
 
     public void login() {
-        GetUnit getUnit=new GetUnit(this);
+        DataCollector getUnit=new DataCollector(this);
         Map<String, Object> contentValue =getUnit.getContentValue();
         ClientFactory.clearCookies();
         GlobalVariable.clearPrefs();

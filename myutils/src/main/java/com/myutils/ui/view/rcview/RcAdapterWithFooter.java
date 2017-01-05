@@ -1,16 +1,14 @@
 package com.myutils.ui.view.rcview;
 
 import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.myutils.core.RowObject;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.ui.view.LoadingTipLayout;
-import com.myutils.ui.view.rcview.BaseRcAdapter;
 import com.myutils.utils.DPUtils;
 
 import java.util.List;

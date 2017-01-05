@@ -1,13 +1,13 @@
 package com.myutils.core.okhttp.builder;
 
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 
 import okhttp3.Request;
 
 /**
- * Created by OAIM on 2016/8/6.
+ * get请求方式
  */
-public class GetBuilder extends BaseBuilder{
+public class GetBuilder extends BaseBuilder {
 
 
     public GetBuilder(String url) {
@@ -24,7 +24,10 @@ public class GetBuilder extends BaseBuilder{
                         + paramMap.get(key).toString();
             }
         }
-        Request request = new Request.Builder().url(url).build();
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("accept", "application/json")
+                .build();
         return request;
     }
 

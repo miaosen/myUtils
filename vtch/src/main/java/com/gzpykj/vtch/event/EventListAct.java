@@ -7,19 +7,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.gzpykj.vtch.R;
 import com.gzpykj.vtch.base.Global;
 import com.gzpykj.vtch.base.PagingRcListAct;
-import com.myutils.base.AppFactory;
 import com.myutils.core.RowObject;
-import com.myutils.core.form.ResourceHold;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.ui.view.rcview.BaseRcAdapter;
-import com.myutils.ui.view.rcview.RefreshRcView;
 import com.myutils.utils.IntentUtils;
 
 import java.util.Map;
@@ -53,7 +50,7 @@ public class EventListAct extends PagingRcListAct {
     public UrlInvoker setDataResourse() {
         UrlInvoker ai= Global.creatActionInvorker("vhActivityPlanAction","findList");
         ai.addParam("TYPENO","02");
-        ai.addParam("STATUS","2,3");
+        ai.addParam("STATUS","2");
         if(!TextUtils.isEmpty(DISEASEID)){
             ai.addParam("DISEASEID",DISEASEID);
         }
@@ -85,7 +82,7 @@ public class EventListAct extends PagingRcListAct {
         Uri uri = Uri.parse(Global.getProjectPath()+row.getString("EXPERTPHOTO"));
         L.i("uri============="+uri);
         draweeView.setImageURI(uri);
-        Button btn_order = (Button) viewWithIdName.get("btn_order");
+        TextView btn_order = (TextView) viewWithIdName.get("btn_order");
         String status = row.getString("STATUS");
         if(status!=null&&status.equals("2")){
             btn_order.setText("预约");

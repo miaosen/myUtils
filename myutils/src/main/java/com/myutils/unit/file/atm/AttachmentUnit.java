@@ -4,10 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.view.View;
 
 import com.myutils.core.RowObject;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.unit.file.atm.vdrcd.VideoRcdUnit;
 import com.myutils.unit.file.atm.vorcd.VocieRcdDlg;
 import com.myutils.unit.file.atm.vorcd.VoiceRcdView;

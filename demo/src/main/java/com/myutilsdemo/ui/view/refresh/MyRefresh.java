@@ -9,12 +9,10 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.RelativeLayout;
-import android.widget.RelativeLayout;
 
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.ui.UIHelper;
 import com.myutils.utils.DPUtils;
 import com.myutilsdemo.R;

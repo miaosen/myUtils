@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.myutils.base.AppFactory;
 import com.myutils.core.ActionResult;
-import com.myutils.core.form.FillUnit;
+import com.myutils.core.form.Form;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
 import com.myutilsdemo.R;
@@ -22,7 +22,7 @@ import com.myutilsdemo.base.BaseAct;
  */
 public class FillAct extends BaseAct {
 
-    private FillUnit f;
+    private Form f;
 
     @Override
     public int initConfig(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class FillAct extends BaseAct {
 
     @Override
     public void initView(View decorView) {
-         f=new FillUnit(decorView);
+         f=new Form(decorView);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class FillAct extends BaseAct {
             public void onSuccess(ActionResult result) {
                 f.setRow(result.getRow());
                 f.setDisableType(EditText.class);//EditText不填充
-                f.setOnFillMessageListener(new FillUnit.OnFillMessageListener() {//自定义填充
+                f.setOnFillMessageListener(new Form.OnFillMessageListener() {//自定义填充
                     @Override
                     public boolean fillMessage(View view, String key, String value) {
                         if(key.equals("desc")){

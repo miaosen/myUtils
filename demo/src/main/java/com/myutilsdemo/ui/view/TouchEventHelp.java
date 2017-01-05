@@ -3,7 +3,7 @@ package com.myutilsdemo.ui.view;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.utils.DPUtils;
 
 /**

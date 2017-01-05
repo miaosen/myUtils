@@ -1,4 +1,4 @@
-package com.myutils.core.gson;
+package com.myutils.core.json;
 
 import java.util.List;
 

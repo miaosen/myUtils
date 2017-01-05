@@ -2,8 +2,6 @@ package com.myutils.base;
 
 import android.content.Context;
 
-import com.myutils.core.logger.L;
-
 /**
  * @Created by gzpykj.com
  * @author zms

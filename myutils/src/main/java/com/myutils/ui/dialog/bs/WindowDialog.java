@@ -9,7 +9,6 @@ import android.view.WindowManager.LayoutParams;
 
 import com.myutils.base.AppFactory;
 import com.myutils.base.BaseAppContext.OnTrimMemoryListenr;
-import com.myutils.core.logger.L;
 import com.myutils.utils.WindowUtils;
 /**
  * @Created by gzpykj.com

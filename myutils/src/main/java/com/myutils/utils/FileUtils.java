@@ -10,7 +10,7 @@ import android.os.Environment;
 import android.os.StatFs;
 
 import com.myutils.base.AppFactory;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 
 /**
  * @Created by gzpykj.com

@@ -13,7 +13,7 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import com.myutils.R;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.utils.DPUtils;
 
 @SuppressLint("NewApi")

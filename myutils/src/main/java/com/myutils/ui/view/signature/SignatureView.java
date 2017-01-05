@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import com.myutils.R;
 import com.myutils.core.annotation.InjectReader;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.utils.ViewUtils;
+
 /**
  * @Created by gzpykj.com
  * @author zms

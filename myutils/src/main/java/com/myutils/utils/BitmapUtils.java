@@ -23,7 +23,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.util.Log;
 
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 
 /**
  * 图片压缩工具类

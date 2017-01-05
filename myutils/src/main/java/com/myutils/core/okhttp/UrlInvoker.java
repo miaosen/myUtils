@@ -1,6 +1,6 @@
 package com.myutils.core.okhttp;
 
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.core.okhttp.builder.GetBuilder;
 import com.myutils.core.okhttp.builder.PostBuilder;
 import com.myutils.core.okhttp.builder.RequestBuilder;

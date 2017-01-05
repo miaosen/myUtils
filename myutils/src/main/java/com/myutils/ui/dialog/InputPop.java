@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.myutils.R;
 import com.myutils.core.RowObject;
-import com.myutils.core.logger.L;
+import com.myutils.base.L;
 import com.myutils.ui.view.listview.BaseFillAdapter;
 
 import java.util.LinkedList;

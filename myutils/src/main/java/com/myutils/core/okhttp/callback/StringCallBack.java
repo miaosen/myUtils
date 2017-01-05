@@ -2,7 +2,6 @@ package com.myutils.core.okhttp.callback;
 
 
 import com.myutils.core.ActionResult;
-import com.myutils.core.logger.L;
 import com.myutils.core.okhttp.HandlerQueue;
 import com.myutils.ui.dialog.LoadingDialog;
 
@@ -10,7 +9,6 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 /**
  * @author zengmiaosen
@@ -38,6 +36,8 @@ public abstract class StringCallBack extends CallBackAdapter {
             });
 
         }
+
+
     }
 
     public abstract void onSuccess(ActionResult result);

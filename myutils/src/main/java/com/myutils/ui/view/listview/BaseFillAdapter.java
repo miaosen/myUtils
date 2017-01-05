@@ -1,6 +1,5 @@
 package com.myutils.ui.view.listview;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,10 +13,9 @@ import android.widget.BaseAdapter;
 
 import com.myutils.base.AppFactory;
 import com.myutils.core.RowObject;
-import com.myutils.core.form.FillUnit;
-import com.myutils.core.gson.JSONSerializer;
-import com.myutils.core.logger.L;
-import com.myutils.utils.ViewUtils;
+import com.myutils.core.form.Form;
+import com.myutils.core.json.JSONSerializer;
+import com.myutils.core.form.ViewUtils;
 
 /**
  * @Created by gzpykj.com
@@ -88,7 +86,7 @@ public abstract class BaseFillAdapter extends BaseAdapter {
 			convertView = LayoutInflater.from(context).inflate(layout, null);
 			Map<String, View> allChildViewWithId = ViewUtils.getViewWithIdName(convertView);
 			holder.views=allChildViewWithId;
-			holder.fillUnit=new FillUnit(allChildViewWithId);
+			holder.fillUnit=new Form(allChildViewWithId);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -148,7 +146,7 @@ public abstract class BaseFillAdapter extends BaseAdapter {
 
 		public Object object;
 
-		public FillUnit fillUnit;
+		public Form fillUnit;
 
 	}
 
