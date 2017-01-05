@@ -22,6 +22,7 @@ public class ResourceHold {
 	}
 
 
+
 	/**
 	 * key为资源类型，value为存放一个key为资源字段名称和一个vaule为资源id的值 的map
 	 * 
