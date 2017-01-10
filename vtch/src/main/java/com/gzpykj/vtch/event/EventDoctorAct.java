@@ -30,16 +30,6 @@ import java.util.Map;
 public class EventDoctorAct extends PagingRcListAct {
 
 
-    @Override
-    public int setItemLayout() {
-        return R.layout.event_doctor_list_item;
-    }
-
-    @Override
-    public UrlInvoker setDataResourse() {
-        UrlInvoker ai= Global.creatActionInvorker("vhExpertAction","getList");
-        return ai;
-    }
 
     @SuppressLint("NewApi")
     @Override
@@ -74,6 +64,10 @@ public class EventDoctorAct extends PagingRcListAct {
     public void initView(View decorView) {
         super.initView(decorView);
         baseHeader.setTitle("按医生预约");
-        mRefresh.setOnLoadListener(null);
+        pagingListRcView.getRefreshRcView().setOnLoadListener(null);
+        pagingListRcView.setActionClass("vhExpertAction");
+        pagingListRcView.setItemLayout(R.layout.event_doctor_list_item);
+        pagingListRcView.setActionName("getList");
+        pagingListRcView.load();
     }
 }

@@ -2,27 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:background="@drawable/bs_bg"
               android:orientation="vertical">
 
     <include layout="@layout/bs_header" />
 
-
-    <com.myutils.ui.view.rcview.RefreshRcView
-        android:id="@+id/mRefresh"
+    <com.myutils.ui.view.rcview.PagingListRcView
+        android:id="@+id/pagingListRcView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        app:itemLayout="@layout/event_list_item"
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rc_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            >
-
-        </android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content" />
 
 
-    </com.myutils.ui.view.rcview.RefreshRcView>
 </LinearLayout>

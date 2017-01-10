@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.myutils.base.AppFactory;
-import com.myutils.core.ActionResult;
+import com.myutils.core.okhttp.callback.ActionResult;
 import com.myutils.core.json.JSONSerializer;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
@@ -75,7 +75,7 @@ public class OkhttpAct extends BaseAct {
 //                    EditText tv = new EditText(getContext());
 //                    tv.setText("第 " + j + " 条" + JSONSerializer.toJson(result) + "");
 //                    ln.addView(tv);
-                    ed.setText(JSONSerializer.toJson(result.getResponseText()));
+                    ed.setText(JSONSerializer.toJson(result.getResponseJsonText()));
                 }
             });
             ai.invoke();

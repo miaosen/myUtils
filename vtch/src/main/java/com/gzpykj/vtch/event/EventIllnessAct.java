@@ -1,5 +1,6 @@
 package com.gzpykj.vtch.event;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,17 +27,7 @@ import java.util.Map;
 public class EventIllnessAct extends PagingRcListAct {
 
 
-    @Override
-    public int setItemLayout() {
-        return R.layout.event_illness_list_item;
-    }
-
-    @Override
-    public UrlInvoker setDataResourse() {
-        UrlInvoker ai= Global.creatActionInvorker("vhDiseaseAction","getList");
-        return ai;
-    }
-
+    @SuppressLint("NewApi")
     @Override
     public void setPageItem(BaseRcAdapter.ViewHolder viewHolder, final RowObject row, int position) {
         Map<String, View> viewWithIdName = viewHolder.fillUnit.getViewWithIdName();
@@ -56,7 +47,7 @@ public class EventIllnessAct extends PagingRcListAct {
         });
         SimpleDraweeView draweeView = (SimpleDraweeView) viewWithIdName.get("simpleDraweeView");
         Uri uri = Uri.parse(Global.getProjectPath()+row.getString("DISEASEPHOTO"));
-        L.i("uri============="+uri);
+        //L.i("uri============="+uri);
         draweeView.setImageURI(uri);
     }
 
@@ -69,7 +60,11 @@ public class EventIllnessAct extends PagingRcListAct {
     public void initView(View decorView) {
         super.initView(decorView);
         baseHeader.setTitle("按病种预约");
-        mRefresh.setOnLoadListener(null);
+        pagingListRcView.getRefreshRcView().setOnLoadListener(null);
+        pagingListRcView.setActionClass("vhDiseaseAction");
+        pagingListRcView.setActionName("getList");
+        pagingListRcView.setItemLayout(R.layout.event_illness_list_item);
+        pagingListRcView.load();
     }
 
     ///**
@@ -78,21 +73,21 @@ public class EventIllnessAct extends PagingRcListAct {
     // * @param type 刷新还是加载更多
     // */
     //protected void onResultCallBack(ActionResult result, String type) {
-    //    RowObject row = result.getRow();
+    //    RowObject row = result.getAsRow();
     //    if (result.isSuccess()) {
     //        List<RowObject> resultRows = row.getFilePaths("data");
     //        if (resultRows != null) {
-    //            rcAdapter.hideFooter();
+    //            adpRc.hideFooter();
     //            rows.addAll(resultRows);
     //            if (type.equals("refresh")) {
-    //                rcAdapter.notifyDataSetChanged();
+    //                adpRc.notifyDataSetChanged();
     //                mRefresh.setRefreshing(false);
     //            } else {
-    //                rcAdapter.notifyDataSetChanged();
+    //                adpRc.notifyDataSetChanged();
     //            }
     //            pageIndex = pageIndex + 1;
     //        } else {
-    //            rcAdapter.getTipLayout().notData("没有更多数据！");
+    //            adpRc.getTipLayout().notData("没有更多数据！");
     //        }
     //        mRefresh.setLoading(false);
     //    }

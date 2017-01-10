@@ -1,8 +1,8 @@
-package com.myutils.core.okhttp.callback;
+package com.myutils.core;
 
 import com.myutils.base.L;
 import com.myutils.core.okhttp.HandlerQueue;
-import com.myutils.ui.dialog.LoadingDialog;
+import com.myutils.core.okhttp.callback.ActionResult;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -10,14 +10,25 @@ import java.net.SocketTimeoutException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Response;
+
+/**
+ * @author zengmiaosen
+ * @email 1510809124@qq.com
+ * @git http://git.oschina.net/miaosen/MyUtils
+ * @CreateDate 2017-01-09  12:11
+ * @Descrition
+ */
 
 /**
  * @email 1510809124@qq.com
  * @author zengmiaosen
  * @CreateDate 2016/8/9 16:30
- * @Descrition 回调适配器 扩展okhttp3 的Callback接口
+ * @Descrition 数据回调适配器，扩展获取网络和本地结果回调接口
  */
-public abstract class CallBackAdapter implements Callback {
+public abstract class ResultCallBack implements Callback {
+
+
 
     @Override
     public void onFailure(final Call call, final IOException e) {
@@ -31,7 +42,7 @@ public abstract class CallBackAdapter implements Callback {
         HandlerQueue.onResultCallBack(new Runnable() {
             @Override
             public void run() {
-                onFail(call,e);
+                onFail(e);
             }
         });
 
@@ -39,14 +50,13 @@ public abstract class CallBackAdapter implements Callback {
 
     /**
      * Ui线程
-     * @param call
      * @param e
      */
-    protected void onFail(Call call, IOException e) {
+    protected void onFail(Exception e) {
 
     }
 
-    public abstract void setLoadingDialog(LoadingDialog loadingDialog);
+    public abstract void onSuccess(JSONResult result);
 
 
 }

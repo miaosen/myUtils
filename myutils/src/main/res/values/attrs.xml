@@ -27,12 +27,88 @@
         <attr name="column" format="integer" />
     </declare-styleable>
 
+
     <!-- 流布局 -->
     <declare-styleable name="FlowLayout">
         <!-- 行距离 -->
         <attr name="lineMargin" format="dimension" />
         <!-- 列距离 -->
         <attr name="columnMargin" format="dimension" />
+    </declare-styleable>
+
+
+    <!-- 数据综合处理器 -->
+    <declare-styleable name="DataHandler">
+        <!-- 获取数据成功后提示-->
+        <attr name="successMsg" format="string" />
+        <!-- 获取数据失败后提示-->
+        <attr name="failMsg" format="string" />
+        <!-- 获取数据中提示-->
+        <attr name="loadingMsg" format="string" />
+        <!-- 设置这个地址会覆盖掉框架的请求地址 -->
+        <attr name="url" format="string" />
+        <!-- Sql语句 -->
+        <attr name="sql" format="string" />
+        <!-- action类名-->
+        <attr name="actionClass" format="string" />
+        <!-- 方法名-->
+        <attr name="actionName" format="string" />
+        <!-- 参数 格式：{key:value,key:value,key:value} -->
+        <attr name="param" format="string" />
+
+        <!-- View加载完后自动获取数据-->
+        <attr name="atuoInvoke" format="boolean" />
+        <!-- 数据来源是否为本地sqlite，false为从网络获取-->
+        <attr name="isDataFromSql" format="boolean" />
+        <!-- 是否从当前页面获取参数-->
+        <attr name="isGetParamFromThis" format="boolean" />
+        <!-- 获取数据后是否自动填充到本页面-->
+        <attr name="isFillThis" format="boolean" />
+
+        <!-- 指定获取表单的区域 -->
+        <attr name="paramArea" format="reference" />
+        <!-- 指定填充数据的区域 -->
+        <attr name="fillArea" format="reference" />
+        <!-- 通过点击当前view的某个控件去调用数据请求 -->
+        <attr name="invokeByClick" format="reference" />
+       <!--
+        <com.myutils.core.DataHandler
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:successMsg="获取成功！"
+            app:failMsg="获取失败！"
+            app:loadingMsg="登陆中..."
+            app:url="http://...."
+            app:sql="select * from ..."
+            app:actionClass="vhOlderAction"
+            app:actionName="olderLogin"
+            app:param="{key:value,key:value,key:value}"
+
+            app:isDataFromSql="false"
+            app:atuoInvoke="false"
+            app:isGetParamFromThis="true"
+            app:isFillThis="true"
+
+            app:paramArea="@id/btn_login"
+            app:fillArea="@id/btn_login"
+            app:invokeByClick="@id/btn_login"
+            />
+            -->
+    </declare-styleable>
+
+
+    <!-- 分页列表 -->
+    <declare-styleable name="PagingListRcView">
+        <!-- 适配器item -->
+        <attr name="itemLayout" format="reference" />
+        <!-- 设置这个地址会覆盖掉框架的请求地址 -->
+        <attr name="url"  />
+        <!-- Sql语句 -->
+        <attr name="sql" />
+        <!-- action类名-->
+        <attr name="actionClass" />
+        <!-- 方法名-->
+        <attr name="actionName" />
     </declare-styleable>
 
 </resources>

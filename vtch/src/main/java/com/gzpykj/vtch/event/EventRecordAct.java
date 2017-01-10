@@ -12,7 +12,9 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.gzpykj.vtch.R;
 import com.gzpykj.vtch.base.Global;
 import com.gzpykj.vtch.base.PagingRcListAct;
-import com.myutils.core.ActionResult;
+import com.myutils.core.JSONResult;
+import com.myutils.core.ResultCallBack;
+import com.myutils.core.okhttp.callback.ActionResult;
 import com.myutils.core.GlobalVariable;
 import com.myutils.core.RowObject;
 import com.myutils.base.L;
@@ -38,20 +40,6 @@ import okhttp3.Call;
  */
 public class EventRecordAct extends PagingRcListAct {
 
-
-    @Override
-    public int setItemLayout() {
-        return R.layout.event_list_item;
-    }
-
-    @Override
-    public UrlInvoker setDataResourse() {
-        UrlInvoker ai= Global.creatActionInvorker("vhActivityAppointAction","findList");
-        RowObject olderInfo = GlobalVariable.getRow("olderInfo");
-        // L.i(olderInfo.toString()+"   "+olderInfo.getString("MAINID"));
-        ai.addParam("olderId",olderInfo.getString("MAINID"));
-        return ai;
-    }
 
     @SuppressLint("NewApi")
     @Override
@@ -119,11 +107,11 @@ public class EventRecordAct extends PagingRcListAct {
         ai.addParam("idStr",mainId);
         ai.setCallback(new StringCallBack() {
             @Override
-            public void onSuccess(ActionResult result) {
+            public void onSuccess(JSONResult result) {
                if(result.isSuccess()){
                    UIHelper.toast("取消成功！");
                    baseFmDialog.dismiss();
-                   refresh();
+                   pagingListRcView.refresh();
                 }else{
                    String message = result.getMessage();
                    UIHelper.toast(message);
@@ -131,8 +119,8 @@ public class EventRecordAct extends PagingRcListAct {
             }
 
             @Override
-            protected void onFail(Call call, IOException e) {
-                super.onFail(call, e);
+            protected void onFail(Exception e) {
+                super.onFail(e);
 
             }
         });
@@ -147,7 +135,14 @@ public class EventRecordAct extends PagingRcListAct {
     @Override
     public void initView(View decorView) {
         super.initView(decorView);
-        mRefresh.setOnLoadListener(null);
+        pagingListRcView.getRefreshRcView().setOnLoadListener(null);
         baseHeader.setTitle("预约记录查询");
+        UrlInvoker ai = pagingListRcView.getUik();
+        RowObject olderInfo = GlobalVariable.getRow("olderInfo");
+        ai.addParam("olderId",olderInfo.getString("MAINID"));
+        pagingListRcView.getRefreshRcView().setOnLoadListener(null);
+        pagingListRcView.setActionClass("vhActivityAppointAction");
+        pagingListRcView.setActionName("findList");
+        pagingListRcView.load();
     }
 }

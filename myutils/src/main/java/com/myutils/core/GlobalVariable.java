@@ -112,7 +112,7 @@ public class GlobalVariable {
 				if(JsonUtils.isCanToRow(sharePreferenceUtil.get(key))){
 					mapGlobalVariable.put(key, sharePreferenceUtil.get(key));
 				}else{
-					L.i(TAG+"getRow key=="+key+" value=="+sharePreferenceUtil.get(key)+"无法转换为RowObject");
+					L.i(TAG+"getAsRow key=="+key+" value=="+sharePreferenceUtil.get(key)+"无法转换为RowObject");
 				}
 			}
 		}
@@ -134,7 +134,7 @@ public class GlobalVariable {
 				if(JsonUtils.isCanToRow(sharePreferenceUtil.get(key))){
 					mapGlobalVariable.put(key, sharePreferenceUtil.get(key));
 				}else{
-					L.i(TAG+"getRow key=="+key+" value=="+sharePreferenceUtil.get(key)+"无法转换为RowObject");
+					L.i(TAG+"getAsRow key=="+key+" value=="+sharePreferenceUtil.get(key)+"无法转换为RowObject");
 				}
 			}
 		}

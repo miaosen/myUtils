@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.myutils.base.AppFactory;
-import com.myutils.core.ActionResult;
+import com.myutils.core.okhttp.callback.ActionResult;
 import com.myutils.core.RowObject;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
@@ -81,7 +81,7 @@ public class ListViewAct extends BaseAct {
         ai.setCallback(new StringCallBack() {
             @Override
             public void onSuccess(ActionResult result) {
-                RowObject row = result.getRow();
+                RowObject row = result.getAsRow();
                 List<RowObject> resultRows = row.getRows("result");
                 if(rows!=null){
                     rows.addAll(resultRows);

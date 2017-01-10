@@ -34,6 +34,8 @@ public class EventListAct extends PagingRcListAct {
 
     String EXPERTID;
 
+
+
     @Override
     public int initConfig(Bundle savedInstanceState) {
         DISEASEID=getIntent().getStringExtra("DISEASEID");
@@ -41,24 +43,7 @@ public class EventListAct extends PagingRcListAct {
         return R.layout.event_list_act;
     }
 
-    @Override
-    public int setItemLayout() {
-        return R.layout.event_list_item;
-    }
 
-    @Override
-    public UrlInvoker setDataResourse() {
-        UrlInvoker ai= Global.creatActionInvorker("vhActivityPlanAction","findList");
-        ai.addParam("TYPENO","02");
-        ai.addParam("STATUS","2");
-        if(!TextUtils.isEmpty(DISEASEID)){
-            ai.addParam("DISEASEID",DISEASEID);
-        }
-        if(!TextUtils.isEmpty(EXPERTID)){
-            ai.addParam("EXPERTID",EXPERTID);
-        }
-        return ai;
-    }
 
     @SuppressLint("NewApi")
     @Override
@@ -111,6 +96,18 @@ public class EventListAct extends PagingRcListAct {
     public void initView(View decorView) {
         super.initView(decorView);
         baseHeader.setTitle("就诊活动选择");
+        UrlInvoker ai = pagingListRcView.getUik();
+        ai.addParam("TYPENO","02");
+        ai.addParam("STATUS","2");
+        if(!TextUtils.isEmpty(DISEASEID)){
+            ai.addParam("DISEASEID",DISEASEID);
+        }
+        if(!TextUtils.isEmpty(EXPERTID)){
+            ai.addParam("EXPERTID",EXPERTID);
+        }
+        pagingListRcView.setActionClass("vhActivityPlanAction");
+        pagingListRcView.setActionName("findList");
+        pagingListRcView.load();
     }
 
     @Override

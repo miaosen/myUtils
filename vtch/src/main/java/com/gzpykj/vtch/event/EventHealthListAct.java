@@ -10,20 +10,18 @@ import com.myutils.core.okhttp.UrlInvoker;
  */
 public class EventHealthListAct extends EventListAct {
 
-    @Override
-    public UrlInvoker setDataResourse() {
-        UrlInvoker ai= Global.creatActionInvorker("vhActivityPlanAction","findList");
-        ai.addParam("TYPENO","01");
-        ai.addParam("STATUS","2");
-        return ai;
-    }
-
 
 
     @Override
     public void initView(View decorView) {
         super.initView(decorView);
         baseHeader.setTitle("健康知识讲座");
+        UrlInvoker ai = pagingListRcView.getUik();
+        ai.addParam("TYPENO","01");
+        ai.addParam("STATUS","2");
+        pagingListRcView.getRefreshRcView().setOnLoadListener(null);
+        pagingListRcView.setActionClass("vhActivityPlanAction");
+        pagingListRcView.setActionName("findList");
     }
 
 }

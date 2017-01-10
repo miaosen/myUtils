@@ -4,8 +4,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.myutils.base.L;
+
 import java.util.LinkedList;
 import java.util.List;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 /**
  * @author zengmiaosen
@@ -15,6 +19,8 @@ import java.util.List;
  * @Descrition View过滤器,主要负责在数据填充和收集时把一些不需要的view去掉
  */
 public class ViewFilter {
+
+
 
 
     /**
@@ -38,8 +44,16 @@ public class ViewFilter {
     //父类加入disableSubViews，又想其中某个子类添加例外，子类加入到这个数组
     private List<Class> enableViews = new LinkedList<Class>();
 
+    public static ViewFilter instance;
 
-    public ViewFilter() {
+    public static ViewFilter getInstance(){
+        if(instance==null){
+            instance=new ViewFilter();
+        }
+        return instance;
+    }
+
+    private ViewFilter() {
         for (Class<?> clz:
                 disableClass ) {
             disableViews.add(clz);
@@ -66,7 +80,7 @@ public class ViewFilter {
         boolean succes=false;
         for (int i = 0; i <disableSubViews.size() ; i++) {
             Class cls=disableSubViews.get(i);
-            if(cls.isInstance(view.getClass())){
+            if(cls.isInstance(view)){
                 succes= true;
                 i=disableSubViews.size();
             }

@@ -20,7 +20,7 @@ import java.util.List;
  * @CreateDate 2016/9/1 14:36
  * @Descrition RecyclerView数据自动填充适配器
  */
-public abstract class BaseRcAdapter extends RecyclerView.Adapter<BaseRcAdapter.ViewHolder> implements ItemTouchApdater {
+public class BaseRcAdapter extends RecyclerView.Adapter<BaseRcAdapter.ViewHolder> implements ItemTouchApdater {
 
     private List<RowObject> rows;
     private int layout;
@@ -28,7 +28,7 @@ public abstract class BaseRcAdapter extends RecyclerView.Adapter<BaseRcAdapter.V
 
     // item监听
     private OnItemClickListener onItemClickListener;
-
+    OnItemDetailListener onItemDetailListener;
     int num=0;
 
     public BaseRcAdapter(List<RowObject> rows, int layout) {
@@ -42,7 +42,7 @@ public abstract class BaseRcAdapter extends RecyclerView.Adapter<BaseRcAdapter.V
         View view = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
         // 创建一个ViewHolder
         ViewHolder holder = new ViewHolder(view);
-        L.i("onCreateViewHolder====================="+num);
+        //L.i("onCreateViewHolder====================="+num);
         num=num+1;
         return holder;
     }
@@ -51,7 +51,9 @@ public abstract class BaseRcAdapter extends RecyclerView.Adapter<BaseRcAdapter.V
     public void onBindViewHolder(ViewHolder holder, int position) {
         RowObject row = rows.get(position);
         holder.fillUnit.fill(row);
-        setItem(holder, row, position);
+        if(onItemDetailListener!=null){
+            onItemDetailListener.setItem(holder, row, position);
+        }
         holder.itemView.setOnClickListener(new mClick(holder, row));
     }
 
@@ -69,8 +71,6 @@ public abstract class BaseRcAdapter extends RecyclerView.Adapter<BaseRcAdapter.V
 
             }
         }
-
-
         public void setText(int id, String text) {
             View view = itemView.findViewById(id);
             if (view instanceof TextView) {
@@ -83,15 +83,6 @@ public abstract class BaseRcAdapter extends RecyclerView.Adapter<BaseRcAdapter.V
     }
 
 
-
-    /**
-     * item 手动填充，在字段填充完后执行
-     *
-     * @param viewHolder
-     * @param row
-     * @param position
-     */
-    public abstract void setItem(ViewHolder viewHolder, RowObject row, int position);
 
     /**
      * item监听
@@ -180,5 +171,17 @@ public abstract class BaseRcAdapter extends RecyclerView.Adapter<BaseRcAdapter.V
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemDetailListener{
+        void setItem(ViewHolder viewHolder, RowObject row, int position);
+    }
+
+    public OnItemDetailListener getOnItemDetailListener() {
+        return onItemDetailListener;
+    }
+
+    public void setOnItemDetailListener(OnItemDetailListener onItemDetailListener) {
+        this.onItemDetailListener = onItemDetailListener;
     }
 }

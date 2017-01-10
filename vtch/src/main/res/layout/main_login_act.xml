@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:background="@drawable/bs_bg"
               android:orientation="vertical">
 
@@ -19,55 +20,6 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/logo"
             />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ln_login"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="7"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:paddingLeft="40dp"
-        android:layout_marginTop="10dp"
-        android:paddingRight="40dp"
-        android:visibility="visible"
-        >
-
-        <EditText
-            android:id="@+id/LOGINNAME"
-            style="@style/bg_frame_grey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@mipmap/icon_user"
-            android:drawablePadding="3dp"
-            android:padding="8dp"
-            android:text="lishi"
-            android:hint="登录名"/>
-
-        <EditText
-            android:id="@+id/LOGINPASS"
-            style="@style/bg_frame_grey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawablePadding="3dp"
-            android:padding="8dp"
-            android:text="123456"
-            android:layout_marginTop="6dp"
-
-            android:drawableLeft="@mipmap/icon_password"
-            android:hint="密码"/>
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/sel_btn_blue"
-            android:text="登  录"
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
-
     </LinearLayout>
 
 
@@ -252,4 +204,78 @@
             </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ln_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:paddingLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:paddingRight="40dp"
+        android:visibility="visible"
+        >
+
+        <EditText
+            android:id="@+id/LOGINNAME"
+            style="@style/bg_frame_grey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_user"
+            android:drawablePadding="3dp"
+            android:padding="8dp"
+            android:text="lishi"
+            android:hint="登录名"/>
+
+        <EditText
+            android:id="@+id/LOGINPASS"
+            style="@style/bg_frame_grey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="3dp"
+            android:padding="8dp"
+            android:text="123456"
+            android:layout_marginTop="6dp"
+
+            android:drawableLeft="@mipmap/icon_password"
+            android:hint="密码"/>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/sel_btn_blue"
+            android:text="登  录"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <com.myutils.core.DataHandler
+        android:id="@+id/datahandler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:successMsg="获取成功！"
+        app:failMsg="获取失败！"
+        app:loadingMsg="登陆中..."
+        app:sql="select * from ..."
+        app:actionClass="vhOlderAction"
+        app:actionName="olderLogin"
+
+        app:isDataFromSql="false"
+        app:atuoInvoke="false"
+        app:isGetParamFromThis="true"
+        app:isFillThis="true"
+
+        app:invokeByClick="@id/btn_login"
+        />
+
+
+
+
+
     </LinearLayout>

@@ -60,6 +60,7 @@
                     android:orientation="vertical"
                     >
 
+
                     <TextView
                         android:id="@+id/ACTIVITYNAME"
                         style="@style/tv_title"

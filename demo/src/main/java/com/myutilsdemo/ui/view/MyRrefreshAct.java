@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.myutils.base.AppFactory;
-import com.myutils.core.ActionResult;
+import com.myutils.core.okhttp.callback.ActionResult;
 import com.myutils.core.RowObject;
 import com.myutils.core.annotation.ViewInject;
 import com.myutils.core.okhttp.UrlInvoker;
@@ -55,7 +55,7 @@ public class MyRrefreshAct extends BaseAct {
         ai.setCallback(new StringCallBack() {
             @Override
             public void onSuccess(ActionResult result) {
-                RowObject row = result.getRow();
+                RowObject row = result.getAsRow();
                 List<RowObject> resultRows = row.getRows("result");
                 rows.addAll(resultRows);
                 mAdpter.notifyDataSetChanged();

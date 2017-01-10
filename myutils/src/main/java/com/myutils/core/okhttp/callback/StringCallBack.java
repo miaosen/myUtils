@@ -1,11 +1,15 @@
 package com.myutils.core.okhttp.callback;
 
 
-import com.myutils.core.ActionResult;
+import com.myutils.base.L;
+import com.myutils.core.JSONResult;
+import com.myutils.core.ResultCallBack;
 import com.myutils.core.okhttp.HandlerQueue;
 import com.myutils.ui.dialog.LoadingDialog;
 
 import java.io.IOException;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -16,16 +20,12 @@ import okhttp3.Response;
  * @CreateDate 2016/8/7 20:01
  * @Descrition 文本回调
  */
-public abstract class StringCallBack extends CallBackAdapter {
+public abstract class StringCallBack extends ResultCallBack {
 
 
-    private LoadingDialog loadingDialog;
 
     @Override
     public void onResponse(Call call, final Response response) throws IOException {
-        if (loadingDialog != null && loadingDialog.isShowing()) {
-            loadingDialog.dismiss();
-        }
         if (response.isSuccessful()) {
             final String result = response.body().string();
             HandlerQueue.onResultCallBack(new Runnable() {
@@ -34,16 +34,7 @@ public abstract class StringCallBack extends CallBackAdapter {
                     onSuccess(new ActionResult(result));
                 }
             });
-
         }
-
-
     }
 
-    public abstract void onSuccess(ActionResult result);
-
-    @Override
-    public void setLoadingDialog(LoadingDialog loadingDialog) {
-        this.loadingDialog = loadingDialog;
-    }
 }

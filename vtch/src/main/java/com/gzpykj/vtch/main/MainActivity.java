@@ -6,7 +6,7 @@
 //import com.gzpykj.vtch.R;
 //import com.gzpykj.vtch.base.BaseAct;
 //import com.myutils.base.AppFactory;
-//import com.myutils.core.ActionResult;
+//import com.myutils.core.okhttp.callback.ActionResult;
 //import com.myutils.core.RowObject;
 //import com.myutils.core.logger.L;
 //import com.myutils.core.okhttp.UrlInvoker;

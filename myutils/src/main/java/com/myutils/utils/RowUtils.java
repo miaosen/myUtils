@@ -1,7 +1,9 @@
 package com.myutils.utils;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.myutils.core.json.JSONSerializer;
 import com.myutils.core.RowObject;
@@ -38,6 +40,7 @@ public class RowUtils {
 		// List<RowObject> rows=new ArrayList<RowObject>();
 
 	}
+
 
 	/**
 	 * 获取RowObject层级数据,比如aa对象下有key为bb的字段,则返回row下的aa的RowObject对象中的key为bb的值
@@ -84,4 +87,9 @@ public class RowUtils {
 		String json = JSONSerializer.toJson(obj);
 		return JSONSerializer.getRow(json);
 	}
+
+
+
+
+
 }

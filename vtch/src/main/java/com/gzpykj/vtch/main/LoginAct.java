@@ -12,11 +12,14 @@ import com.gzpykj.vtch.base.Global;
 import com.gzpykj.vtch.event.EventChooseAct;
 import com.gzpykj.vtch.event.EventHealthListAct;
 import com.gzpykj.vtch.event.EventRecordAct;
-import com.myutils.core.ActionResult;
+import com.gzpykj.vtch.event.EventSignAct;
+import com.myutils.base.L;
+import com.myutils.core.JSONResult;
+import com.myutils.core.okhttp.callback.ActionResult;
+import com.myutils.core.DataHandler;
 import com.myutils.core.GlobalVariable;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.core.form.DataCollector;
-import com.myutils.base.L;
+import com.myutils.core.form.Form;
 import com.myutils.core.okhttp.ClientFactory;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
@@ -25,7 +28,10 @@ import com.myutils.ui.dialog.MsgDialog;
 import com.myutils.ui.dialog.bs.BaseFmDialog;
 import com.myutils.utils.IntentUtils;
 
+import java.io.IOException;
 import java.util.Map;
+
+import okhttp3.Call;
 
 /**
  * Created by OAIM on 2016/9/20.
@@ -34,6 +40,9 @@ public class LoginAct extends BaseAct {
 
     @ViewInject
     Button btn_login;
+
+    @ViewInject
+    DataHandler datahandler;
 
     int num=0;
 
@@ -48,11 +57,35 @@ public class LoginAct extends BaseAct {
 
     @Override
     public void initView(View decorView) {
-        btn_login.setOnClickListener(this);
+        //btn_login.setOnClickListener(this);
         ln_event_choose.setOnClickListener(this);
         ln_event_health.setOnClickListener(this);
         ln_event_sign_in.setOnClickListener(this);
         ln_event_record.setOnClickListener(this);
+        datahandler.setOnInvokeLisener(new DataHandler.OnInvokeLisener() {
+            @Override
+            public void onBefore() {
+                ClientFactory.clearCookies();
+                GlobalVariable.clearPrefs();
+            }
+
+            @Override
+            public void onSuccess(JSONResult result) {
+                if(result.isSuccess()){
+                    UIHelper.toast("登陆成功！");
+                    GlobalVariable.saveObject("olderInfo",result.getAsRow().getRow("data"));
+                   showMenu();
+                }else{
+                    String message = result.getMessage();
+                    L.i("message==="+message);
+                    UIHelper.toast(message);
+                }
+            }
+
+            @Override
+            public void onFail(Exception e) {
+            }
+        });
     }
 
     @Override
@@ -61,18 +94,19 @@ public class LoginAct extends BaseAct {
     }
 
     public void login() {
-        DataCollector getUnit=new DataCollector(this);
+        Form getUnit=new Form(this);
         Map<String, Object> contentValue =getUnit.getContentValue();
+        L.i("=========login=============="+contentValue);
         ClientFactory.clearCookies();
         GlobalVariable.clearPrefs();
         UrlInvoker ai= Global.creatActionInvorker("vhOlderAction","olderLogin");
         ai.addParam(contentValue);
         ai.setCallback(new StringCallBack() {
             @Override
-            public void onSuccess(ActionResult result) {
+            public void onSuccess(JSONResult result) {
                 if(result.isSuccess()){
                     UIHelper.toast("登陆成功！");
-                    GlobalVariable.saveObject("olderInfo",result.getRow().getRow("data"));
+                    GlobalVariable.saveObject("olderInfo",result.getAsRow().getRow("data"));
                    showMenu();
                 }else{
                     String message = result.getMessage();
@@ -80,8 +114,11 @@ public class LoginAct extends BaseAct {
                     UIHelper.toast(message);
                 }
             }
+            @Override
+            protected void onFail(Exception e) {
+                super.onFail(e);
+            }
         });
-        ai.setDialogMsg("登录中...");
         ai.invoke();
     }
 
@@ -95,7 +132,7 @@ public class LoginAct extends BaseAct {
     public void click(View v) {
         if(v==btn_login){
             //showMenu();
-            login();
+            //login();
         }else if(v==ln_event_choose){
             IntentUtils.jump(LoginAct.this, EventChooseAct.class);
         }else if(v== ln_event_health){
@@ -103,10 +140,10 @@ public class LoginAct extends BaseAct {
         }else if(v==ln_event_record){
             IntentUtils.jump(LoginAct.this, EventRecordAct.class);
         }else if(v==ln_event_sign_in){
-            UIHelper.toast("现在活动不需要签到！");
-            //IntentUtils.jump(LoginAct.this, EventSignAct.class);
+            //UIHelper.toast("现在活动不需要签到！");
+            IntentUtils.jump(LoginAct.this, EventSignAct.class);
         }
-       // GlobalVariable.getRow()
+       // GlobalVariable.getAsRow()
     }
 
 

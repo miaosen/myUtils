@@ -10,7 +10,8 @@ import android.widget.RadioButton;
 import com.gzpykj.vtch.R;
 import com.gzpykj.vtch.base.BaseAct;
 import com.gzpykj.vtch.base.Global;
-import com.myutils.core.ActionResult;
+import com.myutils.core.JSONResult;
+import com.myutils.core.okhttp.callback.ActionResult;
 import com.myutils.core.GlobalVariable;
 import com.myutils.core.RowObject;
 import com.myutils.core.annotation.ViewInject;
@@ -96,9 +97,9 @@ public class EventOrderAct extends BaseAct {
         UrlInvoker ai = Global.creatActionInvorker("vhTimeDefinitionAction", "getListById/" + activityId);
         ai.setCallback(new StringCallBack() {
             @Override
-            public void onSuccess(ActionResult result) {
+            public void onSuccess(JSONResult result) {
                 if (result.isSuccess()) {
-                    List<RowObject> data = result.getRow().getRows("data");
+                    List<RowObject> data = result.getAsRow().getRows("data");
                     if (data != null) {
                         rows.addAll(data);
                         mAdpter.notifyDataSetChanged();
@@ -124,7 +125,7 @@ public class EventOrderAct extends BaseAct {
             UrlInvoker ai = Global.creatActionInvorker("vhActivityAppointAction", "appointActivity");
             ai.setCallback(new StringCallBack() {
                 @Override
-                public void onSuccess(ActionResult result) {
+                public void onSuccess(JSONResult result) {
                     if (result.isSuccess()) {
                         String message = result.getMessage();
                         UIHelper.toast(message);
@@ -133,7 +134,7 @@ public class EventOrderAct extends BaseAct {
                         String message = result.getMessage();
                         UIHelper.toast(message);
                     }
-                    //L.i("result===="+result.getResponseText());
+                    //L.i("result===="+result.getResponseJsonText());
                 }
             });
             ai.addParam("activityTimeId", activityTimeId);

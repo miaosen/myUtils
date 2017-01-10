@@ -25,14 +25,14 @@ public class RcAdapterWithFooter extends BaseRcAdapter{
 
     LoadingTipLayout tipLayout;
 
+
+    OnItemDetailListener onItemDetailListener;
+
     public RcAdapterWithFooter(List<RowObject> rows, int layout) {
         super(rows, layout);
     }
 
-    @Override
-    public void setItem(ViewHolder viewHolder, RowObject row, int position) {
 
-    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -126,6 +126,8 @@ public class RcAdapterWithFooter extends BaseRcAdapter{
         }
         isShowFooter=false;
     }
+
+
 
     public boolean isShowFooter() {
         return isShowFooter;

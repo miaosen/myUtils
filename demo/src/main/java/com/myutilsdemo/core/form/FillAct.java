@@ -6,7 +6,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.myutils.base.AppFactory;
-import com.myutils.core.ActionResult;
+import com.myutils.core.okhttp.callback.ActionResult;
 import com.myutils.core.form.Form;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
@@ -42,7 +42,7 @@ public class FillAct extends BaseAct {
         ai.setCallback(new StringCallBack() {
             @Override
             public void onSuccess(ActionResult result) {
-                f.setRow(result.getRow());
+                f.setRow(result.getAsRow());
                 f.setDisableType(EditText.class);//EditText不填充
                 f.setOnFillMessageListener(new Form.OnFillMessageListener() {//自定义填充
                     @Override

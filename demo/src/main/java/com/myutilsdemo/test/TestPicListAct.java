@@ -7,7 +7,7 @@ import android.support.v7.widget.OrientationHelper;
 import android.view.View;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.myutils.core.ActionResult;
+import com.myutils.core.okhttp.callback.ActionResult;
 import com.myutils.core.RowObject;
 import com.myutils.base.L;
 import com.myutils.core.okhttp.UrlInvoker;
@@ -115,7 +115,7 @@ public class TestPicListAct  extends PagingRcListAct{
      */
     @Override
     protected void onResultCallBack(ActionResult result, String type) {
-        RowObject row = result.getRow();
+        RowObject row = result.getAsRow();
             List<RowObject> resultRows = row.getRows("data");
             if (resultRows != null && resultRows.size() > 0) {
                 rcAdapter.hideFooter();

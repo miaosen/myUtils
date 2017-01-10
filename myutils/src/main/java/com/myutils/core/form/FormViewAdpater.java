@@ -30,6 +30,6 @@ public interface FormViewAdpater {
      * 扫描View时是否作为一个整体被识别，比如自定义ListView里面包含许多Editext等控件，我不需要这些被收集到或者填充到
      * 设置为true
      */
-    boolean isScanAsOne = false;
+    boolean isScanAsOne();
 
 }

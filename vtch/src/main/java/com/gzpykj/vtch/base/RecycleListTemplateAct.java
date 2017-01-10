@@ -10,7 +10,8 @@ import android.view.View;
 import com.gzpykj.vtch.R;
 import com.myutils.base.AppConfig;
 import com.myutils.base.AppFactory;
-import com.myutils.core.ActionResult;
+import com.myutils.core.JSONResult;
+import com.myutils.core.okhttp.callback.ActionResult;
 import com.myutils.core.RowObject;
 import com.myutils.core.annotation.ViewInject;
 import com.myutils.base.L;
@@ -112,8 +113,8 @@ public class RecycleListTemplateAct extends BaseAct {
         ai.addParam("rows",10);
         ai.setCallback(new StringCallBack() {
             @Override
-            public void onSuccess(ActionResult result) {
-                RowObject row = result.getRow();
+            public void onSuccess(JSONResult result) {
+                RowObject row = result.getAsRow();
                 List<RowObject> resultRows = row.getRows("result");
                 if(resultRows!=null){
                     rcAdapter.hideFooter();

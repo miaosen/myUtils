@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import com.myutils.utils.ApplicationUtils;
 import com.myutils.utils.FileUtils;
 
+import static com.myutils.R.attr.url;
 
 
 /**
@@ -125,8 +126,13 @@ public class AppConfig {
                 e.printStackTrace();
             }
         }
+	}
 
-
+	public static String getHttpRootPath(){
+		String url = "http://" +instance. getHOST() + ":"+instance. getPORT() +
+				"/" + instance. getCONTEXT_PATH() +
+				"/" + instance. getACTION_PREFIX();
+		return url;
 	}
 
     public InputStream getCfgFile() {

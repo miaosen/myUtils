@@ -1,11 +1,19 @@
 package com.myutils.utils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
+import com.myutils.base.L;
+import com.myutils.core.RowObject;
 import com.myutils.core.json.JSONSerializer;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * @Created by gzpykj.com
@@ -106,5 +114,119 @@ public class JsonUtils {
 		return data;
 		
 	}
+
+	/**
+	 * json字符串转对象
+	 * @param jsonStr
+	 * @return
+	 */
+	public static RowObject jsonToRow(String jsonStr) {
+		RowObject row = new RowObject();
+		if (isValidateJson(jsonStr)) {
+			if (jsonStr.startsWith("{")) {
+				try {
+					JSONObject jObject = new JSONObject(jsonStr);
+					jsonObjectToRow(row, jObject);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		} else {
+			L.e("json格式错误！");
+		}
+		return row;
+	}
+
+	/**
+	 * 判断json字符串是否是JSONArray
+	 *
+	 * @param jsonStr
+	 * @return
+	 */
+	public static boolean isJSONObject(String jsonStr) {
+		if (isValidateJson(jsonStr)) {
+			if (jsonStr.startsWith("[")) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	/**
+	 * JSONArray转List<RowObject>
+	 * @param jsonStr
+	 * @return
+	 */
+	public static List<RowObject> jsonToRows(String jsonStr) {
+		List<RowObject> rows = new LinkedList<RowObject>();
+		if (isJSONArray(jsonStr)) {
+			try {
+				JSONArray jArray = new JSONArray(jsonStr);
+				jsonArrayToRows(rows, jArray);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		} else {
+			L.e("json格式错误！");
+		}
+		return rows;
+	}
+
+	/**
+	 * 判断json字符串是否是JSONArray
+	 *
+	 * @param jsonStr
+	 * @return
+	 */
+	public static boolean isJSONArray(String jsonStr) {
+		if (isValidateJson(jsonStr)) {
+			if (jsonStr.startsWith("[")) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static void jsonObjectToRow(RowObject row, JSONObject jObject) {
+		try {
+			Iterator it = jObject.keys();
+			while (it.hasNext()) {
+				String key = it.next().toString();
+				Object value = jObject.get(key);
+				if (value instanceof JSONArray) {
+					List<RowObject> rows = new LinkedList<RowObject>();
+					jsonArrayToRows(rows, (JSONArray) value);
+					row.put(key, rows);
+				} else if (value instanceof JSONObject) {
+					RowObject mRow = new RowObject();
+					jsonObjectToRow(mRow, (JSONObject) value);
+					row.put(key, mRow);
+				} else {
+					row.put(key, value);
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void jsonArrayToRows(List<RowObject> rows, JSONArray jArray) {
+		try {
+			for (int i = 0; i < jArray.length(); i++) {
+				Object object = jArray.get(i);
+				if (object instanceof JSONObject) {
+					RowObject row = new RowObject();
+					jsonObjectToRow(row, (JSONObject) object);
+					rows.add(row);
+				} else {
+					rows.add((RowObject) object);
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 }

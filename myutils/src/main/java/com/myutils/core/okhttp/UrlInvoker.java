@@ -1,10 +1,11 @@
 package com.myutils.core.okhttp;
 
 import com.myutils.base.L;
+import com.myutils.core.ResultCallBack;
 import com.myutils.core.okhttp.builder.GetBuilder;
 import com.myutils.core.okhttp.builder.PostBuilder;
 import com.myutils.core.okhttp.builder.RequestBuilder;
-import com.myutils.core.okhttp.callback.CallBackAdapter;
+import com.myutils.core.okhttp.callback.BsCallBack;
 import com.myutils.ui.dialog.LoadingDialog;
 import com.myutils.ui.T;
 import com.myutils.utils.NetUtils;
@@ -13,6 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 
 /**
@@ -35,18 +37,21 @@ public class UrlInvoker {
     //请求体
     private RequestBuilder responseBuilder = null;
     // 默认表单提交方式,决定ResponseBuilder的类型
-    private String way = "post";
+    private String way = RESQUESTMODE.POST;
 
-    // 单例弹窗
-    private LoadingDialog loadingDialog;
-    // 单例弹窗提示信息
-    private String dialogMsg;
+    public interface RESQUESTMODE {
+        String POST = "post";
+        String GET = "get";
+    }
+
+    ;
+
 
     //回调
-    private CallBackAdapter callback;
+    private ResultCallBack callback;
 
     //打印参数时定位项目调用此次请求的代码位置
-    private int logLocationIndex=2;
+    private int logLocationIndex = 2;
 
 
     public UrlInvoker(String url) {
@@ -62,11 +67,6 @@ public class UrlInvoker {
         if (!NetUtils.isConnected()) {
             T.show("网络未连接,请连接网络!");
         } else {
-            if (dialogMsg!= null) {
-                loadingDialog = LoadingDialog.getDialog();
-                loadingDialog.show(dialogMsg);
-            }
-
             if (way.equals("post")) {
                 responseBuilder = new PostBuilder(url);
             } else {// get方式
@@ -75,9 +75,6 @@ public class UrlInvoker {
             responseBuilder.addParam(paramMap);
             if (callback != null) {
                 Call call = client.newCall(responseBuilder.getRequest());
-                if (loadingDialog != null) {
-                    callback.setLoadingDialog(loadingDialog);
-                }
                 call.enqueue(callback);
                 logParam();
             }
@@ -90,9 +87,9 @@ public class UrlInvoker {
     private void logParam() {
         if (paramMap.size() > 0) {
             for (String key : paramMap.keySet())
-                L.i("key===" + key + "    value===" + paramMap.get(key),logLocationIndex);
+                L.i("key===" + key + "    value===" + paramMap.get(key), logLocationIndex);
         } else {
-            L.i("没有参数",logLocationIndex);
+            L.i("没有参数", logLocationIndex);
         }
     }
 
@@ -129,19 +126,14 @@ public class UrlInvoker {
      * 请求方式为get
      */
     public void getMode() {
-        way = "get";
+        way = RESQUESTMODE.GET;
     }
 
     /**
      * 请求方式为post
      */
     public void postMode() {
-        way = "post";
-    }
-
-
-    public void setDialog(String dialogMsg) {
-        this.dialogMsg = dialogMsg;
+        way = RESQUESTMODE.POST;
     }
 
 
@@ -185,27 +177,12 @@ public class UrlInvoker {
         this.way = way;
     }
 
-    public LoadingDialog getLoadingDialog() {
-        return loadingDialog;
-    }
 
-    public void setLoadingDialog(LoadingDialog loadingDialog) {
-        this.loadingDialog = loadingDialog;
-    }
-
-    public String getDialogMsg() {
-        return dialogMsg;
-    }
-
-    public void setDialogMsg(String dialogMsg) {
-        this.dialogMsg = dialogMsg;
-    }
-
-    public CallBackAdapter getCallback() {
+    public ResultCallBack getCallback() {
         return callback;
     }
 
-    public void setCallback(CallBackAdapter callback) {
+    public void setCallback(ResultCallBack callback) {
         this.callback = callback;
     }
 

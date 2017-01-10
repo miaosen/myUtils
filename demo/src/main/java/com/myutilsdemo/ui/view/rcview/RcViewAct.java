@@ -11,7 +11,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.myutils.base.AppFactory;
-import com.myutils.core.ActionResult;
+import com.myutils.core.okhttp.callback.ActionResult;
 import com.myutils.core.RowObject;
 import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.core.okhttp.callback.StringCallBack;
@@ -134,11 +134,11 @@ public class RcViewAct extends BaseAct {
                 WebSettings wSet = webView.getSettings();
                 wSet.setJavaScriptEnabled(true);
                 msgDialog.setContentView(webView);
-                webView.loadData(result.getResponseText(),"text/html","utf-8");
+                webView.loadData(result.getResponseJsonText(),"text/html","utf-8");
                 webView.setBackgroundColor(Color.parseColor("#00ffff"));
                 msgDialog.show(getSupportFragmentManager(),"news");
-                //msgDialog.setMsg(result.getResponseText());
-               // UIHelper.toast("你选择了 " + result.getResponseText());
+                //msgDialog.setMsg(result.getResponseJsonText());
+               // UIHelper.toast("你选择了 " + result.getResponseJsonText());
             }
         });
         ai.invoke();
@@ -161,7 +161,7 @@ public class RcViewAct extends BaseAct {
         ai.setCallback(new StringCallBack() {
             @Override
             public void onSuccess(ActionResult result) {
-                RowObject row = result.getRow();
+                RowObject row = result.getAsRow();
                 List<RowObject> resultRows = row.getRows("result");
                 if(resultRows!=null){
                     rcAdapter.hideFooter();
