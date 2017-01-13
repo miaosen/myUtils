@@ -1,46 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:padding="5dp">
+              android:orientation="horizontal"
+              android:layout_height="120dp">
 
-    <TextView
-        android:id="@+id/title"
-        style="@style/ed_text"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:textSize="18sp"
+
+    <com.myutils.ui.view.ImageViewForFresco
+        android:id="@+id/img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        fresco:placeholderImage="@drawable/icon_loding"
+        fresco:failureImage="@drawable/icon_no_pic"
+        fresco:roundedCornerRadius="5dp"
         />
 
-    <TextView
-        android:id="@+id/description"
-        style="@style/ed_text"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:textSize="12sp"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
 
-    <TextView
-        android:id="@+id/picUrl"
-        style="@style/ed_text"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:textSize="12sp"
-        />
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ed_text"
+            />
 
-    <TextView
-        android:id="@+id/url"
-        style="@style/ed_text"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:textSize="12sp"
-        />
-
-    <TextView
-        android:id="@+id/ctime"
-        style="@style/ed_text"
-        />
-
-
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ed_text"
+            android:maxLines="4"
+            />
+    </LinearLayout>
 </LinearLayout>

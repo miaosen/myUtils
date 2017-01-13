@@ -1,9 +1,8 @@
-package com.myutils.core.okhttp.callback;
+package com.myutils.core.http.callback;
 
 import com.myutils.base.L;
 import com.myutils.core.JSONResult;
-import com.myutils.core.okhttp.HandlerQueue;
-import com.myutils.ui.dialog.LoadingDialog;
+import com.myutils.core.http.HandlerQueue;
 
 import java.io.IOException;
 import java.net.ConnectException;

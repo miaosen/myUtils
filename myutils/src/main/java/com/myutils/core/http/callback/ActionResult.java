@@ -1,4 +1,4 @@
-package com.myutils.core.okhttp.callback;
+package com.myutils.core.http.callback;
 
 import com.myutils.core.JSONResult;
 import com.myutils.core.RowObject;
@@ -6,8 +6,6 @@ import com.myutils.core.json.JSONSerializer;
 import com.myutils.utils.JsonUtils;
 
 import java.util.List;
-
-import static com.myutils.core.json.JSONSerializer.getRows;
 
 
 /**
@@ -37,7 +35,12 @@ public class ActionResult implements JSONResult{
 	}
 
 
-    @Override
+	@Override
+	public String getAsText() {
+		return responseJsonText;
+	}
+
+	@Override
 	public RowObject getAsRow() {
 		if(row!=null){
 			return row;

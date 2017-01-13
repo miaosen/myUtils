@@ -47,8 +47,6 @@ public class WindowUtils {
 
 	/**
 	 * 获得状态栏的高度
-	 * 
-	 * @param context
 	 * @return
 	 */
 	public static int getStatusHeight() {

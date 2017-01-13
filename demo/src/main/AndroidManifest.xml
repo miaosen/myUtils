@@ -54,7 +54,7 @@
 
         <activity android:name=".core.form.FillAct"/>
 
-        <activity android:name=".core.okhttp.OkhttpAct"/>
+        <activity android:name=".core.http.OkhttpAct"/>
 
         <activity android:name=".ui.dlg.DialogAct"/>
 

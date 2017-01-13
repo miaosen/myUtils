@@ -1,9 +1,9 @@
-package com.myutils.core.okhttp;
+package com.myutils.core.http;
 
 import okhttp3.OkHttpClient;
 
 import com.myutils.base.AppFactory;
-import com.myutils.core.okhttp.cookies.CookiesManager;
+import com.myutils.core.http.cookies.CookiesManager;
 
 import java.util.concurrent.TimeUnit;
 

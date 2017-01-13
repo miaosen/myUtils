@@ -1,8 +1,7 @@
 package com.myutils.core;
 
 import com.myutils.base.L;
-import com.myutils.core.okhttp.HandlerQueue;
-import com.myutils.core.okhttp.callback.ActionResult;
+import com.myutils.core.http.HandlerQueue;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -10,7 +9,6 @@ import java.net.SocketTimeoutException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Response;
 
 /**
  * @author zengmiaosen

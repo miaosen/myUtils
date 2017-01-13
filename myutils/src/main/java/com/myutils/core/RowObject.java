@@ -24,7 +24,7 @@ public class RowObject extends LinkedHashMap<String, Object> implements Serializ
 		return row;
 	}
 
-	public List<RowObject> getRows(String key) {
+	public LinkedList<RowObject> getRows(String key) {
 		LinkedList<RowObject> rows = (LinkedList<RowObject>) get(key);
 		return rows;
 	}

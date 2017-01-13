@@ -1,19 +1,16 @@
-package com.myutils.core.okhttp.callback;
+package com.myutils.core.http.callback;
 
 
-import com.myutils.base.BaseActivity;
 import com.myutils.base.L;
 import com.myutils.core.JSONResult;
 import com.myutils.core.ResultCallBack;
-import com.myutils.core.okhttp.HandlerQueue;
+import com.myutils.core.http.HandlerQueue;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.logging.Logger;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -22,7 +19,7 @@ import okhttp3.Response;
  * @author zengmiaosen
  * @email 1510809124@qq.com
  * @CreateDate 2016/8/7 20:01
- * @Descrition 文本回调
+ * @Descrition 自定义文本回调 T不能是内部类，问题待解决
  */
 public abstract class CustomeCallBack<T extends JSONResult> extends ResultCallBack {
 

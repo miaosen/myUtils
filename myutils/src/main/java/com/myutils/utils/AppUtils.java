@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.myutils.base.AppFactory;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -13,13 +14,16 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 /**
  * @Created by gzpykj.com
  * @author zms
  * @Date 2016-3-12
  * @Descrition 获取应用(Application)相关信息工具类
  */
-public class ApplicationUtils {
+public class AppUtils {
 
 	/**
 	 * 查询手机内非系统应用
@@ -43,54 +47,10 @@ public class ApplicationUtils {
 		return apps;
 	}
 
-	public static String doStartApplicationWithPackageName(Context context,
-			String packagename) {
 
-		// 通过包名获取此APP详细信息，包括Activities、services、versioncode、name等等
-		PackageInfo packageinfo = null;
-		try {
-			packageinfo = context.getPackageManager().getPackageInfo(
-					packagename, 0);
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
-		}
-		if (packageinfo == null) {
-			return null;
-		}
-
-		// 创建一个类别为CATEGORY_LAUNCHER的该包名的Intent
-		Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);
-		resolveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-		resolveIntent.setPackage(packageinfo.packageName);
-
-		// 通过getPackageManager()的queryIntentActivities方法遍历
-		List<ResolveInfo> resolveinfoList = context.getPackageManager()
-				.queryIntentActivities(resolveIntent, 0);
-		ResolveInfo resolveinfo = resolveinfoList.iterator().next();
-		String className = null;
-		if (resolveinfo != null) {
-			// packagename = 参数packname
-			String packageName = resolveinfo.activityInfo.packageName;
-			// 这个就是我们要找的该APP的LAUNCHER的Activity[组织形式：packagename.mainActivityname]
-			className = resolveinfo.activityInfo.name;
-			// LAUNCHER Intent
-			Intent intent = new Intent(Intent.ACTION_MAIN);
-			intent.addCategory(Intent.CATEGORY_LAUNCHER);
-
-			// 设置ComponentName参数1:packagename参数2:MainActivity路径
-			ComponentName cn = new ComponentName(packageName, className);
-
-			intent.setComponent(cn);
-			// context.startActivity(intent);
-		}
-		return className;
-	}
-
-	
 	
 	/**
 	 * 获取应用名称
-	 * @param context
 	 * @return
 	 */
 	public  static String getAppName() {
@@ -108,5 +68,48 @@ public class ApplicationUtils {
 				.getApplicationLabel(applicationInfo);
 		return applicationName;
 
+	}
+
+	/**
+	 * 判断网络是否连接
+	 * @return
+	 */
+	public static boolean isConnected() {
+		ConnectivityManager connectivity = (ConnectivityManager) AppFactory.getAppContext()
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (null != connectivity) {
+
+			NetworkInfo info = connectivity.getActiveNetworkInfo();
+			if (null != info && info.isConnected()) {
+				if (info.getState() == NetworkInfo.State.CONNECTED) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 判断是否是wifi连接
+	 */
+	public static boolean isWifi() {
+		ConnectivityManager cm = (ConnectivityManager) AppFactory.getAppContext()
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		if (cm == null)
+			return false;
+		return cm.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
+	}
+
+	/**
+	 * 打开网络设置界面
+	 */
+	public static void openSetting(Activity activity) {
+		Intent intent = new Intent("/");
+		ComponentName cm = new ComponentName("com.android.settings",
+				"com.android.settings.WirelessSettings");
+		intent.setComponent(cm);
+		intent.setAction("android.intent.action.VIEW");
+		activity.startActivityForResult(intent, 0);
 	}
 }

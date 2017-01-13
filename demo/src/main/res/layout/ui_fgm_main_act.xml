@@ -5,28 +5,22 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.myutils.ui.view.HeaderView
+        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/colorPrimary"
-        app:title="弹窗例子"
-        app:titleTextColor="@color/white"
-        >
-
-        <TextView
-            android:text="QQQQQ"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </android.support.v7.widget.Toolbar>
+        app:isLeftFinish="true"
+        app:title="示例"
+        app:isHideLeft="true"
+        android:layout_height="40dp" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        app:tabIndicatorColor="#750001"
+        android:background="@color/blue"
+        app:tabIndicatorColor="@color/white"
+        app:tabIndicatorHeight="2dp"
         app:tabSelectedTextColor="#750001"
         app:tabTextColor="#666666"
         />
@@ -37,6 +31,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/tabLayout"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/header"
        ></android.support.v4.view.ViewPager>
 </RelativeLayout>

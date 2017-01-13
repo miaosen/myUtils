@@ -12,7 +12,6 @@
         android:id="@+id/pagingListRcView"
         android:layout_width="match_parent"
         app:itemLayout="@layout/event_list_item"
-
         android:layout_height="wrap_content" />
 
 

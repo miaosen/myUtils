@@ -9,7 +9,7 @@ import com.myutils.utils.IntentUtils;
 import com.myutilsdemo.R;
 import com.myutilsdemo.base.BaseFgm;
 import com.myutilsdemo.core.form.FillAct;
-import com.myutilsdemo.core.okhttp.OkhttpAct;
+import com.myutilsdemo.core.http.OkhttpAct;
 
 /**
  * @email 1510809124@qq.com

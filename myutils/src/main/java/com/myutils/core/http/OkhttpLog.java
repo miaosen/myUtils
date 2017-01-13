@@ -1,4 +1,4 @@
-package com.myutils.core.okhttp;
+package com.myutils.core.http;
 
 import com.myutils.core.RowObject;
 import com.myutils.base.L;

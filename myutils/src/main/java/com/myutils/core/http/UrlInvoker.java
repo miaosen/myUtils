@@ -1,20 +1,17 @@
-package com.myutils.core.okhttp;
+package com.myutils.core.http;
 
 import com.myutils.base.L;
 import com.myutils.core.ResultCallBack;
-import com.myutils.core.okhttp.builder.GetBuilder;
-import com.myutils.core.okhttp.builder.PostBuilder;
-import com.myutils.core.okhttp.builder.RequestBuilder;
-import com.myutils.core.okhttp.callback.BsCallBack;
-import com.myutils.ui.dialog.LoadingDialog;
+import com.myutils.core.http.builder.GetBuilder;
+import com.myutils.core.http.builder.PostBuilder;
+import com.myutils.core.http.builder.RequestBuilder;
 import com.myutils.ui.T;
-import com.myutils.utils.NetUtils;
+import com.myutils.utils.AppUtils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 
 /**
@@ -64,7 +61,7 @@ public class UrlInvoker {
      * 调用请求网络线程
      */
     public void invoke() {
-        if (!NetUtils.isConnected()) {
+        if (!AppUtils.isConnected()) {
             T.show("网络未连接,请连接网络!");
         } else {
             if (way.equals("post")) {

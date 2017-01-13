@@ -14,6 +14,7 @@ import java.util.List;
 
 public interface JSONResult
 {
+    String getAsText();
     /**
      * 转成RowObject
      * @return
@@ -40,6 +41,9 @@ public interface JSONResult
 
 
     String getMessage();
+
+
+
 
 
 }

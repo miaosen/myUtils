@@ -8,6 +8,8 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.support.v7.widget.TintContextWrapper;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -247,6 +249,27 @@ public class ViewUtils {
         Toast.makeText(AppFactory.getAppContext(), text, Toast.LENGTH_SHORT).show();
     }
 
+
+    /**
+     * 点击view结束当前activity
+     * @param view
+     */
+    public static void finishByClick(View view) {
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                String name = context.getClass().getName();
+                L.i("=========onClick=============="+name);
+                if(context instanceof Activity){
+                    ((Activity) context).finish();
+                }else if(context instanceof ContextWrapper){
+                    Context baseContext = ((ContextWrapper) context).getBaseContext();
+                    ((Activity) baseContext).finish();
+                }
+            }
+        });
+    }
 
 
 }

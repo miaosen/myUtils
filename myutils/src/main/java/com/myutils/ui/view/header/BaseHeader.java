@@ -17,6 +17,7 @@ import com.myutils.base.L;
  *             rl_head (View) 标题id: title (TextView) 标题左边id: left_btn (Button)
  *             标题右边id: right_btn (Button)
  */
+@Deprecated
 public class BaseHeader {
 
 	public Context context;

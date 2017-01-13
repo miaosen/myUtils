@@ -1,7 +1,7 @@
 package com.myutils.base;
 
-import com.myutils.core.okhttp.UrlInvoker;
-import com.myutils.utils.ApplicationUtils;
+import com.myutils.core.http.UrlInvoker;
+import com.myutils.utils.AppUtils;
 import com.myutils.utils.FileUtils;
 
 
@@ -10,7 +10,7 @@ public class AppFactory {
 	/**
 	 * 文件默认保存的基础路径
 	 */
-	private static String appDir = FileUtils.getSDCardPath()+ ApplicationUtils.getAppName();
+	private static String appDir = FileUtils.getSDCardPath()+ AppUtils.getAppName();
 	
 	
 	

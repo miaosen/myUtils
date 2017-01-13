@@ -13,23 +13,18 @@ import com.gzpykj.vtch.R;
 import com.gzpykj.vtch.base.Global;
 import com.gzpykj.vtch.base.PagingRcListAct;
 import com.myutils.core.JSONResult;
-import com.myutils.core.ResultCallBack;
-import com.myutils.core.okhttp.callback.ActionResult;
 import com.myutils.core.GlobalVariable;
 import com.myutils.core.RowObject;
 import com.myutils.base.L;
-import com.myutils.core.okhttp.UrlInvoker;
-import com.myutils.core.okhttp.callback.StringCallBack;
+import com.myutils.core.http.UrlInvoker;
+import com.myutils.core.http.callback.StringCallBack;
 import com.myutils.ui.UIHelper;
 import com.myutils.ui.dialog.MsgDialog;
 import com.myutils.ui.dialog.bs.BaseFmDialog;
 import com.myutils.ui.view.rcview.BaseRcAdapter;
 import com.myutils.utils.IntentUtils;
 
-import java.io.IOException;
 import java.util.Map;
-
-import okhttp3.Call;
 
 /**
  * @author zengmiaosen

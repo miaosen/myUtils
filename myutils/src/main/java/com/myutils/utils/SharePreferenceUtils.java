@@ -12,17 +12,17 @@ import com.myutils.base.AppFactory;
  * @Date 2016-1-19
  * @Descrition 基于SharePreference的xml操作工具
  */
-public class SharePreferenceUtil {
+public class SharePreferenceUtils {
 	
 	private SharedPreferences sp;
 	private SharedPreferences.Editor editor;
 
 	/**
 	 * 
-	 * @param fileName文件名称
+	 * @param fileName 文件名称
 	 */
 	@SuppressLint("CommitPrefEdits")
-	public SharePreferenceUtil(String fileName) {
+	public SharePreferenceUtils(String fileName) {
 		sp = AppFactory.getAppContext().getSharedPreferences(fileName, Context.MODE_PRIVATE);
 		editor = sp.edit();
 	}

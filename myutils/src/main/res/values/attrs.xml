@@ -96,7 +96,6 @@
             -->
     </declare-styleable>
 
-
     <!-- 分页列表 -->
     <declare-styleable name="PagingListRcView">
         <!-- 适配器item -->
@@ -109,6 +108,28 @@
         <attr name="actionClass" />
         <!-- 方法名-->
         <attr name="actionName" />
+    </declare-styleable>
+
+    <!-- 分页列表 -->
+    <declare-styleable name="HeaderView">
+        <!-- 标题 -->
+        <attr name="title" format="string" />
+        <!-- 左边文字 -->
+        <attr name="leftText" format="string" />
+        <!-- 右边文字 -->
+        <attr name="rightText" format="string" />
+        <!-- 点击左边关闭当前页面-->
+        <attr name="isLeftFinish" format="boolean" />
+        <!-- 点击左边关闭当前页面-->
+        <attr name="isRightFinish" format="boolean" />
+        <!-- 点击左边关闭当前页面-->
+        <attr name="isHideLeft" format="boolean" />
+        <!-- 点击左边关闭当前页面-->
+        <attr name="isHideRight" format="boolean" />
+        <!-- 左边图片 -->
+        <attr name="leftDrawable" format="reference" />
+        <!-- 右边图片 -->
+        <attr name="rightDrawable" format="reference" />
     </declare-styleable>
 
 </resources>

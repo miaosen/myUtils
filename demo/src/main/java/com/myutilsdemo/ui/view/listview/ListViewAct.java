@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.myutils.base.AppFactory;
-import com.myutils.core.okhttp.callback.ActionResult;
+import com.myutils.core.JSONResult;
 import com.myutils.core.RowObject;
-import com.myutils.core.okhttp.UrlInvoker;
-import com.myutils.core.okhttp.callback.StringCallBack;
+import com.myutils.core.http.UrlInvoker;
+import com.myutils.core.http.callback.StringCallBack;
 import com.myutils.ui.view.listview.BaseFillAdapter;
 import com.myutils.core.annotation.ViewInject;
 import com.myutilsdemo.R;
@@ -73,14 +73,13 @@ public class ListViewAct extends BaseAct {
 
     @Override
     public void initData() {
-
         UrlInvoker ai = AppFactory.creatUrlInvorker("http://api.avatardata.cn/GuoNeiNews/Query?key=124076155abb4e97993a181c949e9de8");
         ai.addParam("page", 50);
        //ai.setDialog("loading...");
         ai.addParam("rows",10);
         ai.setCallback(new StringCallBack() {
             @Override
-            public void onSuccess(ActionResult result) {
+            public void onSuccess(JSONResult result) {
                 RowObject row = result.getAsRow();
                 List<RowObject> resultRows = row.getRows("result");
                 if(rows!=null){
@@ -91,7 +90,6 @@ public class ListViewAct extends BaseAct {
                     pullToRefresh.setRefreshing(false);
                     lv.removeFooterView(footerView);
                 }
-
             }
         });
         ai.invoke();

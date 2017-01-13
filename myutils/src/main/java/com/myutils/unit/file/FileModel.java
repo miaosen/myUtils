@@ -2,8 +2,7 @@ package com.myutils.unit.file;
 
 import java.io.File;
 
-import com.myutils.base.AppFactory;
-import com.myutils.utils.ApplicationUtils;
+import com.myutils.utils.AppUtils;
 import com.myutils.utils.DateTimeUtils;
 import com.myutils.utils.FileUtils;
 
@@ -23,7 +22,7 @@ public class FileModel {
 	/**
 	 * 默认项目名称为基础文件夹
 	 */
-	public String dfBsDir = FileUtils.getSDCardPath()+ ApplicationUtils.getAppName();
+	public String dfBsDir = FileUtils.getSDCardPath()+ AppUtils.getAppName();
 	/**
 	 * 相对App目录下的目录路径
 	 */

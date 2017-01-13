@@ -13,8 +13,8 @@ import com.myutils.base.L;
 import com.myutils.core.form.Form;
 import com.myutils.core.form.ViewFilter;
 import com.myutils.core.form.ViewUtils;
-import com.myutils.core.okhttp.UrlInvoker;
-import com.myutils.core.okhttp.callback.StringCallBack;
+import com.myutils.core.http.UrlInvoker;
+import com.myutils.core.http.callback.StringCallBack;
 import com.myutils.utils.JsonUtils;
 
 import java.util.LinkedHashMap;

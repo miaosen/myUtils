@@ -1,4 +1,4 @@
-package com.myutilsdemo.core.okhttp;
+package com.myutilsdemo.core.http;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,10 +7,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.myutils.base.AppFactory;
-import com.myutils.core.okhttp.callback.ActionResult;
+import com.myutils.core.JSONResult;
+import com.myutils.core.form.ViewUtils;
 import com.myutils.core.json.JSONSerializer;
-import com.myutils.core.okhttp.UrlInvoker;
-import com.myutils.core.okhttp.callback.StringCallBack;
+import com.myutils.core.http.UrlInvoker;
+import com.myutils.core.http.callback.StringCallBack;
 import com.myutils.core.annotation.ViewInject;
 import com.myutilsdemo.R;
 import com.myutilsdemo.base.BaseAct;
@@ -71,11 +72,16 @@ public class OkhttpAct extends BaseAct {
             //ai.addParam("pageSize", "10");
             ai.setCallback(new StringCallBack() {
                 @Override
-                public void onSuccess(ActionResult result) {
+                public void onSuccess(JSONResult result) {
 //                    EditText tv = new EditText(getContext());
 //                    tv.setText("第 " + j + " 条" + JSONSerializer.toJson(result) + "");
 //                    ln.addView(tv);
-                    ed.setText(JSONSerializer.toJson(result.getResponseJsonText()));
+                    ed.setText(JSONSerializer.toJson(result.getAsText()));
+                }
+                @Override
+                protected void onFail(Exception e) {
+                    super.onFail(e);
+                    ViewUtils.toast(e.getMessage());
                 }
             });
             ai.invoke();

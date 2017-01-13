@@ -2,8 +2,7 @@ package com.gzpykj.vtch.event;
 
 import android.view.View;
 
-import com.gzpykj.vtch.base.Global;
-import com.myutils.core.okhttp.UrlInvoker;
+import com.myutils.core.http.UrlInvoker;
 
 /**
  * Created by OAIM on 2016/10/11.

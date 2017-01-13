@@ -12,21 +12,19 @@ import android.widget.LinearLayout;
 
 import com.myutils.R;
 import com.myutils.base.AppFactory;
+import com.myutils.base.L;
 import com.myutils.core.JSONResult;
-import com.myutils.core.ResultCallBack;
 import com.myutils.core.RowObject;
 import com.myutils.core.annotation.InjectReader;
 import com.myutils.core.annotation.ViewInject;
 import com.myutils.core.form.FormViewAdpater;
 import com.myutils.core.form.ViewUtils;
-import com.myutils.core.okhttp.UrlInvoker;
-import com.myutils.core.okhttp.callback.StringCallBack;
+import com.myutils.core.http.UrlInvoker;
+import com.myutils.core.http.callback.StringCallBack;
 import com.myutils.ui.view.LoadingTipLayout;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import static android.R.attr.y;
 
 
 /**
@@ -37,7 +35,7 @@ import static android.R.attr.y;
  * @Descrition
  */
 
-public class PagingListRcView extends LinearLayout implements FormViewAdpater{
+public class PagingListRcView extends LinearLayout implements FormViewAdpater {
 
     @ViewInject
     RecyclerView recycler_view;
@@ -66,17 +64,25 @@ public class PagingListRcView extends LinearLayout implements FormViewAdpater{
     String actionName;
     //设置这个地址会覆盖掉框架的请求地址
     String url;
-    ResultCallBack resultCallBack;
+    //ResultCallBack resultCallBack;
 
-    public PagingListRcView(Context context,int itemlayout) {
+    public interface LoadingType{
+        String REFRESH="refresh";
+        String LOAD="load";
+    }
+
+
+    OnDataAnalysisListener onDataAnalysisListener;
+
+    public PagingListRcView(Context context, int itemlayout) {
         super(context);
-        this.itemlayoutId =itemlayout;
+        this.itemlayoutId = itemlayout;
         init();
     }
 
     public PagingListRcView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        readAttr(context,attrs);
+        readAttr(context, attrs);
         init();
     }
 
@@ -95,54 +101,61 @@ public class PagingListRcView extends LinearLayout implements FormViewAdpater{
         addView(view);
         InjectReader.injectAllFields(this);
         initRcView();
-        uik=new UrlInvoker(url);
+        uik = new UrlInvoker(url);
+        buildUrl();
+
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-
     }
 
 
-    public void load(){
-        if(url==null){
-            url = AppFactory.getAppConfig().getHttpRootPath() ;
-        }
-        if(actionClass!=null){
-            url= url+ "/"+ actionClass  ;
-        }
-        if(actionName!=null){
-            url=url+ "/"+ actionName;
-        }
-        uik.setUrl(url);
-        if(resultCallBack==null){
-            uik.setCallback(new StringCallBack() {
-                @Override
-                public void onSuccess(JSONResult result) {
+    public void load() {
+        uik.setCallback(new StringCallBack() {
+            @Override
+            public void onSuccess(JSONResult result) {
+                if (onDataAnalysisListener != null) {
+                    LinkedList<RowObject> rowObjects = onDataAnalysisListener.onAnalysis(result);
+                    if (rowObjects != null) {
+                        addList(rowObjects);
+                    }
+                } else {
                     onResultCallBack(result);
                 }
-            });
-        }else{
-            uik.setCallback(resultCallBack);
+            }
+
+            @Override
+            protected void onFail(Exception e) {
+                super.onFail(e);
+                enRefresh();
+            }
+        });
+        getData(LoadingType.REFRESH);
+    }
+
+
+    public void enRefresh(){
+        refreshRcView.setRefreshing(false);
+        refreshRcView.setLoading(false);
+    }
+
+    /**
+     * 请求地址拼接
+     */
+    private void buildUrl() {
+        String httpRootPath = AppFactory.getAppConfig().getHttpRootPath();
+        if (url == null || url.startsWith(httpRootPath)) {
+            url = httpRootPath;
         }
-        refreshRcView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                rows.clear();
-                adpRc.notifyDataSetChanged();
-                pageIndex = 1;
-                getData("refresh");
-            }
-        });
-        refreshRcView.setOnLoadListener(new RefreshRcView.OnLoadListener() {
-            @Override
-            public void onLoad() {
-                getData("load");
-            }
-        });
-        refreshRcView.setRefreshing(true);
-        getData("refresh");
+        if (actionClass != null) {
+            url = url + "/" + actionClass;
+        }
+        if (actionName != null) {
+            url = url + "/" + actionName;
+        }
+        uik.setUrl(url);
     }
 
     /**
@@ -151,7 +164,7 @@ public class PagingListRcView extends LinearLayout implements FormViewAdpater{
      * @param type
      */
     public void getData(final String type) {
-        if (type.equals("refresh")) {
+        if (type.equals(LoadingType.REFRESH)) {
             adpRc.hideFooter();
         } else {
             adpRc.showFooter();
@@ -162,22 +175,22 @@ public class PagingListRcView extends LinearLayout implements FormViewAdpater{
     }
 
     /**
-     * 结果回调
+     * 默认结构解析
      *
      * @param result
      */
-    public  void onResultCallBack(JSONResult result) {
+    public void onResultCallBack(JSONResult result) {
         if (result.isSuccess()) {
             List<RowObject> resultRows = (List<RowObject>) result.getMainData();
-           addList(resultRows);
-        }else{
-            if(result.getMessage()!=null){
+            addList(resultRows);
+        } else {
+            if (result.getMessage() != null) {
                 ViewUtils.toast(result.getMessage());
             }
         }
     }
 
-    public void addList(List<RowObject> resultRows){
+    public void addList(List<RowObject> resultRows) {
         if (resultRows != null && resultRows.size() > 0) {
             adpRc.hideFooter();
             rows.addAll(resultRows);
@@ -190,13 +203,12 @@ public class PagingListRcView extends LinearLayout implements FormViewAdpater{
                 adpRc.hideFooter(1);
             }
         }
-        refreshRcView.setRefreshing(false);
-        refreshRcView.setLoading(false);
+        enRefresh();
     }
 
-    public void refresh(){
+    public void refresh() {
         rows.clear();
-        getData("refresh");
+        getData(LoadingType.REFRESH);
     }
 
     public void initRcView() {
@@ -208,12 +220,31 @@ public class PagingListRcView extends LinearLayout implements FormViewAdpater{
         //设置Adapter
         adpRc = new RcAdapterWithFooter(rows, itemlayoutId);
         recycler_view.setAdapter(adpRc);
+
+        refreshRcView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                rows.clear();
+                adpRc.notifyDataSetChanged();
+                pageIndex = 1;
+                getData(LoadingType.REFRESH);
+            }
+        });
+        refreshRcView.setOnLoadListener(new RefreshRcView.OnLoadListener() {
+            @Override
+            public void onLoad() {
+                L.i("=========onLoad==============");
+                getData(LoadingType.LOAD);
+            }
+        });
+        refreshRcView.setRefreshing(true);
+        refreshRcView.setLoading(false);
     }
 
 
     @Override
     public void setValue(Object object) {
-        if(object.getClass().isInstance(rows.getClass())){
+        if (object.getClass().isInstance(rows.getClass())) {
             rows.addAll(((List<RowObject>) object));
         }
         adpRc.notifyDataSetChanged();
@@ -230,8 +261,8 @@ public class PagingListRcView extends LinearLayout implements FormViewAdpater{
     }
 
 
-    public interface OnPageItemDetailListener{
-        void setItem(BaseRcAdapter.ViewHolder viewHolder, RowObject row, int position);
+    public interface OnDataAnalysisListener {
+        LinkedList<RowObject> onAnalysis(JSONResult jsonResult);
     }
 
     public String getPageIndexText() {
@@ -305,6 +336,7 @@ public class PagingListRcView extends LinearLayout implements FormViewAdpater{
 
     public void setActionClass(String actionClass) {
         this.actionClass = actionClass;
+        buildUrl();
     }
 
     public String getActionName() {
@@ -313,6 +345,7 @@ public class PagingListRcView extends LinearLayout implements FormViewAdpater{
 
     public void setActionName(String actionName) {
         this.actionName = actionName;
+        buildUrl();
     }
 
     public String getUrl() {
@@ -324,13 +357,13 @@ public class PagingListRcView extends LinearLayout implements FormViewAdpater{
         uik.setUrl(url);
     }
 
-    public ResultCallBack getResultCallBack() {
-        return resultCallBack;
-    }
-
-    public void setResultCallBack(ResultCallBack resultCallBack) {
-        this.resultCallBack = resultCallBack;
-    }
+    //public ResultCallBack getResultCallBack() {
+    //    return resultCallBack;
+    //}
+    //
+    //public void setResultCallBack(ResultCallBack resultCallBack) {
+    //    this.resultCallBack = resultCallBack;
+    //}
 
     public RecyclerView getRecycler_view() {
         return recycler_view;
@@ -348,5 +381,11 @@ public class PagingListRcView extends LinearLayout implements FormViewAdpater{
         this.refreshRcView = refreshRcView;
     }
 
+    public OnDataAnalysisListener getOnDataAnalysisListener() {
+        return onDataAnalysisListener;
+    }
 
+    public void setOnDataAnalysisListener(OnDataAnalysisListener onDataAnalysisListener) {
+        this.onDataAnalysisListener = onDataAnalysisListener;
+    }
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 import com.myutils.base.L;
 import com.myutils.core.json.JSONSerializer;
 import com.myutils.utils.JsonUtils;
-import com.myutils.utils.SharePreferenceUtil;
+import com.myutils.utils.SharePreferenceUtils;
 
 /**
  * @Created by gzpykj.com
@@ -27,7 +27,7 @@ public class GlobalVariable {
 	 */
 	private static final String VARIABLE_PREFS = "variablePrefsFile";
 	
-	private static SharePreferenceUtil sharePreferenceUtil;
+	private static SharePreferenceUtils sharePreferenceUtil;
 	/**
 	 * 存放字符串变量
 	 */
@@ -42,7 +42,7 @@ public class GlobalVariable {
 	 */
 	public static void saveObject(String key,Object object){
 		if(sharePreferenceUtil==null){
-			sharePreferenceUtil=new SharePreferenceUtil(VARIABLE_PREFS);
+			sharePreferenceUtil=new SharePreferenceUtils(VARIABLE_PREFS);
 		}
 		String json = JSONSerializer.toJson(object);
 		sharePreferenceUtil.save(key, json);
@@ -57,7 +57,7 @@ public class GlobalVariable {
 	 */
 	public static void saveString(String key,String strJson){
 		if(sharePreferenceUtil==null){
-			sharePreferenceUtil=new SharePreferenceUtil(VARIABLE_PREFS);
+			sharePreferenceUtil=new SharePreferenceUtils(VARIABLE_PREFS);
 		}
 		sharePreferenceUtil.save(key, strJson);
 		mapGlobalVariable.put(key, strJson);
@@ -72,7 +72,7 @@ public class GlobalVariable {
 	public static String getString(String key){
 		if(mapGlobalVariable.get(key)==null){
 			if(sharePreferenceUtil==null){
-				sharePreferenceUtil=new SharePreferenceUtil(VARIABLE_PREFS);
+				sharePreferenceUtil=new SharePreferenceUtils(VARIABLE_PREFS);
 			}
 			if(sharePreferenceUtil.get(key)!=null){
 				mapGlobalVariable.put(key, sharePreferenceUtil.get(key));
@@ -91,7 +91,7 @@ public class GlobalVariable {
 //	 */
 //	public static void saveRow(String key,RowObject rowObject){
 //		if(sharePreferenceUtil==null){
-//			sharePreferenceUtil=new SharePreferenceUtil(VARIABLE_PREFS);
+//			sharePreferenceUtil=new SharePreferenceUtils(VARIABLE_PREFS);
 //		}
 //		String json = JSONSerializer.toJson(rowObject);
 //		sharePreferenceUtil.save(key, json);
@@ -106,7 +106,7 @@ public class GlobalVariable {
 	public static RowObject getRow(String key){
 		if(mapGlobalVariable.get(key)==null){
 			if(sharePreferenceUtil==null){
-				sharePreferenceUtil=new SharePreferenceUtil(VARIABLE_PREFS);
+				sharePreferenceUtil=new SharePreferenceUtils(VARIABLE_PREFS);
 			}
 			if(sharePreferenceUtil.get(key)!=null){
 				if(JsonUtils.isCanToRow(sharePreferenceUtil.get(key))){
@@ -128,7 +128,7 @@ public class GlobalVariable {
 	public static Object getObject(String key,Class<?> clazz){
 		if(mapGlobalVariable.get(key)==null){
 			if(sharePreferenceUtil==null){
-				sharePreferenceUtil=new SharePreferenceUtil(VARIABLE_PREFS);
+				sharePreferenceUtil=new SharePreferenceUtils(VARIABLE_PREFS);
 			}
 			if(sharePreferenceUtil.get(key)!=null){
 				if(JsonUtils.isCanToRow(sharePreferenceUtil.get(key))){
@@ -147,7 +147,7 @@ public class GlobalVariable {
 	 */
 	public static void  clearPrefs() {
 		if(sharePreferenceUtil==null){
-			sharePreferenceUtil=new SharePreferenceUtil(VARIABLE_PREFS);
+			sharePreferenceUtil=new SharePreferenceUtils(VARIABLE_PREFS);
 		}
 		sharePreferenceUtil.clear(VARIABLE_PREFS);
 		mapGlobalVariable.clear();

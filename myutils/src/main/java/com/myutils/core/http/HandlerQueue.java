@@ -1,4 +1,4 @@
-package com.myutils.core.okhttp;
+package com.myutils.core.http;
 
 import android.os.Handler;
 import android.os.Looper;

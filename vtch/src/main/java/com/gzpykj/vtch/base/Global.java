@@ -2,7 +2,7 @@ package com.gzpykj.vtch.base;
 
 import com.myutils.base.AppConfig;
 import com.myutils.base.AppFactory;
-import com.myutils.core.okhttp.UrlInvoker;
+import com.myutils.core.http.UrlInvoker;
 
 /**
  * @email 1510809124@qq.com

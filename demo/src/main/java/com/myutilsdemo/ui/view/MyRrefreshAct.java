@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.myutils.base.AppFactory;
-import com.myutils.core.okhttp.callback.ActionResult;
+import com.myutils.core.JSONResult;
 import com.myutils.core.RowObject;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.core.okhttp.UrlInvoker;
-import com.myutils.core.okhttp.callback.StringCallBack;
+import com.myutils.core.http.UrlInvoker;
+import com.myutils.core.http.callback.StringCallBack;
 import com.myutils.ui.view.listview.BaseFillAdapter;
 import com.myutilsdemo.R;
 import com.myutilsdemo.base.BaseAct;
@@ -54,7 +54,7 @@ public class MyRrefreshAct extends BaseAct {
         ai.addParam("rows",10);
         ai.setCallback(new StringCallBack() {
             @Override
-            public void onSuccess(ActionResult result) {
+            public void onSuccess(JSONResult result) {
                 RowObject row = result.getAsRow();
                 List<RowObject> resultRows = row.getRows("result");
                 rows.addAll(resultRows);

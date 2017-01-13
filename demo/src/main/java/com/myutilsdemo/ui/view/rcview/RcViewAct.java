@@ -11,15 +11,16 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.myutils.base.AppFactory;
-import com.myutils.core.okhttp.callback.ActionResult;
+import com.myutils.core.JSONResult;
 import com.myutils.core.RowObject;
-import com.myutils.core.okhttp.UrlInvoker;
-import com.myutils.core.okhttp.callback.StringCallBack;
 import com.myutils.core.annotation.ViewInject;
+import com.myutils.core.http.UrlInvoker;
+import com.myutils.core.http.callback.StringCallBack;
 import com.myutils.ui.UIHelper;
 import com.myutils.ui.dialog.MsgDialog;
 import com.myutils.ui.view.rcview.BaseRcAdapter;
 import com.myutils.ui.view.rcview.GridViewLine;
+import com.myutils.ui.view.rcview.PagingListRcView;
 import com.myutils.ui.view.rcview.RcAdapterWithFooter;
 import com.myutils.ui.view.rcview.RefreshRcView;
 import com.myutilsdemo.R;
@@ -27,6 +28,9 @@ import com.myutilsdemo.base.BaseAct;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import static com.myutilsdemo.R.id.mRefresh;
+import static com.myutilsdemo.R.id.rc_view;
 
 /**
  * @author zengmiaosen
@@ -37,21 +41,13 @@ import java.util.List;
  */
 public class RcViewAct extends BaseAct {
 
-
     @ViewInject
-    RecyclerView rc_view;
+    PagingListRcView paging_list;
 
-    @ViewInject
-    RefreshRcView mRefresh;
-
-    RcAdapterWithFooter rcAdapter;
-
-    List<RowObject> rows = new LinkedList<RowObject>();
 
     MsgDialog msgDialog;
     WebView webView;
 
-    int page = 1;
 
     @Override
     public int initConfig(Bundle savedInstanceState) {
@@ -60,13 +56,6 @@ public class RcViewAct extends BaseAct {
 
     @Override
     public void initView(View view) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(RcViewAct.this);
-        //GridLayoutManager layoutManager = new GridLayoutManager(RcViewAct.this, 4);
-        //StaggeredGridLayoutManager layoutManager=new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
-        //设置布局管理器
-        rc_view.setLayoutManager(layoutManager);
-        //设置为垂直布局，这也是默认的
-        layoutManager.setOrientation(OrientationHelper.VERTICAL);
 
         //开启拖动、移除动画
         //ItemTouchCallback callback = new ItemTouchCallback() {
@@ -79,48 +68,37 @@ public class RcViewAct extends BaseAct {
         //ItemTouchHelper helper = new ItemTouchHelper(callback);
         //helper.attachToRecyclerView(rc_view);
 
-        //设置Adapter
-        rcAdapter = new RcAdapterWithFooter(rows, R.layout.ui_view_review_item) ;
+        RcAdapterWithFooter rcAdapter =paging_list.getAdpRc();
         rcAdapter.setOnItemClickListener(new BaseRcAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseRcAdapter.ViewHolder viewHolder, RowObject row, int position) {
                 UIHelper.toast("url==========="+row.getString("title"));
                // getNew(row.getString("url"));
-
-                if(rcAdapter.isShowFooter()){
-                    rcAdapter.hideFooter();
-                }else{
-                    rcAdapter.showFooter();
-                }
             }
         });
-        rc_view.setAdapter(rcAdapter);
         //设置增加或删除条目的动画
         //rc_view.setItemAnimator(new DefaultItemAnimator());
         //设置分隔线
-        rc_view.addItemDecoration(new GridViewLine(RcViewAct.this));
-        mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                rows.clear();
-                page = 1;
-                getData("refresh");
-            }
-        });
-        mRefresh.setOnLoadListener(new RefreshRcView.OnLoadListener() {
-            @Override
-            public void onLoad() {
-                getData("load");
-            }
-        });
-        mRefresh.setRefreshing(true);
-        getData("refresh");
-
-
+        //RecyclerView rc_view=paging_list.getRecycler_view();
+        //rc_view.addItemDecoration(new GridViewLine(RcViewAct.this));
         if(msgDialog==null){
             msgDialog=new MsgDialog();
             msgDialog.setTitle("新闻弹窗");
         }
+        String url="http://api.avatardata.cn/Cook/List";
+        paging_list.setUrl(url);
+        UrlInvoker ai = paging_list.getUik();
+        ai.addParam("key","8858c93a7665449784b19a421aba0059");
+        paging_list.setOnDataAnalysisListener(new PagingListRcView.OnDataAnalysisListener() {
+            @Override
+            public LinkedList<RowObject> onAnalysis(JSONResult jsonResult) {
+                return jsonResult.getAsRow().getRows("result");
+            }
+        });
+        paging_list.setPageIndexText("page");
+        paging_list.setPageSizeText("rows");
+        paging_list.setPageSize(20);
+        paging_list.load();
 
     }
 
@@ -129,12 +107,12 @@ public class RcViewAct extends BaseAct {
         //ai.setDialog("loading...");
         ai.setCallback(new StringCallBack() {
             @Override
-            public void onSuccess(ActionResult result) {
+            public void onSuccess(JSONResult result) {
                 webView=new WebView(RcViewAct.this);
                 WebSettings wSet = webView.getSettings();
                 wSet.setJavaScriptEnabled(true);
                 msgDialog.setContentView(webView);
-                webView.loadData(result.getResponseJsonText(),"text/html","utf-8");
+                webView.loadData(result.getAsText(),"text/html","utf-8");
                 webView.setBackgroundColor(Color.parseColor("#00ffff"));
                 msgDialog.show(getSupportFragmentManager(),"news");
                 //msgDialog.setMsg(result.getResponseJsonText());
@@ -145,42 +123,6 @@ public class RcViewAct extends BaseAct {
 
     }
 
-    private void getData( final String type) {
-        if(type.equals("refresh")) {
-
-        }else{
-            rcAdapter.showFooter();
-        }
-        UrlInvoker ai = AppFactory.creatUrlInvorker("http://api.avatardata.cn/GuoNeiNews/Query?key=124076155abb4e97993a181c949e9de8");
-        if(page==2){
-            page=1001110;
-        }
-        ai.addParam("page", page);
-        //ai.setDialog("loading...");
-        ai.addParam("rows",10);
-        ai.setCallback(new StringCallBack() {
-            @Override
-            public void onSuccess(ActionResult result) {
-                RowObject row = result.getAsRow();
-                List<RowObject> resultRows = row.getRows("result");
-                if(resultRows!=null){
-                    rcAdapter.hideFooter();
-                    rows.addAll(resultRows);
-                    if(type.equals("refresh")){
-                        rcAdapter.notifyDataSetChanged();
-                        mRefresh.setRefreshing(false);
-                    }else{
-                        rcAdapter.notifyDataSetChanged();
-                    }
-                    page=page+1;
-                }else{
-                    rcAdapter.getTipLayout().notData("没有更多数据！");
-                }
-                mRefresh.setLoading(false);
-            }
-        });
-        ai.invoke();
-    }
 
     @Override
     public void click(View v) {

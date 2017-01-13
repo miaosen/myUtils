@@ -6,10 +6,8 @@ import java.util.Properties;
 
 import android.annotation.SuppressLint;
 
-import com.myutils.utils.ApplicationUtils;
+import com.myutils.utils.AppUtils;
 import com.myutils.utils.FileUtils;
-
-import static com.myutils.R.attr.url;
 
 
 /**
@@ -236,7 +234,7 @@ public class AppConfig {
 		if(APP_DIR_PATH!=null){
 			return FileUtils.getSDCardPath()+APP_DIR_PATH;
 		}else{
-			return FileUtils.getSDCardPath()+ApplicationUtils.getAppName();
+			return FileUtils.getSDCardPath()+ AppUtils.getAppName();
 		}
 	}
 

@@ -2,21 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical">
 
-    <com.myutils.ui.view.rcview.RefreshRcView
-        android:id="@+id/mRefresh"
+    <com.myutils.ui.view.HeaderView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="40dp"
+        app:title="RecyclerView分页列表"
+        ></com.myutils.ui.view.HeaderView>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rc_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <com.myutils.ui.view.rcview.PagingListRcView
+        android:id="@+id/paging_list"
+        android:layout_width="match_parent"
+        app:itemLayout="@layout/ui_view_review_item"
+        android:layout_height="wrap_content">
 
-        </android.support.v7.widget.RecyclerView>
-
-
-    </com.myutils.ui.view.rcview.RefreshRcView>
+    </com.myutils.ui.view.rcview.PagingListRcView>
 </LinearLayout>

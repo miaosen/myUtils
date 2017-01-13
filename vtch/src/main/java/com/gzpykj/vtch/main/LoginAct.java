@@ -15,23 +15,19 @@ import com.gzpykj.vtch.event.EventRecordAct;
 import com.gzpykj.vtch.event.EventSignAct;
 import com.myutils.base.L;
 import com.myutils.core.JSONResult;
-import com.myutils.core.okhttp.callback.ActionResult;
 import com.myutils.core.DataHandler;
 import com.myutils.core.GlobalVariable;
 import com.myutils.core.annotation.ViewInject;
 import com.myutils.core.form.Form;
-import com.myutils.core.okhttp.ClientFactory;
-import com.myutils.core.okhttp.UrlInvoker;
-import com.myutils.core.okhttp.callback.StringCallBack;
+import com.myutils.core.http.ClientFactory;
+import com.myutils.core.http.UrlInvoker;
+import com.myutils.core.http.callback.StringCallBack;
 import com.myutils.ui.UIHelper;
 import com.myutils.ui.dialog.MsgDialog;
 import com.myutils.ui.dialog.bs.BaseFmDialog;
 import com.myutils.utils.IntentUtils;
 
-import java.io.IOException;
 import java.util.Map;
-
-import okhttp3.Call;
 
 /**
  * Created by OAIM on 2016/9/20.

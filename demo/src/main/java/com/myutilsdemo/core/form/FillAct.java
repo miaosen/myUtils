@@ -2,14 +2,13 @@ package com.myutilsdemo.core.form;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.myutils.base.AppFactory;
-import com.myutils.core.okhttp.callback.ActionResult;
+import com.myutils.core.JSONResult;
 import com.myutils.core.form.Form;
-import com.myutils.core.okhttp.UrlInvoker;
-import com.myutils.core.okhttp.callback.StringCallBack;
+import com.myutils.core.http.UrlInvoker;
+import com.myutils.core.http.callback.StringCallBack;
 import com.myutilsdemo.R;
 import com.myutilsdemo.base.BaseAct;
 
@@ -37,16 +36,14 @@ public class FillAct extends BaseAct {
     @Override
     public void initData() {
         UrlInvoker ai = AppFactory.creatUrlInvorker("http://wthrcdn.etouch.cn/weather_mini?citykey=101010100");
-        ai.postMode();
-        ai.setDialog("百度");
+        ai.getMode();
         ai.setCallback(new StringCallBack() {
             @Override
-            public void onSuccess(ActionResult result) {
+            public void onSuccess(JSONResult result) {
                 f.setRow(result.getAsRow());
-                f.setDisableType(EditText.class);//EditText不填充
                 f.setOnFillMessageListener(new Form.OnFillMessageListener() {//自定义填充
                     @Override
-                    public boolean fillMessage(View view, String key, String value) {
+                    public boolean fillMessage(View view, String key, Object value) {
                         if(key.equals("desc")){
                             TextView tv= (TextView) view;
                             tv.setText("自定义文字");

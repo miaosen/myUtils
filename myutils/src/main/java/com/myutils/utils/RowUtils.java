@@ -46,7 +46,7 @@ public class RowUtils {
 	 * 获取RowObject层级数据,比如aa对象下有key为bb的字段,则返回row下的aa的RowObject对象中的key为bb的值
 	 * 
 	 * @param row
-	 * @param args
+	 * @param args aa,bb
 	 * @return
 	 */
 	public static String getlayerData(RowObject row, String[] args) {

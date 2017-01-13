@@ -15,7 +15,7 @@ import com.gzpykj.vtch.base.Global;
 import com.gzpykj.vtch.base.PagingRcListAct;
 import com.myutils.core.RowObject;
 import com.myutils.base.L;
-import com.myutils.core.okhttp.UrlInvoker;
+import com.myutils.core.http.UrlInvoker;
 import com.myutils.ui.view.rcview.BaseRcAdapter;
 import com.myutils.utils.IntentUtils;
 

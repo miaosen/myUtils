@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -101,7 +102,8 @@ public class FgmMainAct extends BaseAct {
         });
 
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            tabLayout.getTabAt(i).setCustomView(getTabItem(i)).setText(menuTitle[i]);
+            View tabItem = getTabItem(i);
+            tabLayout.getTabAt(i).setCustomView(tabItem).setText(menuTitle[i]);
         }
 
 
@@ -112,7 +114,6 @@ public class FgmMainAct extends BaseAct {
         View viewItem = LayoutInflater.from(context).inflate(R.layout.ui_fgm_main_tab_item,null);
         TextView tv= (TextView) viewItem.findViewById(R.id.tv);
         tv.setText(menuTitle[i]);
-        ImageButton img_btn= (ImageButton) viewItem.findViewById(R.id.img_btn);
         //img_btn.setImageResource(R.drawable.icon_video);
         return viewItem;
     }

@@ -3,33 +3,16 @@ package com.gzpykj.vtch.event;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.gzpykj.vtch.R;
-import com.gzpykj.vtch.base.MResult;
 import com.gzpykj.vtch.base.PagingRcListAct;
-import com.myutils.base.AppFactory;
-import com.myutils.core.GlobalVariable;
 import com.myutils.core.JSONResult;
-import com.myutils.core.ResultCallBack;
 import com.myutils.core.RowObject;
-import com.myutils.core.json.JSONSerializer;
-import com.myutils.core.okhttp.HandlerQueue;
-import com.myutils.core.okhttp.UrlInvoker;
-import com.myutils.core.okhttp.callback.ActionResult;
-import com.myutils.core.okhttp.callback.CustomeCallBack;
-import com.myutils.core.okhttp.callback.StringCallBack;
+import com.myutils.core.http.UrlInvoker;
 import com.myutils.ui.view.rcview.BaseRcAdapter;
-import com.myutils.utils.JsonUtils;
+import com.myutils.ui.view.rcview.PagingListRcView;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-
-import okhttp3.Call;
-import okhttp3.Response;
-
-import static android.R.attr.y;
+import java.util.LinkedList;
 
 /**
  * @author zengmiaosen
@@ -71,22 +54,23 @@ public class EventSignAct extends PagingRcListAct {
     @Override
     public void initView(View decorView) {
         super.initView(decorView);
-        baseHeader.setTitle("签到");
+        baseHeader.setTitle("菜单");
         UrlInvoker ai = pagingListRcView.getUik();
-        RowObject olderInfo = GlobalVariable.getRow("olderInfo");
-        ai.addParam("olderId",olderInfo.getString("MAINID"));
-        String url="http://api.avatardata.cn/Cook/List?key=8858c93a7665449784b19a421aba0059&page=2&rows=20";
+        //RowObject olderInfo = GlobalVariable.getRow("olderInfo");
+        ai.addParam("key","8858c93a7665449784b19a421aba0059");
+        String url="http://api.avatardata.cn/Cook/List";
         pagingListRcView.setUrl(url);
-        pagingListRcView.getRefreshRcView().setOnLoadListener(null);
+        //pagingListRcView.getRefreshRcView().setOnLoadListener(null);
         pagingListRcView.setItemLayout(R.layout.event_sign_item);
-        pagingListRcView.setResultCallBack(new CustomeCallBack<MResult>() {
+        pagingListRcView.setOnDataAnalysisListener(new PagingListRcView.OnDataAnalysisListener() {
             @Override
-            public void onSuccess(JSONResult result) {
-                pagingListRcView.onResultCallBack(result);
+            public LinkedList<RowObject> onAnalysis(JSONResult jsonResult) {
+                return jsonResult.getAsRow().getRows("result");
             }
         });
         pagingListRcView.setPageIndexText("page");
         pagingListRcView.setPageSizeText("rows");
+        pagingListRcView.setPageSize(20);
         pagingListRcView.load();
         //UrlInvoker urlInvoker=new UrlInvoker("http://api.avatardata.cn/Cook/List?key=8858c93a7665449784b19a421aba0059&page=2&rows=20");
         //urlInvoker.setCallback(new mCallBack() {

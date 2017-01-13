@@ -1,4 +1,4 @@
-package com.myutils.core.okhttp.cookies;
+package com.myutils.core.http.cookies;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

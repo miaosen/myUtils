@@ -1,4 +1,4 @@
-package com.myutils.core.okhttp.builder;
+package com.myutils.core.http.builder;
 
 import com.myutils.base.L;
 

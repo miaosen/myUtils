@@ -6,17 +6,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import com.facebook.drawee.view.DraweeView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.gzpykj.vtch.R;
 import com.gzpykj.vtch.base.Global;
 import com.gzpykj.vtch.base.PagingRcListAct;
-import com.myutils.base.AppConfig;
-import com.myutils.base.AppFactory;
 import com.myutils.core.RowObject;
-import com.myutils.core.okhttp.UrlInvoker;
 import com.myutils.ui.view.rcview.BaseRcAdapter;
-import com.myutils.utils.IntentUtils;
 
 import java.util.Map;
 

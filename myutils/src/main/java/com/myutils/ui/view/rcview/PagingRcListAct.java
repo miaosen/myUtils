@@ -5,7 +5,6 @@ import android.view.View;
 import com.myutils.base.BaseActivity;
 import com.myutils.core.RowObject;
 import com.myutils.core.annotation.ViewInject;
-import com.myutils.core.okhttp.UrlInvoker;
 
 /**
  * @author zengmiaosen
